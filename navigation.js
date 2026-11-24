@@ -357,7 +357,7 @@ function initNavigation() {
 
     if (isAuthenticated) {
         addLink('dashboard.html', 'nav.dashboard', 'Dashboard');
-        if (canCreateListings) addLink('listing-editor.html', 'nav.createPerson', 'Create Person');
+        if (canCreateListings) addLink('create-person.html', 'nav.createPerson', 'Create Person');
         if (isAlmighty) addLink('almighty-portal.html', 'nav.almightyPortal', 'Almighty Portal');
         addUserMenu();
     } else {

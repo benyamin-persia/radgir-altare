@@ -32,7 +32,7 @@ let mapInitAbortedForZeroSize = false;
 const MAP_INIT_RETRY_DELAY_MS = 100;
 const MAX_MAP_INIT_RETRIES = 30;
 const MAX_METADATA_NOTES_LENGTH = 10000;
-const CREATE_PERSON_SCRIPT_VERSION = '2026-11-24-card-photo-2';
+const CREATE_PERSON_SCRIPT_VERSION = '2026-11-24-card-photo-3';
 const ADDRESS_STATUS = Object.freeze({
     EXACT: 'exact',
     APPROXIMATE: 'approximate',
@@ -40,7 +40,7 @@ const ADDRESS_STATUS = Object.freeze({
 });
 let approximateProvincesLoaded = false;
 let approximateSectionsLoadedForProvince = '';
-console.log('create-person.js version:', CREATE_PERSON_SCRIPT_VERSION);
+console.log('create-person.js version:', CREATE_PERSON_SCRIPT_VERSION); // new filename so Cloudflare cannot serve stale create-person.js
 
 function trackAnalyticsEvent(eventName, payload = {}, immediate = false) {
     if (typeof window === 'undefined') return;

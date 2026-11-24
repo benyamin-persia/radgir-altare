@@ -2,7 +2,7 @@
  * Basic service worker for offline caching.
  */
 
-const CACHE_VERSION = 'radgir-static-v54-20261124-listing-editor';
+const CACHE_VERSION = 'radgir-static-v55-20261124-card-photo-altare';
 const PRECACHE_URLS = [
   '/',
   '/index.html',
@@ -25,6 +25,8 @@ const PRECACHE_URLS = [
   '/register.html',
   '/dashboard.html',
   '/about-contact.html',
+  '/create-person.html',
+  '/create-person.js',
   '/listing-editor.html',
   '/listing-editor.js',
   '/almighty-portal.html',

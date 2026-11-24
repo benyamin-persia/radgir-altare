@@ -1090,7 +1090,7 @@ function buildManageActionsHtml(person, capabilities) {
 function handleListingEdit(btn) {
     const personId = btn?.dataset?.id || btn?.closest('.listing-card')?.dataset?.id;
     if (!personId) return;
-    window.location.href = `listing-editor.html?edit=${encodeURIComponent(personId)}`; // new URL bypasses stale Cloudflare create-person.html
+    window.location.href = `create-person.html?edit=${encodeURIComponent(personId)}`;
 }
 
 /**

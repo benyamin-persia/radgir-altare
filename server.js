@@ -186,15 +186,6 @@ Object.entries(emailPageRoutes).forEach(([routePath, fileName]) => {
     });
 });
 
-// Old create-person.html URL → new listing-editor.html (breaks Cloudflare/browser stale cache)
-app.get('/create-person.html', (req, res) => {
-    const qs = req.url.includes('?') ? req.url.slice(req.url.indexOf('?')) : '';
-    res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
-    res.setHeader('CDN-Cache-Control', 'no-store');
-    res.setHeader('Cloudflare-CDN-Cache-Control', 'no-store');
-    res.redirect(302, `/listing-editor.html${qs}`);
-});
-
 // Serve static files (HTML, CSS, JavaScript) from the root directory
 // This allows the browser to access login.html, register.html, dashboard.html, etc.
 // Placed after API routes so API endpoints are checked first
