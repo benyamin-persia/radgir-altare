@@ -506,6 +506,12 @@
             border-radius: 4px;
             overflow: hidden;
             background: var(--background-alt);
+            cursor: pointer; /* click any preview to pick the listing card photo */
+        }
+
+        .image-preview-item.is-card-photo {
+            border-color: var(--color-orange); /* selected card photo stands out */
+            box-shadow: 0 0 0 1px var(--color-orange);
         }
 
         .image-preview-item img {
@@ -513,6 +519,24 @@
             height: 150px;
             object-fit: cover;
             display: block;
+        }
+
+        .image-preview-item .card-photo-badge {
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            background: var(--color-orange);
+            color: #fff;
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 0.2rem 0.45rem;
+            border-radius: 3px;
+            display: none; /* only shown on the selected card photo */
+            z-index: 1;
+        }
+
+        .image-preview-item.is-card-photo .card-photo-badge {
+            display: inline-block;
         }
 
         .image-preview-item .remove-image {
@@ -531,6 +555,7 @@
             align-items: center;
             justify-content: center;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            z-index: 2;
         }
 
         .image-preview-item .remove-image:hover {
@@ -855,6 +880,7 @@
                         <label for="images" data-i18n="createPerson.imagesHint">Upload Images</label>
                         <input type="file" id="images" name="images" multiple accept="image/jpeg,image/jpg,image/png,image/gif,image/webp">
                         <small data-i18n="createPerson.imagesHelp">You can select multiple images (JPEG, PNG, GIF, WebP). Max 10 images, 5MB each.</small>
+                        <small data-i18n="createPerson.cardPhotoHelp" style="display:block;margin-top:0.35rem;">Click an image to use it as the photo on the listing card.</small>
                         <div id="imagePreview" class="image-preview-container"></div>
                     </div>
                 </div>
@@ -900,7 +926,7 @@
             });
         }
     </script>
-    <script src="create-person.js?v=20260219-1"></script>
+    <script src="create-person.js?v=20261124-card-photo"></script>
     
     <!-- Go Back Function for standalone page -->
     <script>

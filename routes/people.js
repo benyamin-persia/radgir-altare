@@ -789,6 +789,70 @@ function scheduleSocialNotifyForNewListing(personDoc, imageUrls, { deferUntilPub
     });
 }
 
+/**
+ * Card photo helpers: listing cards always show images[0], so the chosen preview
+ * is moved to the front of the array on create/update.
+ */
+function getImageEntryRawUrl(img) { // string path/url or object with url/path fields
+    if (!img) return '';
+    if (typeof img === 'string') return img;
+    return img.url || img.secure_url || img.path || '';
+}
+
+function normalizeImageMatchKey(value) { // pathname-ish key so absolute vs relative URLs still match
+    const raw = String(value || '').trim();
+    if (!raw) return '';
+    try {
+        const u = new URL(raw, 'https://example.invalid');
+        return (u.pathname || raw).replace(/\\/g, '/').toLowerCase();
+    } catch (_) {
+        return raw.replace(/\\/g, '/').toLowerCase();
+    }
+}
+
+function imageEntryMatchesCardUrl(img, cardUrl) { // true when stored image is the user's selected card photo
+    const a = normalizeImageMatchKey(getImageEntryRawUrl(img));
+    const b = normalizeImageMatchKey(cardUrl);
+    if (!a || !b) return false;
+    if (a === b) return true;
+    const baseA = a.split('/').pop();
+    const baseB = b.split('/').pop();
+    return Boolean(baseA && baseB && baseA === baseB);
+}
+
+function parseCardPhotoSelection(raw) { // FormData sends JSON string: {type:'existing',url} or {type:'new',index}
+    if (!raw) return null;
+    try {
+        const parsed = typeof raw === 'string' ? JSON.parse(raw) : raw;
+        if (!parsed || typeof parsed !== 'object') return null;
+        if (parsed.type === 'existing' && parsed.url) {
+            return { type: 'existing', url: String(parsed.url) };
+        }
+        if (parsed.type === 'new' && Number.isFinite(Number(parsed.index))) {
+            return { type: 'new', index: Number(parsed.index) };
+        }
+        return null;
+    } catch (_) {
+        return null;
+    }
+}
+
+function applyCardPhotoSelection(images, cardPhoto, newImageCount = 0) { // move chosen image to index 0 for card display
+    if (!Array.isArray(images) || images.length === 0 || !cardPhoto) return images;
+    const arr = [...images];
+    let idx = -1;
+    if (cardPhoto.type === 'new') {
+        const start = Math.max(0, arr.length - Math.max(0, newImageCount)); // new uploads were appended at the end
+        idx = start + cardPhoto.index;
+    } else if (cardPhoto.type === 'existing') {
+        idx = arr.findIndex((img) => imageEntryMatchesCardUrl(img, cardPhoto.url));
+    }
+    if (idx < 0 || idx >= arr.length || idx === 0) return arr; // already primary or not found
+    const [picked] = arr.splice(idx, 1); // pull selected image out of its current slot
+    arr.unshift(picked); // put it first so cards/map use it as the main photo
+    return arr;
+}
+
 // Create router instance
 const router = express.Router();
 
@@ -3736,6 +3800,7 @@ router.post('/', [
         // Handle uploaded images
         // Supports Cloudinary direct uploads and async mode to avoid Heroku H12 timeouts
         let deferredUntilPublicImage = false;
+        const cardPhotoSelection = parseCardPhotoSelection(req.body.cardPhoto); // which preview user marked as card photo
         if (req.files && req.files.length > 0) {
             console.log(`Processing ${req.files.length} uploaded images for person ${person._id}`);
 
@@ -3747,7 +3812,7 @@ router.post('/', [
                 });
 
                 if (localEntries.length > 0) {
-                    person.images = localEntries;
+                    person.images = applyCardPhotoSelection(localEntries, cardPhotoSelection, localEntries.length); // honor card-photo pick before save
                     await person.save();
                     console.log(`Saved ${localEntries.length} local image(s) for person ${person._id}`);
                 }
@@ -3759,15 +3824,16 @@ router.post('/', [
                     userId
                 }).then(async (cloudEntries) => {
                     if (cloudEntries.length > 0) {
+                        const orderedCloud = applyCardPhotoSelection(cloudEntries, cardPhotoSelection, cloudEntries.length); // keep same card order after Cloudinary swap
                         await Person.updateOne(
                             { _id: person._id },
-                            { $set: { images: cloudEntries } }
+                            { $set: { images: orderedCloud } }
                         );
                         console.log(`Replaced local images with ${cloudEntries.length} Cloudinary image(s) for person ${person._id}`);
                         const fresh = await Person.findById(person._id).lean();
-                        const cloudUrls = cloudEntries.map((img) => getImageUrl(img, req)).filter(Boolean);
+                        const cloudUrls = orderedCloud.map((img) => getImageUrl(img, req)).filter(Boolean);
                         notifyNewListingToSocialsAsync(
-                            { ...(fresh || person.toObject()), images: cloudEntries },
+                            { ...(fresh || person.toObject()), images: orderedCloud },
                             { imageUrls: cloudUrls, telegram: true, instagram: true }
                         );
                     } else {
@@ -3796,7 +3862,7 @@ router.post('/', [
                 });
 
                 if (imageEntries.length > 0) {
-                    person.images = imageEntries;
+                    person.images = applyCardPhotoSelection(imageEntries, cardPhotoSelection, imageEntries.length); // promote selected new upload to images[0]
                     await person.save();
                     console.log(`Added ${imageEntries.length} images to person ${person._id}`);
                 }
@@ -4217,6 +4283,8 @@ router.put('/:id', [
 
         // Handle uploaded images if any
         // Supports Cloudinary direct uploads and async mode to avoid Heroku H12 timeouts
+        const cardPhotoSelection = parseCardPhotoSelection(req.body.cardPhoto); // user's chosen card photo among previews
+        let newImageCountThisRequest = 0; // how many new files were appended (for type:'new' cardPhoto index)
         if (req.files && req.files.length > 0) {
             console.log(`Processing ${req.files.length} uploaded images for person ${personId}`);
 
@@ -4228,7 +4296,12 @@ router.put('/:id', [
                 });
 
                 if (localEntries.length > 0) {
-                    person.images = [...existingImages, ...localEntries];
+                    newImageCountThisRequest = localEntries.length;
+                    person.images = applyCardPhotoSelection( // append then promote selected image to front
+                        [...existingImages, ...localEntries],
+                        cardPhotoSelection,
+                        newImageCountThisRequest
+                    );
                     console.log(`Added ${localEntries.length} local image(s) to person ${personId}`);
                 }
 
@@ -4237,7 +4310,11 @@ router.put('/:id', [
                     userId
                 }).then(async (cloudEntries) => {
                     if (cloudEntries.length > 0) {
-                        const nextImages = [...existingImages, ...cloudEntries];
+                        const nextImages = applyCardPhotoSelection( // preserve card-photo order after Cloudinary replace
+                            [...existingImages, ...cloudEntries],
+                            cardPhotoSelection,
+                            cloudEntries.length
+                        );
                         await Person.updateOne(
                             { _id: personId },
                             { $set: { images: nextImages } }
@@ -4259,10 +4336,17 @@ router.put('/:id', [
                 });
 
                 if (imageEntries.length > 0) {
-                    person.images = [...(person.images || []), ...imageEntries];
+                    newImageCountThisRequest = imageEntries.length;
+                    person.images = applyCardPhotoSelection(
+                        [...(person.images || []), ...imageEntries],
+                        cardPhotoSelection,
+                        newImageCountThisRequest
+                    );
                     console.log(`Added ${imageEntries.length} new images to person ${personId}`);
                 }
             }
+        } else if (cardPhotoSelection) {
+            person.images = applyCardPhotoSelection(person.images || [], cardPhotoSelection, 0); // reorder existing only (no new uploads)
         }
 
         // Save updates

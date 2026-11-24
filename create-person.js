@@ -32,7 +32,7 @@ let mapInitAbortedForZeroSize = false;
 const MAP_INIT_RETRY_DELAY_MS = 100;
 const MAX_MAP_INIT_RETRIES = 30;
 const MAX_METADATA_NOTES_LENGTH = 10000;
-const CREATE_PERSON_SCRIPT_VERSION = '2026-02-19-1';
+const CREATE_PERSON_SCRIPT_VERSION = '2026-11-24-card-photo';
 const ADDRESS_STATUS = Object.freeze({
     EXACT: 'exact',
     APPROXIMATE: 'approximate',
@@ -558,7 +558,7 @@ async function populateFormWithPerson(person) {
     const notes = (person.metadata && person.metadata.notes) || person.notes || '';
     setVal('notes', notes);
 
-    // Step 6: Existing images - show as read-only thumbnails in #imagePreview (no remove; new uploads add alongside)
+    // Step 6: Existing images - show as selectable thumbnails in #imagePreview (click = card photo; new uploads add alongside)
     const previewContainer = document.getElementById('imagePreview');
     if (previewContainer && Array.isArray(person.images) && person.images.length > 0) {
         person.images.forEach((imgSrc, idx) => {
@@ -566,9 +566,25 @@ async function populateFormWithPerson(person) {
             if (!url) return;
             const div = document.createElement('div');
             div.className = 'image-preview-item existing-image';
-            div.setAttribute('data-existing', 'true');
-            div.innerHTML = `<img src="${escapeAttr(url)}" alt="Existing ${idx + 1}"><span class="image-name">Existing image ${idx + 1}</span>`;
+            div.setAttribute('data-existing', 'true'); // marks this as already-saved (not a new File upload)
+            div.setAttribute('data-existing-url', url); // stable URL key sent as cardPhoto on submit
+            div.setAttribute('role', 'button');
+            div.setAttribute('tabindex', '0');
+            div.setAttribute('title', t('createPerson.cardPhotoHelp', 'Click an image to use it as the photo on the listing card.'));
+            div.innerHTML = `
+                <span class="card-photo-badge">${escapeAttr(t('createPerson.cardPhotoBadge', 'Card photo'))}</span>
+                <img src="${escapeAttr(url)}" alt="Existing ${idx + 1}">
+                <span class="image-name">Existing image ${idx + 1}</span>
+            `;
+            div.addEventListener('click', () => setCardPhotoPreview(div)); // pick this existing image as the listing card photo
+            div.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    setCardPhotoPreview(div);
+                }
+            });
             previewContainer.appendChild(div);
+            if (idx === 0) setCardPhotoPreview(div); // images[0] is already the live card photo — preselect it
         });
     }
 
@@ -2475,6 +2491,13 @@ function setupFormSubmission() {
                 formData.append('images', file, file.name);
             });
         }
+
+        // Tell API which preview is the listing card photo (moved to images[0] server-side)
+        const cardPhotoPayload = getSelectedCardPhotoPayload();
+        formData.delete('cardPhoto');
+        if (cardPhotoPayload) {
+            formData.append('cardPhoto', JSON.stringify(cardPhotoPayload));
+        }
         
         // Debug: Log what we're sending (without files)
         console.log('FormData contents:');
@@ -2631,6 +2654,42 @@ function hideAlert() {
 }
 
 /**
+ * Mark one preview as the listing card photo (only one at a time).
+ * Cards/map always use images[0]; this selection is sent as cardPhoto on submit.
+ */
+function setCardPhotoPreview(item) {
+    const previewContainer = document.getElementById('imagePreview');
+    if (!previewContainer || !item) return;
+    previewContainer.querySelectorAll('.image-preview-item.is-card-photo').forEach((el) => {
+        el.classList.remove('is-card-photo');
+        el.removeAttribute('aria-pressed');
+    });
+    item.classList.add('is-card-photo');
+    item.setAttribute('aria-pressed', 'true');
+}
+
+/**
+ * Build cardPhoto payload for the API from the selected preview item.
+ * existing → { type:'existing', url }; new upload → { type:'new', index }.
+ */
+function getSelectedCardPhotoPayload() {
+    const previewContainer = document.getElementById('imagePreview');
+    if (!previewContainer) return null;
+    const selected = previewContainer.querySelector('.image-preview-item.is-card-photo');
+    if (!selected) return null;
+    if (selected.getAttribute('data-existing') === 'true') {
+        const url = selected.getAttribute('data-existing-url') || (selected.querySelector('img') && selected.querySelector('img').getAttribute('src')) || '';
+        if (!url) return null;
+        return { type: 'existing', url };
+    }
+    const index = Number(selected.dataset.index);
+    if (!Number.isFinite(index) || index < 0) return null;
+    return { type: 'new', index };
+}
+
+window.setCardPhotoPreview = setCardPhotoPreview;
+
+/**
  * ============================================
  * Setup Image Upload
  * ============================================
@@ -2685,15 +2744,32 @@ function setupImageUpload() {
         reader.onload = function(e) {
             const previewItem = document.createElement('div');
             previewItem.className = 'image-preview-item';
-            previewItem.dataset.index = index;
+            previewItem.dataset.index = index; // index among newly selected files (cardPhoto type:'new')
+            previewItem.setAttribute('role', 'button');
+            previewItem.setAttribute('tabindex', '0');
+            previewItem.setAttribute('title', t('createPerson.cardPhotoHelp', 'Click an image to use it as the photo on the listing card.'));
             
             previewItem.innerHTML = `
-                <img src="${e.target.result}" alt="${file.name}">
-                <button type="button" class="remove-image" onclick="removeImagePreview(${index})" title="${escapeAttr(t('createPerson.removeImageTitle', 'Remove image'))}">×</button>
-                <div class="image-name">${file.name}</div>
+                <span class="card-photo-badge">${escapeAttr(t('createPerson.cardPhotoBadge', 'Card photo'))}</span>
+                <img src="${e.target.result}" alt="${escapeAttr(file.name)}">
+                <button type="button" class="remove-image" onclick="event.stopPropagation(); removeImagePreview(${index})" title="${escapeAttr(t('createPerson.removeImageTitle', 'Remove image'))}">×</button>
+                <div class="image-name">${escapeAttr(file.name)}</div>
             `;
+
+            previewItem.addEventListener('click', () => setCardPhotoPreview(previewItem)); // new upload can also be the card photo
+            previewItem.addEventListener('keydown', (ev) => {
+                if (ev.key === 'Enter' || ev.key === ' ') {
+                    ev.preventDefault();
+                    setCardPhotoPreview(previewItem);
+                }
+            });
             
             previewContainer.appendChild(previewItem);
+
+            // If nothing is card photo yet (create mode / no existing), make first new image the default
+            if (!previewContainer.querySelector('.image-preview-item.is-card-photo')) {
+                setCardPhotoPreview(previewItem);
+            }
         };
         
         reader.readAsDataURL(file);
@@ -2709,20 +2785,27 @@ function setupImageUpload() {
         selectedFiles.splice(index, 1);
         
         // Remove preview element
-        const previewItem = previewContainer.querySelector(`[data-index="${index}"]`);
+        const previewItem = previewContainer.querySelector(`.image-preview-item[data-index="${index}"]`);
+        const wasCardPhoto = previewItem && previewItem.classList.contains('is-card-photo');
         if (previewItem) {
             previewItem.remove();
         }
         
-        // Re-index remaining previews
-        const remainingPreviews = previewContainer.querySelectorAll('.image-preview-item');
-        remainingPreviews.forEach((item, newIndex) => {
+        // Re-index remaining *new* previews only (existing images have no data-index for uploads)
+        const remainingNewPreviews = previewContainer.querySelectorAll('.image-preview-item:not(.existing-image)');
+        remainingNewPreviews.forEach((item, newIndex) => {
             item.dataset.index = newIndex;
             const removeBtn = item.querySelector('.remove-image');
             if (removeBtn) {
-                removeBtn.setAttribute('onclick', `removeImagePreview(${newIndex})`);
+                removeBtn.setAttribute('onclick', `event.stopPropagation(); removeImagePreview(${newIndex})`);
             }
         });
+
+        // If we removed the card photo, fall back to first remaining preview
+        if (wasCardPhoto) {
+            const fallback = previewContainer.querySelector('.image-preview-item');
+            if (fallback) setCardPhotoPreview(fallback);
+        }
         
         // Update file input
         updateFileInput();
