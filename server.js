@@ -186,6 +186,15 @@ Object.entries(emailPageRoutes).forEach(([routePath, fileName]) => {
     });
 });
 
+// Old create-person.html URL → new listing-editor.html (breaks Cloudflare/browser stale cache)
+app.get('/create-person.html', (req, res) => {
+    const qs = req.url.includes('?') ? req.url.slice(req.url.indexOf('?')) : '';
+    res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+    res.setHeader('CDN-Cache-Control', 'no-store');
+    res.setHeader('Cloudflare-CDN-Cache-Control', 'no-store');
+    res.redirect(302, `/listing-editor.html${qs}`);
+});
+
 // Serve static files (HTML, CSS, JavaScript) from the root directory
 // This allows the browser to access login.html, register.html, dashboard.html, etc.
 // Placed after API routes so API endpoints are checked first
@@ -197,7 +206,7 @@ app.use(express.static(__dirname, {
         if (path.endsWith('.html')) {
             res.setHeader('Content-Type', 'text/html; charset=utf-8');
         }
-        // Avoid stale frontend bundles in browser cache during active development.
+        // Avoid stale frontend bundles in browser / Cloudflare edge cache.
         if (
             path.endsWith('.html') ||
             path.endsWith('.js') ||
@@ -206,6 +215,8 @@ app.use(express.static(__dirname, {
             path.endsWith('\\sw.js')
         ) {
             res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+            res.setHeader('CDN-Cache-Control', 'no-store'); // stop shared CDN caches holding HTML/JS
+            res.setHeader('Cloudflare-CDN-Cache-Control', 'no-store'); // Cloudflare-specific edge bypass
             res.setHeader('Pragma', 'no-cache');
             res.setHeader('Expires', '0');
         }

@@ -561,7 +561,7 @@ function editPost(postId) {
     console.log(`Editing post: ${postId}`);
     // Navigate to create-person.html with edit mode
     // We'll need to modify create-person.html to support edit mode
-    window.location.href = `create-person.html?edit=${postId}`;
+    window.location.href = `listing-editor.html?edit=${postId}`; // new URL bypasses stale Cloudflare create-person.html
 }
 
 /**
