@@ -1,0 +1,4743 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#243C4C">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Radgir">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192x192.png">
+    <link rel="apple-touch-icon" href="/icons/icon-192x192.png">
+    <meta name="description" content="Radgir - Find and list people by their geolocation">
+    <!-- Canonical app URL for share links: server injects APP_URL so copied links never use localhost in production -->
+    <meta name="radgir-app-url" content="__RADGIR_APP_URL__">
+    <title data-i18n="index.title">اطلاعات افراد وابسته به نظام کثیف جمهوری اسلامی</title>
+    <link rel="stylesheet" href="styles.css?v=mobile-menu-2">
+    
+    <!-- Leaflet CSS for map -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+          crossorigin=""/>
+    
+    <script>
+        /**
+         * ============================================
+         * Theme Initialization Script
+         * ============================================
+         * Apply theme immediately to prevent flash of unstyled content (FOUC)
+         */
+        (function() {
+            const savedTheme = localStorage.getItem('theme');
+            const systemPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const theme = savedTheme || (systemPrefersDark ? 'dark' : 'light');
+            document.documentElement.setAttribute('data-theme', theme);
+            console.log('Theme initialized:', theme);
+        })();
+    </script>
+    <!-- Load translations first, then i18n manager -->
+    <script src="translations.js"></script>
+    <script src="i18n.js"></script>
+    <script src="theme.js"></script>
+    
+    <style>
+        /**
+         * ============================================
+         * Home Page Styles - Map and Listings Layout
+         * ============================================
+         */
+        
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            height: 100dvh;
+            min-height: 100vh;
+            min-height: 100dvh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            padding-bottom: env(safe-area-inset-bottom, 0px);
+        }
+        
+        /* Guest User Notification Banner */
+        .guest-notification-banner {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 20px;
+            margin-top: 60px; /* Header height */
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            display: none; /* Hidden by default, shown only for Guest users */
+            position: relative;
+            z-index: 10;
+        }
+
+        .guest-notification-banner.show {
+            display: block;
+        }
+        
+        /* Adjust main container when banner is shown */
+        body:has(.guest-notification-banner.show) .main-container {
+            margin-top: 0;
+        }
+
+        .guest-notification-banner .banner-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .guest-notification-banner .banner-icon {
+            font-size: 1.5rem;
+        }
+
+        .guest-notification-banner .banner-text {
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .guest-notification-banner .banner-link {
+            color: white;
+            text-decoration: underline;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.3s ease;
+        }
+
+        .guest-notification-banner .banner-link:hover {
+            opacity: 0.8;
+        }
+
+        /* Main container layout - 3 column horizontal layout */
+        /* Order: Filters (1st), Listings (2nd), Map (3rd) */
+        /* All sections are visible side by side on screens wider than 1000px */
+        .main-container {
+            display: flex;
+            flex-direction: row; /* Always horizontal for 3-column layout */
+            flex: 1;
+            overflow: hidden;
+            margin-top: 0; /* No top margin, banner handles spacing */
+            gap: 0; /* No gap, borders will separate sections */
+            /* Ensure all children are visible */
+            align-items: stretch;
+            min-height: 0;
+        }
+        /* Wrapper for lists + one combined header; fixed width so map keeps remaining space (min 400px) */
+        .list-and-filters-wrapper {
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+            flex: 0 0 auto;
+            width: 700px;
+            max-width: calc(100vw - 420px);
+            order: 2;
+        }
+        .combined-list-header {
+            height: 52px;
+            padding: 0 1rem;
+            background-color: rgba(92, 126, 143, 1);
+            color: white;
+            border-bottom: 2px solid rgba(105, 134, 150, 1);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-shrink: 0;
+        }
+        .combined-list-header .header-search-sort {
+            flex: 1;
+            min-width: 0;
+        }
+        .combined-list-header .header-search-sort input,
+        .combined-list-header .header-search-sort select {
+            height: 33px;
+            padding: 0.35rem 0.5rem;
+            font-size: 0.85rem;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+        }
+        .combined-list-header .header-search-sort input::placeholder {
+            color: rgba(255, 255, 255, 0.75);
+        }
+        .combined-list-header .header-search-sort #searchInput {
+            width: 160px;
+            min-width: 140px;
+        }
+        .combined-list-header .header-search-sort #sortFilter {
+            width: 120px;
+            min-width: 120px;
+        }
+        /* Order: left = with address (listings), right = without address (filters); same in RTL */
+        /* align-items: stretch so both columns have equal height (listingsList and filtersPeopleContent same height) */
+        .list-and-filters-columns {
+            display: flex;
+            flex-direction: row;
+            flex: 1;
+            min-height: 0;
+            overflow: hidden;
+            align-items: stretch;
+        }
+        /* Both list sections identical: width, height, color, border (list style); fixed width so map keeps size; stretch to equal height */
+        .list-and-filters-columns .listings-section-standalone,
+        .list-and-filters-columns .filters-section-standalone {
+            width: 349px;
+            min-width: 300px;
+            max-width: 400px;
+            flex: 0 0 349px;
+            background: var(--background-alt);
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: 2px 0 8px rgba(0, 0, 0, 0.05);
+            min-height: 0;
+        }
+        [dir="rtl"] .filters-section-standalone,
+        [dir="rtl"] .listings-section-standalone {
+            border-right: none;
+            border-left: 1px solid var(--border-color);
+        }
+        /* RTL: keep "with address" on left, "without address" on right (swap visual order) */
+        [dir="rtl"] .listings-section-standalone {
+            order: 1;
+        }
+        [dir="rtl"] .filters-section-standalone {
+            order: -1;
+        }
+        
+        .filters-header {
+            height: 52px;
+            padding: 1rem;
+            background-color: rgba(92, 126, 143, 1);
+            color: white;
+            border-bottom: 2px solid rgba(105, 134, 150, 1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 0.5rem;
+            flex-shrink: 0;
+        }
+        .filters-header-main {
+            flex: 1;
+            min-width: 0;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .filters-header h3 {
+            margin: 0;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        /* Count/title text removed from header; shown in .list-top-caption below */
+        .filters-header-main h3 { order: 1; margin: 0 0 0 auto; }
+        [dir="rtl"] .filters-header-main h3 { order: -1; margin: 0; }
+        .filters-people-tabs {
+            display: none;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .people-tab-btn {
+            flex: 1;
+            min-width: 0;
+            border: 1px solid rgba(255, 255, 255, 0.38);
+            background: rgba(255, 255, 255, 0.12);
+            color: #ffffff;
+            border-radius: 999px;
+            padding: 0.32rem 0.58rem;
+            font-size: 0.78rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.35rem;
+        }
+        .people-tab-btn.active {
+            border-color: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 255, 255, 0.24);
+        }
+        .people-tab-count {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 1.45rem;
+            padding: 0 0.25rem;
+            border-radius: 999px;
+            font-size: 0.72rem;
+            line-height: 1.2;
+            background: rgba(0, 0, 0, 0.18);
+        }
+        [dir="rtl"] .filters-people-tabs { flex-direction: row-reverse; }
+        
+        /* Both list areas identical: color, padding, scrollbar, height (list style) */
+        .filters-content.people-tabs-layout,
+        .listings-container {
+            flex: 1;
+            min-height: 0;
+            overflow-y: auto;
+            padding: 1rem;
+            position: relative;
+            background: var(--background-alt);
+            scrollbar-width: thin;
+            scrollbar-color: var(--border-color) var(--background-alt);
+        }
+        .filters-content {
+            flex: 1;
+            min-height: 0;
+            overflow-y: auto;
+            padding: 1rem;
+            position: relative;
+            background: var(--background-alt);
+            scrollbar-width: thin;
+            scrollbar-color: var(--border-color) var(--background-alt);
+        }
+        .filters-content::-webkit-scrollbar,
+        .listings-container::-webkit-scrollbar {
+            width: 6px;
+        }
+        .filters-content::-webkit-scrollbar-track,
+        .listings-container::-webkit-scrollbar-track {
+            background: var(--background-alt);
+        }
+        .filters-content::-webkit-scrollbar-thumb,
+        .listings-container::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 3px;
+        }
+        .filters-content::-webkit-scrollbar-thumb:hover,
+        .listings-container::-webkit-scrollbar-thumb:hover {
+            background: var(--border-medium);
+        }
+        .people-tab-panel {
+            display: none;
+            width: 100%;
+            min-height: 0;
+        }
+        .people-tab-panel.active {
+            display: block;
+            min-height: 0;
+            overflow: visible;
+        }
+        .with-address-list,
+        .no-address-list {
+            width: 100%;
+        }
+        .with-address-cards {
+            display: block;
+            width: 100%;
+        }
+
+        /* People without address section – no extra blank space at bottom */
+        .no-address-list {
+            display: block;
+            width: 100%;
+            margin-bottom: 0;
+            min-height: 0;
+        }
+        .no-address-list-wrapper {
+            min-height: 0;
+        }
+        .no-address-section-title {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin: 0 0 0.5rem 0;
+            color: var(--text-dark);
+        }
+        /* No-address cards: same structure and styles as people-with-address cards (identical components) */
+        .no-address-cards {
+            display: block;
+            width: 100%;
+        }
+        /* Same card dimensions and spacing as .listing-card (people with address) */
+        .no-address-cards .listing-card,
+        .listing-card[data-no-address="1"] {
+            width: 100% !important;
+            height: 143px !important;
+            min-height: 143px;
+            max-height: 143px;
+            margin: 0 0 1rem 0 !important;
+            padding: 1rem;
+            box-sizing: border-box;
+        }
+        /* Identical to people-with-address: content, actions, votes use same layout (no overrides) */
+        .no-address-cards .listing-card:last-child,
+        .listing-card[data-no-address="1"]:last-child {
+            margin-bottom: 0 !important;
+        }
+        /* No-address address line: same typography as .listing-content .listing-address */
+        .listing-card[data-no-address="1"] .listing-address-none,
+        .listing-card[data-no-address="1"] .listing-address,
+        .no-address-cards .listing-address-none,
+        .no-address-cards .listing-card .listing-address {
+            margin: 0.25rem 0;
+            font-size: 0.85rem;
+            color: var(--text-medium);
+        }
+        .listing-card[data-no-address="1"] .listing-add-address-link,
+        .no-address-cards .listing-add-address-link {
+            display: inline-block;
+            font-size: 0.85rem;
+            color: var(--accent-color);
+            text-decoration: none;
+            margin: 0.25rem 0 0 0;
+        }
+        .listing-address-none {
+            margin: 0.15rem 0;
+            font-size: 0.85rem;
+            color: var(--text-medium);
+            font-style: italic;
+        }
+        .listing-add-address-link {
+            display: inline-block;
+            font-size: 0.8rem;
+            color: var(--accent-color);
+            text-decoration: none;
+            margin: 0.2rem 0 0 0;
+        }
+        .listing-add-address-link:hover {
+            text-decoration: underline;
+        }
+        .filters-hint {
+            font-size: 0.85rem;
+            color: var(--text-medium);
+            margin: 0.25rem 0 0 0;
+        }
+        .btn-load-more {
+            margin-top: 0.6rem;
+            width: 100%;
+            height: 34px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background: transparent;
+            color: var(--text-medium);
+            font-size: 0.86rem;
+            cursor: pointer;
+            transition: border-color 0.2s ease, color 0.2s ease;
+        }
+        .btn-load-more:hover {
+            border-color: var(--accent-color);
+            color: var(--accent-color);
+        }
+        .btn-load-more:disabled {
+            opacity: 0.6;
+            cursor: wait;
+        }
+        
+        /* Listings section uses same style as filters section (see .listings-section-standalone above) */
+        .listings-section-standalone .listings-header {
+            padding: 1rem;
+            background-color: rgba(92, 126, 143, 1);
+            color: white;
+            border-bottom: 2px solid rgba(105, 134, 150, 1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-shrink: 0; /* Prevent header from shrinking */
+        }
+        
+        /* Map Container (Third Column): filter bar on top, map below */
+        .map-container {
+            flex: 1;
+            position: relative;
+            min-width: 400px;
+            order: 3;
+            background: var(--background-alt);
+            border: none;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+            min-height: 0;
+        }
+        /* Filter bar at top of map: one line, dropdowns shrink when width gets small (no wrap) */
+        .map-filters-bar {
+            height: 52px;
+            flex-shrink: 0;
+            padding: 0 1rem;
+            background: var(--secondary-color);
+            color: white;
+            border-bottom: 2px solid var(--secondary-light);
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: nowrap;
+            overflow: hidden;
+            min-width: 0;
+        }
+        /* Each filter: shrinks with the bar so everything stays on one line */
+        .map-filters-bar .filter-group,
+        .map-filters-bar .country-switcher-group {
+            margin-bottom: 0;
+            flex: 1 1 0;
+            min-width: 0;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 0.35rem;
+        }
+        /* Hide labels in map bar to save space; use select title/aria-label for tooltip and a11y */
+        .map-filters-bar .filter-group label,
+        .map-filters-bar .country-switcher-group label {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+        /* Map bar dropdowns: shrink to fit (one line, no wrap) */
+        .map-filters-bar .filter-group select,
+        .map-filters-bar .filter-group input,
+        .map-filters-bar .country-switcher {
+            width: 100%;
+            min-width: 0;
+            box-sizing: border-box;
+            height: 33px;
+            padding: 0.35rem 0.4rem;
+            font-size: 0.85rem;
+            border-color: rgba(255, 255, 255, 0.4);
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+        }
+        .map-filters-bar #countrySwitcher,
+        .map-filters-bar #provinceFilter,
+        .map-filters-bar #sectionFilter,
+        .map-filters-bar #roleFilter {
+            width: 100%;
+            min-width: 0;
+        }
+        .map-filters-bar .filter-group select option,
+        .map-filters-bar .country-switcher option {
+            background: var(--background-color);
+            color: var(--text-color);
+        }
+        .map-filters-sheet-head,
+        .filter-actions-row {
+            display: none;
+        }
+        .map-filters-sheet-head {
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.6rem;
+        }
+        .map-filters-sheet-title {
+            margin: 0;
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+        .map-filters-sheet-subtitle {
+            margin: 0.15rem 0 0;
+            font-size: 0.72rem;
+            color: rgba(255, 255, 255, 0.72);
+        }
+        .map-filters-sheet-close {
+            min-width: 34px;
+            min-height: 34px;
+            border: 1px solid rgba(255, 255, 255, 0.38);
+            background: rgba(255, 255, 255, 0.12);
+            color: #ffffff;
+            border-radius: 10px;
+            font-size: 1rem;
+            line-height: 1;
+            cursor: pointer;
+        }
+        .filter-actions-row {
+            width: 100%;
+            gap: 0.55rem;
+            margin-top: 0.15rem;
+        }
+        .filter-action-btn {
+            flex: 1;
+            min-height: 40px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.32);
+            font-size: 0.86rem;
+            font-weight: 700;
+            cursor: pointer;
+        }
+        .filter-action-btn.btn-clear-filters {
+            background: rgba(255, 255, 255, 0.16);
+            color: #ffffff;
+        }
+        .filter-action-btn.btn-apply-filters {
+            border-color: rgba(0, 172, 172, 0.65);
+            background: rgba(0, 172, 172, 0.88);
+            color: #ffffff;
+        }
+        /* Screen-reader only label (visible to assistive tech, hidden visually) */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+        /* Search and sort inside section headers (replacing duplicate title+count; caption is below) */
+        .header-search-sort {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            flex: 1;
+            min-width: 0;
+        }
+        .header-filter-group {
+            margin-bottom: 0;
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+        /* Legacy support - hide old sidebar structure */
+        .listings-sidebar {
+            display: none;
+        }
+        
+        /* RTL Layout - Reverse order for Persian */
+        [dir="rtl"] .main-container {
+            flex-direction: row-reverse;
+        }
+        
+        [dir="rtl"] .list-and-filters-wrapper .filters-section-standalone {
+            border-right: none;
+            border-left: 1px solid var(--border-color);
+        }
+        
+        [dir="rtl"] .listings-section-standalone {
+            border-right: none;
+            border-left: 1px solid var(--border-color);
+        }
+        
+        [dir="rtl"] .map-container {
+            order: 1;
+            border-left: none;
+        }
+        
+        #map {
+            flex: 1;
+            min-height: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+        
+        /* Filters section - Legacy support (hidden, using filters-section-standalone) */
+        .filters-section {
+            display: none;
+        }
+        
+        /* Filter group: label and dropdown on the same row (beside each other) */
+        .filter-group {
+            margin-bottom: 0.5rem;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        
+        /* Country switcher: same structure (label + select beside each other) */
+        .country-switcher-group {
+            margin-bottom: 0.5rem;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .country-switcher-group label,
+        .filter-group label {
+            display: block;
+            margin-bottom: 0;
+            flex-shrink: 0;
+            color: var(--text-color);
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        
+        .filter-group input,
+        .filter-group select,
+        .country-switcher {
+            flex: 1;
+            min-width: 0;
+            padding: 0.5rem 0.65rem;
+            border: 1.5px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 0.9rem;
+            background: var(--background-color);
+            color: var(--text-color);
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+        
+        .filter-group input:hover,
+        .filter-group select:hover,
+        .country-switcher:hover {
+            border-color: var(--border-medium);
+        }
+        
+        .filter-group input:focus,
+        .filter-group select:focus,
+        .country-switcher:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(0, 172, 172, 0.1);
+            background: var(--background-color);
+        }
+        
+        .filter-group input::placeholder {
+            color: var(--text-light);
+            opacity: 0.7;
+        }
+        
+        .filter-buttons {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.75rem;
+            padding-top: 0.5rem;
+            border-top: 1px solid var(--border-light);
+        }
+        
+        .btn-filter {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 172, 172, 0.2);
+            font-family: inherit;
+        }
+        
+        .btn-filter:hover {
+            background: var(--accent-hover);
+            box-shadow: 0 4px 8px rgba(0, 172, 172, 0.3);
+            transform: translateY(-1px);
+        }
+        
+        .btn-filter:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 4px rgba(0, 172, 172, 0.2);
+        }
+        
+        .btn-filter-secondary {
+            background: var(--secondary-color);
+            box-shadow: 0 2px 4px rgba(105, 134, 150, 0.2);
+        }
+        
+        .btn-filter-secondary:hover {
+            background: var(--secondary-light);
+            box-shadow: 0 4px 8px rgba(105, 134, 150, 0.3);
+        }
+        
+        /* Listings container: same as .filters-content (see shared list style above) */
+        .listings-container {
+            background: var(--background-alt);
+        }
+        
+        .listings-header {
+            height: 52px;
+            padding: 1rem;
+            background-color: rgba(92, 126, 143, 1);
+            color: white;
+            border-bottom: 2px solid rgba(105, 134, 150, 1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-shrink: 0; /* Prevent header from shrinking */
+        }
+        .list-top-caption {
+            min-height: 18px;
+            padding: 0.15rem 0.75rem 0.2rem;
+            font-size: 0.64rem;
+            line-height: 1.15;
+            letter-spacing: 0.01em;
+            color: rgba(255, 255, 255, 0.74);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            background: transparent;
+        }
+        
+        /* Header main area now holds search/sort; caption below has title+count */
+        .listings-header > div {
+            flex: 1;
+            min-width: 0;
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .listings-count {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.9rem;
+        }
+
+        /* Person listing card - fixed height for consistent list appearance (persisted from browser preview) */
+        .listing-card {
+            position: relative;
+            z-index: 0;
+            overflow: visible;
+            height: 143px;
+            background: var(--background-alt);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        /* Share button: positioned at top-left corner of card (completely left and up) */
+        .listing-share-corner {
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: 2;
+        }
+        .listing-share-corner .listing-share-btn {
+            padding: 0.35rem 0.5rem;
+            min-width: 2rem;
+            min-height: 1.8rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 0 0 6px 0;
+        }
+        .listing-share-btn .share-icon {
+            width: 0.95rem;
+            height: 0.95rem;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 1.8;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        
+        .listing-card:hover {
+            border-color: var(--accent-color);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .listing-card.active {
+            border-color: var(--accent-color);
+            background: var(--accent-light);
+        }
+        .listing-card.relationship-focused {
+            border-color: #00bcd4;
+            box-shadow: 0 0 0 1px rgba(0, 188, 212, 0.55), 0 8px 18px rgba(0, 188, 212, 0.18);
+        }
+        .listing-card.listing-menu-open {
+            z-index: 30;
+        }
+        .listing-card.has-card-stack {
+            background: var(--background-alt);
+            overflow: visible;
+            margin-bottom: 1.45rem;
+        }
+        .listing-card.has-card-stack::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: 8px;
+            background: var(--background-alt);
+            z-index: 1;
+            pointer-events: none;
+        }
+        .listing-card.has-card-stack .listing-card-row {
+            position: relative;
+            z-index: 3;
+            transition: transform 0.18s ease;
+        }
+        .listing-card.has-card-stack .listing-share-corner {
+            z-index: 7;
+        }
+        .listing-card.has-card-stack.stack-shift-next .listing-card-row {
+            transform: translateX(22px);
+        }
+        .listing-card.has-card-stack.stack-shift-prev .listing-card-row {
+            transform: translateX(-22px);
+        }
+        .listing-card-stack {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .listing-card-stack-layer {
+            position: absolute;
+            inset: 0;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            background: rgba(22, 26, 32, 0.82);
+            transform: translate(
+                calc(var(--card-stack-index, 1) * 8px),
+                calc(var(--card-stack-index, 1) * 7px)
+            );
+            opacity: calc(0.55 - (var(--card-stack-index, 1) * 0.12));
+            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.25);
+            z-index: calc(var(--card-stack-index, 1) * -1);
+            transition: transform 0.18s ease, opacity 0.18s ease;
+            pointer-events: none;
+        }
+        .listing-card-stack-layer.is-leaving {
+            transform: translate(26px, -18px) scale(0.97);
+            opacity: 0;
+        }
+        .listing-card-stack-layer-inner {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.5rem;
+            padding: 0.75rem 0.9rem;
+            box-sizing: border-box;
+        }
+        .listing-card-stack-text {
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
+        }
+        .listing-card-stack-name {
+            font-size: 0.8rem;
+            color: rgba(180, 230, 255, 0.8);
+            line-height: 1.2;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .listing-card-stack-subtitle {
+            font-size: 0.7rem;
+            color: rgba(220, 230, 240, 0.65);
+            line-height: 1.2;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .listing-card-stack-thumb {
+            width: 40px;
+            height: 40px;
+            border-radius: 6px;
+            object-fit: cover;
+            flex-shrink: 0;
+            display: block;
+            border: 1px solid rgba(255, 255, 255, 0.14);
+        }
+        .listing-card-stack-thumb-placeholder {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 188, 212, 0.16);
+            color: #c7f6ff;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+        .listing-card-stack-count {
+            position: absolute;
+            inset-inline-end: -6px;
+            bottom: -10px;
+            min-width: 1.2rem;
+            height: 1.2rem;
+            border-radius: 999px;
+            background: #00bcd4;
+            color: #083542;
+            border: 1px solid rgba(255, 255, 255, 0.45);
+            font-size: 0.68rem;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.28);
+        }
+        .listing-card-stack-controls {
+            position: absolute;
+            inset: 0;
+            z-index: 5;
+            pointer-events: none;
+            opacity: 1;
+            transition: opacity 0.15s ease;
+        }
+        .listing-card-stack-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 14px;
+            height: 14px;
+            border: none;
+            background: transparent;
+            color: rgba(230, 242, 255, 0.85);
+            font-size: 16px;
+            font-weight: 700;
+            line-height: 1;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            cursor: pointer;
+            pointer-events: auto;
+            box-shadow: none;
+            opacity: 0.85;
+            transition: transform 0.15s ease, color 0.15s ease, opacity 0.15s ease;
+        }
+        .listing-card-stack-btn:hover {
+            color: #00d7f2;
+            opacity: 1;
+            transform: translateY(-50%) scale(1.05);
+        }
+        .listing-card-stack-btn:active {
+            transform: translateY(-50%) scale(0.92);
+        }
+        .listing-card-stack-btn-prev {
+            left: -11px;
+        }
+        .listing-card-stack-btn-next {
+            right: -11px;
+        }
+        @media (hover: hover) and (pointer: fine) {
+            .listing-card.has-card-stack .listing-card-stack-controls {
+                opacity: 0;
+                pointer-events: none;
+            }
+            .listing-card.has-card-stack .listing-card-stack-btn {
+                opacity: 0;
+                pointer-events: none;
+            }
+            .listing-card.has-card-stack:hover .listing-card-stack-controls,
+            .listing-card.has-card-stack.relationship-focused .listing-card-stack-controls,
+            .listing-card.has-card-stack:focus-within .listing-card-stack-controls {
+                opacity: 1;
+                pointer-events: none;
+            }
+            .listing-card.has-card-stack:hover .listing-card-stack-btn,
+            .listing-card.has-card-stack.relationship-focused .listing-card-stack-btn,
+            .listing-card.has-card-stack:focus-within .listing-card-stack-btn {
+                opacity: 0.85;
+                pointer-events: auto;
+            }
+        }
+        
+        /* Row: content on left, image on right */
+        .listing-card-row {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+        
+        /* Content (name, address, tags, actions) - left side */
+        .listing-content {
+            flex: 1;
+            min-width: 0;
+        }
+        .listing-content-top {
+            min-width: 0;
+        }
+        
+        /* Image container - right side, fixed size */
+        .listing-image {
+            flex-shrink: 0;
+            width: 80px;
+            height: 80px;
+            position: relative;
+            overflow: visible;
+        }
+        .listing-image .listing-thumb {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 6px;
+            cursor: pointer;
+            display: block;
+            position: relative;
+            z-index: 3;
+        }
+        .listing-image .listing-thumb-placeholder {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(155deg, rgba(120, 144, 156, 0.34), rgba(38, 50, 56, 0.52));
+            color: #e5eff7;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: default;
+        }
+        .listing-content .listing-name { margin: 0 0 0.25rem; font-size: 1rem; font-weight: 600; color: var(--primary-color); }
+        .listing-content .listing-address { margin: 0.25rem 0; font-size: 0.85rem; color: var(--text-medium); }
+        .listing-address-clickable { cursor: pointer; text-decoration: underline; text-underline-offset: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block; }
+        .listing-address-clickable:hover { color: var(--accent-color); }
+        /* Modal popup for address â†’ Ø¨Ø±ÛŒÙ… شکار */
+        .listing-address-popup-overlay { position: fixed; left: 0; top: 0; right: 0; bottom: 0; z-index: 10000; display: flex; align-items: center; justify-content: center; padding: 1rem; box-sizing: border-box; }
+        .listing-address-popup-backdrop { position: absolute; left: 0; top: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); cursor: pointer; }
+        .listing-address-popup-box { position: relative; background: var(--background-color); border: 1px solid var(--border-color); border-radius: 12px; padding: 1.5rem; min-width: 200px; max-width: 90vw; box-shadow: 0 8px 32px rgba(0,0,0,0.2); z-index: 1; }
+        .listing-address-popup-full { margin: 0 0 1rem; font-size: 0.95rem; color: var(--text-dark); line-height: 1.5; word-break: break-word; }
+        .listing-address-nav-btn { display: inline-block; padding: 0.5rem 1rem; background: var(--accent-color); color: white; font-size: 1rem; border: none; border-radius: 8px; cursor: pointer; width: 100%; }
+        .listing-address-nav-btn:hover { background: var(--accent-hover); color: white; }
+        .listing-content .listing-tags {
+            margin: 0.25rem 0;
+            font-size: 0.8rem;
+            color: var(--text-dark);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: block;
+            max-width: 100%;
+        }
+        .listing-details {
+            margin-top: 0.3rem;
+            display: grid;
+            gap: 0.2rem;
+        }
+        .listing-detail-item {
+            margin: 0;
+            font-size: 0.78rem;
+            color: var(--text-dark);
+            line-height: 1.35;
+            white-space: normal;
+            overflow-wrap: anywhere;
+            word-break: break-word;
+        }
+        .listing-detail-label {
+            color: var(--text-medium);
+            font-weight: 600;
+        }
+        .listing-detail-value {
+            color: var(--text-dark);
+        }
+        .listing-actions { display: flex; align-items: center; gap: 0.35rem; margin-top: 0.5rem; margin-right: -90px; flex-wrap: nowrap; }
+        .listing-votes { display: flex; gap: 0.25rem; }
+        .listing-vote-btn, .listing-comment-btn, .listing-share-btn, .listing-manage-btn { padding: 0.2rem 0.4rem; font-size: 0.85rem; border: none; background: none; color: var(--text-dark); cursor: pointer; display: inline-flex; align-items: center; gap: 0.2rem; }
+        .listing-bookmark-btn {
+            min-width: 1.45rem;
+            justify-content: center;
+            color: var(--text-medium);
+            opacity: 0.95;
+            transition: color 0.2s ease, opacity 0.2s ease;
+        }
+        .listing-bookmark-btn .bookmark-icon {
+            width: 1rem;
+            height: 1rem;
+            display: block;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 1.8;
+            stroke-linejoin: round;
+            stroke-linecap: round;
+        }
+        .listing-bookmark-btn .bookmark-icon-filled {
+            fill: currentColor;
+            stroke: none;
+        }
+        .listing-bookmark-btn.active {
+            color: var(--text-dark);
+            opacity: 1;
+        }
+        .listing-more-wrap { position: relative; display: inline-flex; align-items: center; z-index: 5; }
+        .listing-more-wrap.open { z-index: 35; }
+        .listing-more-btn { font-size: 1rem; line-height: 1; min-width: 1.4rem; justify-content: center; }
+        .listing-more-menu {
+            position: absolute;
+            top: calc(100% + 6px);
+            right: 0;
+            display: none;
+            min-width: 170px;
+            background: var(--background-color);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            padding: 0.35rem;
+            z-index: 9999;
+        }
+        [dir="rtl"] .listing-more-menu { right: auto; left: 0; }
+        .listing-more-wrap.open .listing-more-menu { display: flex; flex-direction: column; gap: 0.2rem; }
+        .listing-more-item {
+            width: 100%;
+            border: none;
+            background: none;
+            color: var(--text-dark);
+            text-align: left;
+            font-size: 0.82rem;
+            padding: 0.35rem 0.45rem;
+            border-radius: 6px;
+            cursor: pointer;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        [dir="rtl"] .listing-more-item { text-align: right; }
+        .listing-more-item:hover { background: var(--background-light); }
+        .listing-more-item-danger { color: #e57373; }
+        .listing-more-item-disabled { opacity: 0.8; cursor: default; }
+        /* Remove rectangular focus outline on action buttons when clicked (per UX request) */
+        .listing-vote-btn:focus, .listing-comment-btn:focus, .listing-share-btn:focus, .listing-manage-btn:focus { outline: none; }
+        .listing-vote-btn:hover, .listing-comment-btn:hover, .listing-share-btn:hover, .listing-manage-btn:hover { color: var(--accent-color); opacity: 0.9; }
+        .listing-vote-btn.active { color: var(--accent-color); }
+        .listing-comments-panel { margin-top: 0.5rem; padding-top: 0.5rem; border-top: 1px solid var(--border-light); }
+        /* Comments popup modal (replaces inline panel) */
+        .listing-comments-modal-overlay { position: fixed; left: 0; top: 0; right: 0; bottom: 0; z-index: 10001; display: flex; align-items: center; justify-content: center; padding: 1rem; box-sizing: border-box; }
+        .listing-comments-modal-overlay[aria-hidden="true"] { display: none; }
+        .listing-comments-modal-backdrop { position: absolute; left: 0; top: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); cursor: pointer; }
+        /* No border or extra lines on modal box; close via backdrop click only */
+        .listing-comments-modal-box { position: relative; background: var(--background-color); border: none; border-radius: 12px; padding: 1.25rem; min-width: 280px; max-width: 90vw; max-height: 85vh; display: flex; flex-direction: column; box-shadow: 0 8px 32px rgba(0,0,0,0.2); z-index: 1; }
+        .listing-comments-modal-box .comments-list { max-height: 280px; }
+        /* No border around comment action icons (vote, edit, delete) inside the modal */
+        .listing-comments-modal-box .comment-vote-btn,
+        .listing-comments-modal-box .comment-edit-btn,
+        .listing-comments-modal-box .comment-delete-btn { border: none; background: transparent; }
+        .listing-comments-modal-box .comment-vote-btn:hover,
+        .listing-comments-modal-box .comment-edit-btn:hover,
+        .listing-comments-modal-box .comment-delete-btn:hover { background: var(--background-light); }
+        .listing-comments-modal-box .comment-vote-btn.active { background: var(--accent-light); border: none; }
+        /* No top border or horizontal divider on the panel inside the modal */
+        .listing-comments-modal-box .listing-comments-panel { margin-top: 0; padding-top: 0; border-top: none; }
+        /* Remove extra horizontal line before the form (keep separators between comments) */
+        .listing-comments-modal-box .comment-item:last-child { border-bottom: none; }
+        .listing-comments-modal-box .comment-form { border-top: none; }
+        .comments-list { max-height: 180px; overflow-y: auto; margin-bottom: 0.5rem; font-size: 0.85rem; }
+        .comment-item { padding: 0.35rem 0; border-bottom: 1px solid var(--border-light); }
+        .comment-body { margin-bottom: 0.25rem; }
+        .comment-actions { display: flex; align-items: center; gap: 0.35rem; flex-wrap: wrap; }
+        .comment-vote-btn, .comment-edit-btn, .comment-delete-btn { padding: 0.2rem 0.4rem; font-size: 0.8rem; border: 1px solid var(--border-color); background: var(--background-color); color: var(--text-dark); border-radius: 4px; cursor: pointer; }
+        .comment-vote-btn:hover, .comment-edit-btn:hover, .comment-delete-btn:hover { background: var(--background-light); border-color: var(--accent-color); }
+        .comment-vote-btn.active { background: var(--accent-light); border-color: var(--accent-color); color: var(--accent-color); }
+        .comment-edit-input { width: 100%; padding: 0.3rem 0.5rem; font-size: 0.85rem; border: 1px solid var(--border-color); border-radius: 4px; margin: 0.25rem 0; box-sizing: border-box; }
+        .comment-save-btn, .comment-cancel-btn { padding: 0.2rem 0.5rem; font-size: 0.8rem; border-radius: 4px; cursor: pointer; }
+        .comment-save-btn { background: var(--accent-color); color: white; border: none; }
+        .comment-cancel-btn { background: transparent; border: 1px solid var(--border-color); color: var(--text-dark); }
+        .comment-form { display: flex; gap: 0.25rem; }
+        .comment-input { flex: 1; padding: 0.35rem 0.5rem; font-size: 0.85rem; border: 1px solid var(--border-color); border-radius: 6px; }
+        .comment-submit-btn { padding: 0.35rem 0.75rem; font-size: 0.85rem; background: var(--accent-color); color: white; border: none; border-radius: 6px; cursor: pointer; }
+        
+        .listing-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 0.5rem;
+        }
+        
+        .listing-card-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin: 0;
+        }
+        
+        .listing-card-phone {
+            color: var(--text-dark);
+            font-size: 0.9rem;
+            margin: 0.25rem 0;
+        }
+        
+        .listing-card-info {
+            color: var(--text-dark);
+            font-size: 0.85rem;
+            margin: 0.25rem 0;
+        }
+        
+        .listing-card-contact {
+            color: var(--text-dark);
+            font-size: 0.9rem;
+            margin: 0.25rem 0;
+        }
+        
+        .listing-card-address {
+            color: var(--text-medium);
+            font-size: 0.85rem;
+            margin: 0.5rem 0;
+        }
+        
+        .listing-card-job {
+            color: var(--text-dark);
+            font-size: 0.9rem;
+            margin: 0.25rem 0;
+        }
+        
+        .listing-card-social {
+            color: var(--text-medium);
+            font-size: 0.85rem;
+            margin: 0.5rem 0;
+        }
+        
+        .listing-card-social a {
+            color: var(--accent-color);
+            text-decoration: none;
+            margin: 0 0.25rem;
+        }
+        
+        .listing-card-social a:hover {
+            text-decoration: underline;
+        }
+        
+        .listing-card-tags {
+            margin-top: 0.5rem;
+            padding-top: 0.5rem;
+            border-top: 1px solid var(--border-light);
+        }
+        
+        .person-tag {
+            display: inline-block;
+            background: var(--primary-light);
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            margin-right: 0.5rem;
+            margin-bottom: 0.25rem;
+            font-weight: 500;
+        }
+        
+        .listing-card-family {
+            margin-top: 0.5rem;
+            padding-top: 0.5rem;
+            border-top: 1px solid var(--border-light);
+        }
+        
+        .family-member-tag {
+            display: inline-block;
+            background: var(--background-light);
+            color: var(--text-dark);
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            margin-right: 0.5rem;
+            margin-bottom: 0.25rem;
+        }
+        
+        .listing-card-images {
+            display: flex;
+            gap: 0.5rem;
+            margin: 0.5rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .person-thumbnail {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 4px;
+            cursor: pointer;
+            border: 2px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+        
+        /* Main image - larger and more prominent */
+        .person-main-image {
+            width: 150px;
+            height: 150px;
+            border: 3px solid var(--accent-color);
+            border-radius: 8px;
+        }
+        
+        /* Smaller thumbnails for additional images */
+        .person-thumbnail-small {
+            width: 60px;
+            height: 60px;
+        }
+        
+        .person-thumbnail:hover {
+            border-color: var(--accent-color);
+            transform: scale(1.05);
+        }
+        
+        .more-images {
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--background-light);
+            border: 2px solid var(--border-color);
+            border-radius: 4px;
+            color: var(--text-medium);
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        
+        /* Image Modal */
+        .image-modal {
+            display: none;
+            position: fixed;
+            z-index: 10000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            overflow: auto;
+        }
+        
+        .image-modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .image-modal-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+            margin: auto;
+        }
+        
+        .image-modal-content img {
+            width: 100%;
+            height: auto;
+            max-height: 90vh;
+            object-fit: contain;
+        }
+        
+        .image-modal-close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 10001;
+        }
+        
+        .image-modal-close:hover {
+            color: #bbb;
+        }
+        
+        /* Image Carousel Styles */
+        .image-carousel-container {
+            position: relative;
+            width: min(94vw, 1100px);
+            max-width: 94vw;
+            height: 94vh;
+            max-height: 94vh;
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 0.8rem 0;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+        
+        .image-carousel-content {
+            position: relative;
+            width: 100%;
+            max-width: 100%;
+            flex: 1 1 auto;
+            min-height: 0;
+            max-height: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .image-carousel-content img {
+            width: auto;
+            height: auto;
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+        
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 10002;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            user-select: none;
+        }
+        
+        .carousel-btn:hover {
+            background: rgba(255, 255, 255, 0.5);
+            border-color: rgba(255, 255, 255, 0.8);
+            transform: translateY(-50%) scale(1.1);
+        }
+        
+        .carousel-prev {
+            left: 20px;
+        }
+        
+        .carousel-next {
+            right: 20px;
+        }
+        
+        .carousel-indicators {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .carousel-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .carousel-dot:hover {
+            background: rgba(255, 255, 255, 0.7);
+            transform: scale(1.2);
+        }
+        
+        .carousel-dot.active {
+            background: white;
+            border-color: white;
+            transform: scale(1.3);
+        }
+        
+        .carousel-counter {
+            margin-top: 8px;
+            color: white;
+            font-size: 16px;
+            font-weight: 500;
+            text-align: center;
+        }
+        .carousel-details {
+            width: 100%;
+            margin-top: 10px;
+            padding: 0.85rem 1rem;
+            border-radius: 10px;
+            background: rgba(0, 0, 0, 0.62);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            max-height: 30vh;
+            min-height: 120px;
+            overflow-y: auto;
+        }
+        .carousel-details-name {
+            margin: 0;
+            font-size: 1rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+        .carousel-details-address,
+        .carousel-details-tags {
+            margin: 0.35rem 0 0;
+            font-size: 0.88rem;
+            color: rgba(255, 255, 255, 0.95);
+            white-space: normal;
+            overflow-wrap: anywhere;
+            word-break: break-word;
+        }
+        .carousel-details .listing-details {
+            margin-top: 0.5rem;
+            gap: 0.25rem;
+        }
+        .carousel-details .listing-detail-item {
+            font-size: 0.84rem;
+            color: rgba(255, 255, 255, 0.95);
+        }
+        .carousel-details .listing-detail-label {
+            color: rgba(255, 255, 255, 0.82);
+        }
+        @media (max-width: 768px) {
+            .image-carousel-container {
+                width: 96vw;
+                max-width: 96vw;
+                height: 96vh;
+                max-height: 96vh;
+                padding: 0.45rem 0;
+            }
+            .image-carousel-content {
+                flex: 0 0 50vh;
+                max-height: 50vh;
+            }
+            .carousel-btn {
+                width: 42px;
+                height: 42px;
+                font-size: 30px;
+            }
+            .carousel-prev {
+                left: 8px;
+            }
+            .carousel-next {
+                right: 8px;
+            }
+            .carousel-details {
+                max-height: 34vh;
+                min-height: 110px;
+                padding: 0.7rem 0.8rem;
+            }
+            .carousel-details .listing-detail-item {
+                font-size: 0.8rem;
+            }
+        }
+
+        .no-listings {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-light);
+        }
+        
+        .loading-indicator {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-light);
+        }
+        
+        /* Responsive design */
+        /* Tablet responsive - Adjust column widths for medium screens */
+        /* Mid / small-laptop: keep map + dual lists side-by-side without list columns spilling into the map */
+        @media (max-width: 1600px) and (min-width: 901px) {
+            .list-and-filters-wrapper {
+                width: min(700px, calc(100vw - 380px)); /* shrink list panel as viewport narrows */
+                max-width: calc(100vw - 380px);
+                min-width: 0;
+            }
+
+            .list-and-filters-columns .listings-section-standalone,
+            .list-and-filters-columns .filters-section-standalone {
+                width: auto;
+                min-width: 0; /* allow columns to shrink below the desktop 349px basis */
+                max-width: none;
+                flex: 1 1 0; /* equal share of wrapper width — overrides flex: 0 0 349px */
+            }
+
+            .map-container {
+                min-width: 300px; /* leave usable map space on ~1024px screens */
+            }
+        }
+        
+        /* Collapsible section toggle button (desktop/tablet only) */
+        .section-toggle {
+            display: none;
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 8px;
+            min-width: 44px;
+            min-height: 44px;
+            transition: transform 0.3s ease;
+            touch-action: manipulation;
+        }
+        
+        .section-toggle.active {
+            transform: rotate(180deg);
+        }
+        
+        /* Mobile-only listings count: hidden on desktop */
+        .mobile-listings-count {
+            display: none;
+        }
+        
+        /* ============================================
+           Mobile layout: Map on TOP, lists/filters on BOTTOM.
+           Everything smaller on mobile (fonts, controls) – desktop unchanged.
+           ============================================ */
+        @media (max-width: 768px) {
+            .main-container {
+                flex-direction: column !important;
+                height: auto;
+                min-height: 0;
+                flex: 1;
+                overflow: hidden;
+            }
+            
+            /* Map on TOP (order 1) */
+            .map-container {
+                width: 100% !important;
+                min-width: 100% !important;
+                max-width: 100% !important;
+                height: 50% !important;
+                min-height: 220px;
+                flex-shrink: 0;
+                order: 1;
+                border: none;
+                border-bottom: 1px solid var(--border-color);
+            }
+            
+            /* Lists/filters wrapper on BOTTOM (order 2): both lists side by side like desktop */
+            .list-and-filters-wrapper {
+                order: 2;
+                width: 100% !important;
+                max-width: 100% !important;
+                flex: 1 1 auto;
+                min-height: 0;
+                overflow: hidden;
+                display: flex;
+                flex-direction: column;
+            }
+            
+            .list-and-filters-columns {
+                flex: 1;
+                min-height: 0;
+                display: flex;
+                flex-direction: row;
+                overflow: hidden;
+            }
+            
+            /* Both sections side by side on mobile – left 1/3 (people with address), right 2/3 (people without address) */
+            .listings-section-standalone,
+            .filters-section-standalone {
+                min-width: 0;
+                height: 100% !important;
+                min-height: 180px;
+                flex-shrink: 1;
+                border: none;
+                border-right: 1px solid var(--border-color);
+                display: flex !important;
+                flex-direction: column;
+                overflow: hidden;
+                padding-bottom: max(0px, env(safe-area-inset-bottom, 0px));
+                box-sizing: border-box;
+            }
+            .listings-section-standalone {
+                flex: 0 0 33.333%;
+                width: 33.333% !important;
+                max-width: 33.333% !important;
+            }
+            .filters-section-standalone {
+                flex: 1 1 66.667%;
+                width: 66.667% !important;
+                max-width: 66.667% !important;
+            }
+            .list-and-filters-wrapper .filters-section-standalone {
+                border-right: none;
+                border-left: 1px solid var(--border-color);
+            }
+            [dir="rtl"] .list-and-filters-wrapper .listings-section-standalone {
+                border-right: none;
+                border-left: 1px solid var(--border-color);
+            }
+            [dir="rtl"] .list-and-filters-wrapper .filters-section-standalone {
+                border-left: none;
+                border-right: 1px solid var(--border-color);
+            }
+
+            /* ----- Mobile: smaller map bar (fonts, height) ----- */
+            .map-filters-bar {
+                height: 44px;
+                min-height: 44px;
+                flex-wrap: nowrap;
+                overflow: hidden;
+                padding: 0.25rem 0.4rem;
+                gap: 0.25rem;
+            }
+            .map-filters-bar .filter-group select,
+            .map-filters-bar .country-switcher,
+            .map-filters-bar .filter-group input {
+                height: 28px;
+                padding: 0.2rem 0.35rem;
+                font-size: 0.72rem;
+            }
+            .map-filters-bar .filter-group,
+            .map-filters-bar .country-switcher-group {
+                flex: 1 1 0;
+                min-width: 0;
+            }
+
+            /* ----- Mobile: compact header so more space for lists ----- */
+            .combined-list-header {
+                min-height: 36px;
+                height: 36px;
+                padding: 0.2rem 0.35rem;
+                gap: 0.25rem;
+                flex-wrap: nowrap;
+            }
+            .combined-list-header .header-search-sort {
+                flex-wrap: nowrap;
+                flex: 1 1 auto;
+                min-width: 0;
+            }
+            .combined-list-header .header-filter-group {
+                flex: 1 1 0;
+                min-width: 0;
+            }
+            .combined-list-header .header-search-sort #searchInput,
+            .combined-list-header .header-search-sort #sortFilter {
+                height: 24px;
+                padding: 0.15rem 0.25rem;
+                font-size: 0.65rem;
+                min-width: 0;
+                width: 100%;
+            }
+            .combined-list-header .section-toggle {
+                flex-shrink: 0;
+                min-width: 28px;
+                min-height: 28px;
+                padding: 2px;
+                font-size: 0.75rem;
+            }
+
+            /* ----- Mobile: minimal list captions and list content – as small as possible to fit cards side by side ----- */
+            .list-top-caption {
+                font-size: 0.5rem;
+                padding: 0.06rem 0.35rem 0.08rem;
+                min-height: 11px;
+            }
+            .filters-content.people-tabs-layout,
+            .listings-container {
+                padding: 0.2rem 0.3rem;
+            }
+            /* Both columns: smallest readable fonts and compact cards */
+            .filters-content.people-tabs-layout .listing-name,
+            .filters-content.people-tabs-layout .listing-address,
+            .listings-container .listing-name,
+            .listings-container .listing-address {
+                font-size: 0.65rem;
+            }
+            .filters-content.people-tabs-layout .listing-detail-item,
+            .listings-container .listing-detail-item {
+                font-size: 0.58rem;
+            }
+            .filters-content.people-tabs-layout .listing-tags,
+            .listings-container .listing-tags {
+                font-size: 0.55rem;
+            }
+            .filters-content.people-tabs-layout .listing-vote-btn,
+            .filters-content.people-tabs-layout .listing-comment-btn,
+            .filters-content.people-tabs-layout .listing-share-btn,
+            .filters-content.people-tabs-layout .listing-manage-btn,
+            .listings-container .listing-vote-btn,
+            .listings-container .listing-comment-btn,
+            .listings-container .listing-share-btn,
+            .listings-container .listing-manage-btn {
+                font-size: 0.58rem;
+                padding: 0.08rem 0.2rem;
+            }
+            /* Mobile: cards must resize – flexible width (fit column) and height (fit content), override base 143px */
+            .filters-content.people-tabs-layout .listing-card,
+            .filters-content.people-tabs-layout .no-address-cards .listing-card,
+            .filters-content.people-tabs-layout .listing-card[data-no-address="1"],
+            .listings-container .listing-card {
+                width: 100% !important;
+                max-width: 100% !important;
+                min-width: 0;
+                height: auto !important;
+                min-height: 0 !important;
+                max-height: none !important;
+                padding: 0.3rem 0.35rem;
+                margin-bottom: 0.4rem !important;
+                border-radius: 6px;
+            }
+            .filters-content.people-tabs-layout .listing-card-row,
+            .listings-container .listing-card-row {
+                gap: 0.28rem;
+            }
+            .filters-content.people-tabs-layout .listing-image,
+            .filters-content.people-tabs-layout .listing-image .listing-thumb,
+            .listings-container .listing-image,
+            .listings-container .listing-image .listing-thumb {
+                width: 40px !important;
+                height: 40px !important;
+            }
+            .filters-content.people-tabs-layout .listing-content .listing-name,
+            .listings-container .listing-content .listing-name {
+                margin: 0 0 0.12rem;
+            }
+            .filters-content.people-tabs-layout .listing-content .listing-address,
+            .listings-container .listing-content .listing-address {
+                margin: 0.12rem 0;
+            }
+            .filters-content.people-tabs-layout .listing-actions,
+            .listings-container .listing-actions {
+                margin-top: 0.25rem;
+                gap: 0.15rem;
+                row-gap: 0.15rem;
+            }
+            .filters-content.people-tabs-layout .listing-share-corner .listing-share-btn,
+            .listings-container .listing-share-corner .listing-share-btn {
+                padding: 0.2rem 0.3rem;
+                min-width: 1.5rem;
+                min-height: 1.4rem;
+            }
+            .filters-content.people-tabs-layout .listing-share-btn .share-icon,
+            .listings-container .listing-share-btn .share-icon {
+                width: 0.75rem;
+                height: 0.75rem;
+            }
+            .filters-content.people-tabs-layout .listing-details,
+            .listings-container .listing-details {
+                margin-top: 0.15rem;
+                gap: 0.1rem;
+            }
+            .filters-content.people-tabs-layout .listing-content .listing-tags,
+            .listings-container .listing-content .listing-tags {
+                margin: 0.1rem 0;
+            }
+            /* Shrink borders and gaps to match smaller fonts/icons – thin borders, tight spacing */
+            .listings-section-standalone,
+            .filters-section-standalone {
+                border-right-width: 0.5px;
+            }
+            .list-and-filters-wrapper .filters-section-standalone {
+                border-left-width: 0.5px;
+            }
+            [dir="rtl"] .list-and-filters-wrapper .listings-section-standalone {
+                border-left-width: 0.5px;
+            }
+            [dir="rtl"] .list-and-filters-wrapper .filters-section-standalone {
+                border-right-width: 0.5px;
+            }
+            .combined-list-header {
+                border-bottom-width: 0.5px;
+                gap: 0.15rem;
+            }
+            .filters-content.people-tabs-layout .listing-card,
+            .filters-content.people-tabs-layout .no-address-cards .listing-card,
+            .filters-content.people-tabs-layout .listing-card[data-no-address="1"],
+            .listings-container .listing-card {
+                border-width: 0.5px;
+                border-radius: 2px;
+            }
+            .filters-content.people-tabs-layout .listing-votes,
+            .listings-container .listing-votes {
+                gap: 0.05rem;
+            }
+            .filters-content.people-tabs-layout .listing-details,
+            .listings-container .listing-details {
+                margin-top: 0.05rem;
+                gap: 0.03rem;
+            }
+            .filters-content.people-tabs-layout .listing-detail-item,
+            .listings-container .listing-detail-item {
+                line-height: 1.2;
+                margin: 0;
+            }
+            .filters-content.people-tabs-layout .listing-comments-panel,
+            .listings-container .listing-comments-panel {
+                margin-top: 0.12rem;
+                padding-top: 0.12rem;
+                border-top-width: 0.5px;
+            }
+            .filters-content.people-tabs-layout .listing-more-menu,
+            .listings-container .listing-more-menu {
+                border-width: 0.5px;
+                padding: 0.12rem 0.15rem;
+                gap: 0.06rem;
+                border-radius: 2px;
+            }
+            .filters-content.people-tabs-layout .listing-more-item,
+            .listings-container .listing-more-item {
+                padding: 0.08rem 0.12rem;
+            }
+            .filters-content.people-tabs-layout .listing-card-stack-layer,
+            .listings-container .listing-card-stack-layer {
+                border-width: 0.5px;
+                border-radius: 2px;
+            }
+            .filters-content.people-tabs-layout .listing-card-stack-layer-inner,
+            .listings-container .listing-card-stack-layer-inner {
+                border-radius: 2px;
+            }
+            /* Left column: structure and overflow (compact sizes already set above for both columns) */
+            .listings-container .listing-card {
+                height: auto !important;
+                min-height: 0 !important;
+                max-height: none !important;
+            }
+            .listings-container .listing-content,
+            .listings-container .listing-content-top,
+            .filters-content.people-tabs-layout .listing-content,
+            .filters-content.people-tabs-layout .listing-content-top {
+                min-width: 0;
+                overflow: hidden;
+            }
+            .listings-container .listing-name,
+            .listings-container .listing-address,
+            .listings-container .listing-detail-item,
+            .filters-content.people-tabs-layout .listing-name,
+            .filters-content.people-tabs-layout .listing-address,
+            .filters-content.people-tabs-layout .listing-detail-item {
+                white-space: normal;
+                overflow-wrap: anywhere;
+                word-break: break-word;
+            }
+            .listings-container .listing-tags,
+            .filters-content.people-tabs-layout .listing-tags {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                word-break: normal;
+                overflow-wrap: normal;
+            }
+            .listings-container .listing-actions,
+            .filters-content.people-tabs-layout .listing-actions {
+                margin-right: 0 !important;
+                margin-left: 0 !important;
+                width: 100%;
+                max-width: 100%;
+                flex-wrap: wrap;
+            }
+            .listings-container .listing-votes,
+            .filters-content.people-tabs-layout .listing-votes {
+                flex-wrap: wrap;
+            }
+            .listings-container .listing-more-menu,
+            .filters-content.people-tabs-layout .listing-more-menu {
+                min-width: 120px;
+                max-width: calc(100vw - 24px);
+            }
+            /* Card stack (relationship carousel): minimal size for both columns on mobile */
+            .listings-container .listing-card-stack-layer,
+            .filters-content.people-tabs-layout .listing-card-stack-layer {
+                transform: translate(
+                    calc(var(--card-stack-index, 1) * 4px),
+                    calc(var(--card-stack-index, 1) * 3px)
+                );
+            }
+            .listings-container .listing-card-stack-layer-inner,
+            .filters-content.people-tabs-layout .listing-card-stack-layer-inner {
+                padding: 0.35rem 0.4rem;
+            }
+            .listings-container .listing-card-stack-name,
+            .filters-content.people-tabs-layout .listing-card-stack-name {
+                font-size: 0.62rem;
+            }
+            .listings-container .listing-card-stack-subtitle,
+            .filters-content.people-tabs-layout .listing-card-stack-subtitle {
+                font-size: 0.55rem;
+            }
+            .listings-container .listing-card-stack-thumb,
+            .filters-content.people-tabs-layout .listing-card-stack-thumb {
+                width: 26px;
+                height: 26px;
+            }
+            .listings-container .listing-card.has-card-stack,
+            .filters-content.people-tabs-layout .listing-card.has-card-stack {
+                margin-bottom: 0.9rem;
+            }
+            .listings-container .listing-card.has-card-stack.stack-shift-next .listing-card-row,
+            .filters-content.people-tabs-layout .listing-card.has-card-stack.stack-shift-next .listing-card-row {
+                transform: translateX(10px);
+            }
+            .listings-container .listing-card.has-card-stack.stack-shift-prev .listing-card-row,
+            .filters-content.people-tabs-layout .listing-card.has-card-stack.stack-shift-prev .listing-card-row {
+                transform: translateX(-10px);
+            }
+            .listings-container .listing-card-stack-btn,
+            .filters-content.people-tabs-layout .listing-card-stack-btn {
+                width: 12px;
+                height: 12px;
+                font-size: 12px;
+            }
+            .listings-container .listing-card-stack-btn-prev,
+            .filters-content.people-tabs-layout .listing-card-stack-btn-prev {
+                left: -6px;
+            }
+            .listings-container .listing-card-stack-btn-next,
+            .filters-content.people-tabs-layout .listing-card-stack-btn-next {
+                right: -6px;
+            }
+            /* Prevent horizontal overflow in list columns when side by side */
+            .listings-section-standalone,
+            .filters-section-standalone {
+                min-width: 0;
+                overflow: hidden;
+            }
+            .listings-container,
+            .filters-content.people-tabs-layout {
+                min-width: 0;
+                overflow-x: hidden;
+            }
+
+            /* Filters layout: 2x2 grid (Country|Province, Section|Role) â€“ ~22px gap Sectionâ†”buttons */
+            .filters-content:not(.people-tabs-layout) {
+                display: grid;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                grid-template-rows: auto auto auto;
+                gap: 0 10px;
+                row-gap: 0;
+                align-items: start;
+                padding: 0.4rem 0.75rem;
+            }
+            
+            .filter-group,
+            .country-switcher-group {
+                width: 100%;
+                margin: 0;
+            }
+            
+            .filter-group label,
+            .country-switcher-group label {
+                margin-bottom: 0.15rem;
+            }
+            
+            .filter-buttons {
+                grid-column: 1 / -1;
+                margin-top: 0;
+                padding-top: 4px;
+            }
+            
+            /* Keep label beside dropdown (row); cap height so long selects scroll */
+            .filters-content .filter-group:nth-child(2),
+            .filters-content .country-switcher-group + .filter-group {
+                max-height: 86px;
+                overflow: hidden;
+                flex-direction: row;
+            }
+            .filters-content .filter-group:nth-child(2) select,
+            .filters-content .country-switcher-group + .filter-group select {
+                max-height: 60px;
+                overflow-y: auto;
+            }
+            
+            .filters-content .filter-group:nth-child(3),
+            .filters-content .filter-group:nth-child(4) {
+                max-height: 86px;
+                overflow: hidden;
+                flex-direction: row;
+            }
+            .filters-content .filter-group:nth-child(3) select,
+            .filters-content .filter-group:nth-child(4) select {
+                max-height: 60px;
+                overflow-y: auto;
+            }
+            
+            /* Both lists visible side by side on mobile (same as normal size) – no hide */
+            
+            /* Filters header: mobile tab mode */
+            .filters-header {
+                display: flex;
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0;
+                padding: 0.35rem 0.5rem 0;
+                cursor: default;
+                user-select: none;
+                -webkit-user-select: none;
+            }
+            .filters-header-main {
+                display: none;
+            }
+            .filters-people-tabs {
+                width: 100%;
+                display: flex;
+                align-items: stretch;
+                gap: 0;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+                background: transparent;
+            }
+            .filters-people-tabs .people-tab-btn {
+                border: none;
+                border-radius: 0;
+                background: transparent;
+                color: rgba(255, 255, 255, 0.85);
+                min-height: 36px;
+                padding: 0.35rem 0.5rem;
+                font-size: 0.74rem;
+                font-weight: 700;
+                justify-content: center;
+                border-bottom: 2px solid transparent;
+            }
+            .filters-people-tabs .people-tab-btn.active {
+                color: #ffffff;
+                background: rgba(255, 255, 255, 0.08);
+                border-bottom-color: #ffffff;
+            }
+            .filters-people-tabs .people-tab-count {
+                background: rgba(255, 255, 255, 0.16);
+                color: #ffffff;
+                min-width: 1.35rem;
+                font-size: 0.7rem;
+            }
+            
+            .filters-header .section-toggle {
+                display: none !important;
+            }
+            
+            .mobile-listings-count {
+                display: none;
+            }
+            
+            .filters-content {
+                flex: 1;
+                overflow-y: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+            .filters-content.people-tabs-layout {
+                display: block;
+                padding: 0.4rem 0.5rem;
+            }
+            .filters-content.people-tabs-layout .people-tab-panel {
+                width: 100%;
+            }
+            .filters-content.people-tabs-layout .listing-card,
+            .filters-content.people-tabs-layout .no-address-cards .listing-card,
+            .filters-content.people-tabs-layout .listing-card[data-no-address="1"] {
+                width: 100% !important;
+                max-width: 100% !important;
+                height: auto !important;
+                min-height: 0 !important;
+                max-height: none !important;
+            }
+            
+            /* Full-width filter elements â€“ dense spacing */
+            .filter-group,
+            .country-switcher-group {
+                width: 100%;
+                max-width: 100%;
+                box-sizing: border-box;
+            }
+            
+            .filter-group input,
+            .filter-group select,
+            .country-switcher {
+                flex: 1;
+                min-width: 0;
+                max-width: 100%;
+                box-sizing: border-box;
+                min-height: 44px;
+                font-size: 16px;
+                padding: 8px 12px;
+            }
+            
+            .filter-buttons {
+                display: flex;
+                gap: 0.5rem;
+                width: 100%;
+                margin-top: 0;
+                padding-top: 4px;
+                border-top: 1px solid var(--border-light);
+            }
+            
+            .filter-buttons .btn-filter {
+                flex: 1;
+                min-height: 44px;
+                padding: 10px 16px;
+                font-size: 0.95rem;
+            }
+            
+            /* No collapsible state on mobile */
+            .filters-section-standalone.collapsed,
+            .filters-section-standalone.collapsed .filters-content {
+                max-height: none;
+                overflow: visible;
+            }
+        }
+        
+        /* Very small mobile: smallest fonts and controls so both columns fit side by side */
+        @media (max-width: 480px) {
+            .map-container {
+                height: 50% !important;
+                min-height: 190px;
+            }
+            
+            .filters-section-standalone {
+                height: 50% !important;
+                min-height: 190px;
+            }
+            
+            .map-filters-bar {
+                height: 36px;
+                min-height: 36px;
+                padding: 0.15rem 0.3rem;
+            }
+            .map-filters-bar .filter-group select,
+            .map-filters-bar .country-switcher {
+                height: 22px;
+                font-size: 0.6rem;
+            }
+            
+            .combined-list-header {
+                min-height: 32px;
+                height: 32px;
+                padding: 0.15rem 0.3rem;
+            }
+            .combined-list-header .header-search-sort #searchInput,
+            .combined-list-header .header-search-sort #sortFilter {
+                height: 22px;
+                font-size: 0.6rem;
+                padding: 0.1rem 0.2rem;
+            }
+            .combined-list-header .section-toggle {
+                min-width: 24px;
+                min-height: 24px;
+                font-size: 0.65rem;
+            }
+            
+            .list-top-caption {
+                font-size: 0.46rem;
+                padding: 0.04rem 0.25rem 0.06rem;
+                min-height: 10px;
+            }
+            .filters-content.people-tabs-layout,
+            .listings-container {
+                padding: 0.15rem 0.25rem;
+            }
+            .filters-content.people-tabs-layout .listing-name,
+            .filters-content.people-tabs-layout .listing-address,
+            .listings-container .listing-name,
+            .listings-container .listing-address {
+                font-size: 0.6rem;
+            }
+            .filters-content.people-tabs-layout .listing-detail-item,
+            .listings-container .listing-detail-item {
+                font-size: 0.54rem;
+            }
+            .filters-content.people-tabs-layout .listing-tags,
+            .listings-container .listing-tags {
+                font-size: 0.5rem;
+            }
+            .filters-content.people-tabs-layout .listing-card,
+            .filters-content.people-tabs-layout .no-address-cards .listing-card,
+            .filters-content.people-tabs-layout .listing-card[data-no-address="1"],
+            .listings-container .listing-card {
+                padding: 0.25rem 0.28rem;
+                margin-bottom: 0.3rem !important;
+            }
+            .filters-content.people-tabs-layout .listing-card-row,
+            .listings-container .listing-card-row {
+                gap: 0.2rem;
+            }
+            .filters-content.people-tabs-layout .listing-image,
+            .filters-content.people-tabs-layout .listing-image .listing-thumb,
+            .listings-container .listing-image,
+            .listings-container .listing-image .listing-thumb {
+                width: 34px !important;
+                height: 34px !important;
+            }
+            .filters-content.people-tabs-layout .listing-vote-btn,
+            .filters-content.people-tabs-layout .listing-comment-btn,
+            .filters-content.people-tabs-layout .listing-share-btn,
+            .filters-content.people-tabs-layout .listing-manage-btn,
+            .listings-container .listing-vote-btn,
+            .listings-container .listing-comment-btn,
+            .listings-container .listing-share-btn,
+            .listings-container .listing-manage-btn {
+                font-size: 0.52rem;
+                padding: 0.06rem 0.15rem;
+            }
+            .filters-header h3 {
+                font-size: 0.9rem;
+            }
+            .mobile-listings-count {
+                font-size: 0.75rem;
+            }
+            .filter-group label {
+                font-size: 0.78rem;
+                margin-bottom: 0.12rem;
+            }
+        }
+        
+        /* Landscape orientation on mobile */
+        @media (max-width: 768px) and (orientation: landscape) {
+            .map-container {
+                height: 50% !important;
+                min-height: 220px;
+            }
+            
+            .filters-section-standalone {
+                height: 50% !important;
+                min-height: 220px;
+            }
+        }
+        
+        /* Map controls styling */
+        .leaflet-popup-content {
+            font-family: inherit;
+        }
+        
+        .leaflet-popup-content h3 {
+            margin: 0 0 0.5rem 0;
+            color: var(--primary-color);
+        }
+        
+        /* Map popup: no background on wrapper so only the inner card shows (className is on .leaflet-popup, not the wrapper) */
+        .leaflet-popup.listing-popup-wrapper .leaflet-popup-content-wrapper {
+            padding: 0;
+            margin: 0;
+            background: transparent !important;
+            box-shadow: none !important;
+            border: none !important;
+        }
+        .leaflet-popup.listing-popup-wrapper .leaflet-popup-content {
+            margin: 0;
+            min-width: 0;
+            width: 100%;
+        }
+        .leaflet-popup-content .listing-card-popup {
+            min-width: 287px;
+            width: 287px;
+            height: 143px;
+            margin: 0;
+            box-sizing: border-box;
+            direction: rtl;
+        }
+        .leaflet-popup-content .listing-card-popup .listing-content {
+            text-align: right;
+        }
+        /* Popup tip (arrow) transparent so only the card is visible */
+        .leaflet-popup.listing-popup-wrapper .leaflet-popup-tip {
+            background: transparent !important;
+        }
+        /* Ensure popup container doesn't add background */
+        .leaflet-popup.listing-popup-wrapper {
+            background: transparent !important;
+        }
+        .leaflet-popup.relationship-popup-wrapper .leaflet-popup-content-wrapper {
+            background: rgba(20, 24, 31, 0.96);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #f3f6fb;
+        }
+        .leaflet-popup.relationship-popup-wrapper .leaflet-popup-content {
+            margin: 0.45rem 0.55rem;
+            line-height: 1.35;
+            font-size: 0.78rem;
+        }
+        .leaflet-popup.relationship-popup-wrapper .leaflet-popup-tip {
+            background: rgba(20, 24, 31, 0.96);
+        }
+
+        /* ============================================
+           Mobile App Shell Redesign (v1)
+           ============================================ */
+        .mobile-list-tabs,
+        .mobile-quick-nav {
+            display: none;
+        }
+
+        @media (max-width: 900px) {
+            body {
+                --mobile-nav-height: 70px;
+                --mobile-header-height: 60px;
+                background: #eef3f7;
+            }
+
+            header {
+                position: fixed;
+                inset: 0 0 auto 0;
+                height: var(--mobile-header-height);
+                z-index: 1200;
+                background: rgba(255, 255, 255, 0.94);
+                backdrop-filter: blur(8px);
+            }
+
+            nav {
+                height: 100%;
+                padding: 0.55rem 0.9rem;
+            }
+
+            .logo {
+                font-size: 1.05rem;
+            }
+
+            .main-container {
+                position: relative;
+                display: block !important;
+                height: 100dvh;
+                height: 100vh;
+                min-height: 100dvh;
+                min-height: 100vh;
+                padding-top: 0;
+                padding-bottom: calc(var(--mobile-nav-height) + env(safe-area-inset-bottom, 0px));
+                overflow: hidden;
+            }
+
+            .map-container {
+                position: absolute;
+                inset: var(--mobile-header-height) 0 calc(var(--mobile-nav-height) + env(safe-area-inset-bottom, 0px)) 0;
+                height: auto !important;
+                min-height: 0 !important;
+                min-width: 0;
+                border: 0;
+                box-shadow: none;
+            }
+
+            #map {
+                height: 100% !important;
+            }
+
+            .map-filters-bar {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                left: 10px;
+                height: auto;
+                min-height: 0;
+                padding: 0.6rem;
+                border: 0;
+                border-radius: 14px;
+                gap: 0.4rem;
+                background: rgba(36, 60, 76, 0.82);
+                backdrop-filter: blur(6px);
+                display: grid;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                overflow: hidden;
+                z-index: 2;
+            }
+
+            .map-filters-sheet-head {
+                display: none;
+            }
+
+            .filter-actions-row {
+                display: none;
+            }
+
+            .map-filters-bar .filter-group,
+            .map-filters-bar .country-switcher-group {
+                min-width: 0;
+                flex: none;
+                width: 100%;
+            }
+
+            .map-filters-bar .filter-group select,
+            .map-filters-bar .filter-group input,
+            .map-filters-bar .country-switcher {
+                height: 36px;
+                border-radius: 10px;
+                font-size: 0.78rem;
+                border-color: rgba(255, 255, 255, 0.25);
+                text-overflow: ellipsis;
+            }
+
+            .list-and-filters-wrapper {
+                position: fixed;
+                right: 0;
+                left: 0;
+                bottom: calc(var(--mobile-nav-height) + env(safe-area-inset-bottom, 0px));
+                width: 100%;
+                max-width: 100%;
+                flex: none !important;
+                height: min(76dvh, 620px);
+                height: min(76vh, 620px);
+                border-radius: 18px 18px 0 0;
+                background: var(--background-color);
+                box-shadow: 0 -14px 36px rgba(15, 20, 31, 0.22);
+                overflow: hidden;
+                transform: translateY(100%);
+                transition: transform 260ms ease;
+                z-index: 1100;
+            }
+
+            body.mobile-mode-map .list-and-filters-wrapper {
+                transform: translateY(100%);
+            }
+
+            body.mobile-mode-list .list-and-filters-wrapper {
+                transform: translateY(0);
+            }
+
+            body.mobile-mode-filters .list-and-filters-wrapper {
+                transform: translateY(100%);
+            }
+
+            .combined-list-header {
+                height: 64px;
+                padding: 0.5rem 0.75rem;
+                background: linear-gradient(120deg, #243c4c 0%, #326080 100%);
+                border: 0;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+            }
+
+            .combined-list-header .header-search-sort {
+                display: grid;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                width: 100%;
+                gap: 0.3rem;
+                flex: 1 1 100%;
+                min-width: 0;
+            }
+
+            .combined-list-header .header-filter-group {
+                width: 100%;
+                min-width: 0;
+                margin: 0;
+            }
+
+            .combined-list-header .header-search-sort #searchInput,
+            .combined-list-header .header-search-sort #sortFilter {
+                width: 100%;
+                min-width: 0;
+                height: 37px;
+                border-radius: 10px;
+                font-size: 0.84rem;
+            }
+
+            .combined-list-header .section-toggle {
+                display: none;
+            }
+
+            .mobile-list-tabs {
+                display: flex;
+                gap: 0.35rem;
+                padding: 0.55rem 0.75rem 0.4rem;
+                background: var(--background-color);
+                border-bottom: 1px solid var(--border-color);
+            }
+
+            .mobile-list-tab {
+                flex: 1;
+                border: 1px solid var(--border-color);
+                background: var(--background-alt);
+                color: var(--text-dark);
+                height: 38px;
+                border-radius: 999px;
+                font-size: 0.85rem;
+                font-weight: 600;
+                cursor: pointer;
+            }
+
+            .mobile-list-tab.active {
+                border-color: var(--accent-color);
+                background: rgba(0, 172, 172, 0.12);
+                color: var(--primary-color);
+            }
+
+            .list-and-filters-columns {
+                display: grid !important;
+                grid-template-columns: minmax(0, 1fr);
+                height: calc(100% - 64px);
+                min-height: 0;
+                overflow: hidden;
+                gap: 0;
+            }
+
+            .listings-section-standalone,
+            .filters-section-standalone {
+                width: auto !important;
+                min-width: 0;
+                max-width: none !important;
+                height: 100% !important;
+                min-height: 0 !important;
+                border: 0;
+                box-shadow: none;
+                flex: none !important;
+                overflow: hidden;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .listings-section-standalone {
+                display: flex;
+                border-inline-end: 0;
+            }
+
+            .filters-section-standalone {
+                display: none;
+                border-inline-start: 0;
+            }
+
+            body.mobile-list-show-without .listings-section-standalone {
+                display: none;
+            }
+
+            body.mobile-list-show-without .filters-section-standalone {
+                display: flex;
+            }
+
+            .list-top-caption {
+                position: sticky;
+                top: 0;
+                z-index: 2;
+                padding: 0.32rem 0.45rem;
+                font-size: 0.66rem;
+                background: var(--background-color);
+                border-bottom: 1px solid var(--border-color);
+                color: #506778;
+            }
+
+            .listings-container,
+            .filters-content.people-tabs-layout {
+                height: auto;
+                max-height: none;
+                flex: 1;
+                min-height: 0;
+                padding: 0.34rem;
+            }
+
+            .listings-container .listing-card,
+            .filters-content.people-tabs-layout .listing-card,
+            .filters-content.people-tabs-layout .no-address-cards .listing-card,
+            .filters-content.people-tabs-layout .listing-card[data-no-address="1"] {
+                height: auto !important;
+                min-height: 88px !important;
+                max-height: none !important;
+                padding: 0.34rem 0.36rem 0.32rem !important;
+                margin-bottom: 0.3rem !important;
+                border-radius: 7px !important;
+                border: none !important;
+                background: #ffffff !important;
+                box-shadow: 0 1px 2px rgba(16, 34, 52, 0.08);
+            }
+
+            .listings-container .listing-card:hover,
+            .filters-content.people-tabs-layout .listing-card:hover {
+                transform: none;
+            }
+
+            .listings-container .listing-card-row,
+            .filters-content.people-tabs-layout .listing-card-row {
+                display: grid !important;
+                grid-template-columns: minmax(0, 1fr) auto;
+                grid-template-areas:
+                    "content image"
+                    "actions actions";
+                column-gap: 0.32rem !important;
+                row-gap: 0.12rem !important;
+                align-items: start;
+            }
+
+            .listings-container .listing-content,
+            .filters-content.people-tabs-layout .listing-content {
+                display: contents;
+            }
+
+            .listings-container .listing-content-top,
+            .filters-content.people-tabs-layout .listing-content-top {
+                grid-area: content;
+                min-width: 0;
+            }
+
+            .listings-container .listing-image,
+            .filters-content.people-tabs-layout .listing-image {
+                grid-area: image;
+                align-self: start;
+                justify-self: end;
+            }
+
+            [dir="rtl"] .listings-container .listing-card-row,
+            [dir="rtl"] .filters-content.people-tabs-layout .listing-card-row {
+                grid-template-columns: auto minmax(0, 1fr);
+                grid-template-areas:
+                    "image content"
+                    "actions actions";
+            }
+
+            [dir="rtl"] .listings-container .listing-image,
+            [dir="rtl"] .filters-content.people-tabs-layout .listing-image {
+                justify-self: start;
+            }
+
+            .listings-container .listing-image,
+            .listings-container .listing-image .listing-thumb,
+            .filters-content.people-tabs-layout .listing-image,
+            .filters-content.people-tabs-layout .listing-image .listing-thumb {
+                width: 42px !important;
+                height: 42px !important;
+                border-radius: 7px;
+            }
+
+            .listings-container .listing-content .listing-name,
+            .filters-content.people-tabs-layout .listing-content .listing-name {
+                margin: 0 0 0.14rem;
+                font-size: 0.76rem !important;
+                line-height: 1.12;
+            }
+
+            .listings-container .listing-content .listing-address,
+            .filters-content.people-tabs-layout .listing-content .listing-address {
+                margin: 0 0 0.14rem;
+                font-size: 0.66rem !important;
+                line-height: 1.22;
+                color: #4f6474;
+            }
+
+            .listings-container .listing-content .listing-tags,
+            .filters-content.people-tabs-layout .listing-content .listing-tags {
+                margin: 0 0 0.16rem;
+                font-size: 0.61rem !important;
+                color: #5f7180;
+            }
+
+            .listings-container .listing-actions,
+            .filters-content.people-tabs-layout .listing-actions {
+                grid-area: actions;
+                margin: 0 !important;
+                gap: 0.08rem;
+                flex-wrap: wrap;
+                align-items: center;
+                justify-content: flex-end;
+                row-gap: 0.08rem;
+                width: fit-content;
+                max-width: 100%;
+                margin-left: auto !important;
+                margin-right: 0 !important;
+                justify-self: end;
+                opacity: 1;
+            }
+
+            .listings-container .listing-actions > *,
+            .filters-content.people-tabs-layout .listing-actions > * {
+                flex: 0 0 auto;
+            }
+
+            .listings-container .listing-vote-btn,
+            .listings-container .listing-comment-btn,
+            .listings-container .listing-share-btn,
+            .listings-container .listing-manage-btn,
+            .filters-content.people-tabs-layout .listing-vote-btn,
+            .filters-content.people-tabs-layout .listing-comment-btn,
+            .filters-content.people-tabs-layout .listing-share-btn,
+            .filters-content.people-tabs-layout .listing-manage-btn {
+                min-height: 24px;
+                border: none;
+                border-radius: 6px;
+                padding: 0.08rem 0.22rem;
+                background: rgba(36, 60, 76, 0.07);
+                font-size: 0.66rem !important;
+                line-height: 1.1;
+                color: #2d4b5f;
+                opacity: 1;
+            }
+
+            .listings-container .listing-bookmark-btn,
+            .filters-content.people-tabs-layout .listing-bookmark-btn {
+                min-width: 22px;
+                justify-content: center;
+            }
+
+            .listings-container .listing-votes,
+            .filters-content.people-tabs-layout .listing-votes {
+                display: flex;
+                gap: 0.06rem;
+                margin-inline-end: 0.08rem;
+            }
+
+            .listings-container .listing-share-corner .listing-share-btn,
+            .filters-content.people-tabs-layout .listing-share-corner .listing-share-btn {
+                min-width: 1.32rem;
+                min-height: 1.32rem;
+                border-radius: 0 0 6px 0;
+                padding: 0.08rem 0.17rem;
+                border: 0;
+                background: rgba(36, 60, 76, 0.86);
+                color: #f6fbff;
+                opacity: 1;
+            }
+
+            .listings-container .listing-share-corner,
+            .filters-content.people-tabs-layout .listing-share-corner {
+                left: auto;
+                right: 0;
+                top: 0;
+                z-index: 10;
+                opacity: 1;
+            }
+
+            .listings-container .listing-share-btn .share-icon,
+            .filters-content.people-tabs-layout .listing-share-btn .share-icon {
+                width: 0.74rem;
+                height: 0.74rem;
+            }
+
+            .mobile-quick-nav {
+                position: fixed;
+                right: 0;
+                left: 0;
+                bottom: 0;
+                z-index: 1300;
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.45rem;
+                padding: 0.5rem 0.6rem calc(0.5rem + env(safe-area-inset-bottom, 0px));
+                background: rgba(250, 252, 255, 0.98);
+                border-top: 1px solid var(--border-color);
+                box-shadow: 0 -6px 18px rgba(15, 20, 31, 0.12);
+            }
+
+            .mobile-nav-btn {
+                border: 1px solid var(--border-color);
+                background: #ffffff;
+                color: var(--text-dark);
+                border-radius: 12px;
+                min-height: 42px;
+                font-size: 0.82rem;
+                font-weight: 700;
+                cursor: pointer;
+            }
+
+            .mobile-nav-btn.active {
+                border-color: var(--accent-color);
+                background: rgba(0, 172, 172, 0.14);
+                color: var(--primary-color);
+            }
+
+            body.mobile-mode-list .map-filters-bar {
+                opacity: 0;
+                pointer-events: none;
+            }
+
+            body.mobile-mode-map .map-filters-bar,
+            body.mobile-mode-filters .map-filters-bar {
+                opacity: 1;
+                pointer-events: auto;
+            }
+
+            body.mobile-mode-filters .map-container::after {
+                content: '';
+                position: absolute;
+                inset: 0;
+                background: rgba(14, 20, 29, 0.28);
+                pointer-events: none;
+                z-index: 0;
+            }
+
+            body.mobile-mode-filters .map-filters-bar {
+                position: fixed;
+                right: 0.7rem;
+                left: 0.7rem;
+                bottom: calc(var(--mobile-nav-height) + 0.5rem + env(safe-area-inset-bottom, 0px));
+                top: auto;
+                max-height: min(66vh, 520px);
+                overflow-y: auto;
+                display: grid;
+                grid-template-columns: 1fr;
+                align-content: start;
+                z-index: 1250;
+                padding: 0.78rem;
+                gap: 0.55rem;
+                border-radius: 16px;
+                background: rgba(23, 33, 43, 0.95);
+                box-shadow: 0 14px 34px rgba(5, 10, 16, 0.42);
+                overflow-x: hidden;
+                scrollbar-width: thin;
+            }
+
+            body.mobile-mode-filters .map-filters-sheet-head {
+                display: flex;
+            }
+
+            body.mobile-mode-filters .map-filters-bar .filter-group,
+            body.mobile-mode-filters .map-filters-bar .country-switcher-group {
+                min-width: 0;
+                flex: none;
+                display: grid;
+                gap: 0.35rem;
+            }
+
+            body.mobile-mode-filters .map-filters-bar .filter-group label,
+            body.mobile-mode-filters .map-filters-bar .country-switcher-group label {
+                position: static;
+                width: auto;
+                height: auto;
+                padding: 0;
+                margin: 0;
+                overflow: visible;
+                clip: auto;
+                white-space: normal;
+                color: rgba(255, 255, 255, 0.85);
+                font-size: 0.78rem;
+                font-weight: 600;
+            }
+
+            body.mobile-mode-filters .map-filters-bar .filter-group select,
+            body.mobile-mode-filters .map-filters-bar .country-switcher {
+                height: 43px;
+                border-radius: 11px;
+                border-color: rgba(255, 255, 255, 0.22);
+                background: rgba(255, 255, 255, 0.09);
+                color: #ffffff;
+                font-size: 0.87rem;
+                padding: 0.45rem 0.62rem;
+            }
+
+            body.mobile-mode-filters .map-filters-bar .filter-group select option,
+            body.mobile-mode-filters .map-filters-bar .country-switcher option {
+                background: #1f2b37;
+                color: #ffffff;
+            }
+
+            body.mobile-mode-filters .filter-actions-row {
+                display: flex;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                --mobile-nav-height: 64px;
+                --mobile-header-height: 56px;
+            }
+
+            .map-filters-bar {
+                top: 8px;
+                right: 8px;
+                left: 8px;
+                padding: 0.45rem;
+                gap: 0.32rem;
+                border-radius: 12px;
+            }
+
+            .map-filters-bar .filter-group select,
+            .map-filters-bar .filter-group input,
+            .map-filters-bar .country-switcher {
+                height: 31px;
+                font-size: 0.68rem;
+                padding: 0.22rem 0.32rem;
+                border-radius: 8px;
+            }
+
+            .list-and-filters-wrapper {
+                height: min(78dvh, 610px);
+                height: min(78vh, 610px);
+                border-radius: 14px 14px 0 0;
+            }
+
+            .combined-list-header {
+                height: 58px;
+                padding: 0.42rem 0.55rem;
+            }
+
+            .combined-list-header .header-search-sort #searchInput,
+            .combined-list-header .header-search-sort #sortFilter {
+                height: 31px;
+                font-size: 0.72rem;
+                border-radius: 8px;
+            }
+
+            .list-and-filters-columns {
+                height: calc(100% - 58px);
+            }
+
+            .combined-list-header .header-search-sort {
+                gap: 0.24rem;
+            }
+
+            .list-top-caption {
+                padding: 0.26rem 0.34rem;
+                font-size: 0.6rem;
+            }
+
+            .listings-container,
+            .filters-content.people-tabs-layout {
+                padding: 0.28rem;
+            }
+
+            .listings-container .listing-card,
+            .filters-content.people-tabs-layout .listing-card,
+            .filters-content.people-tabs-layout .no-address-cards .listing-card,
+            .filters-content.people-tabs-layout .listing-card[data-no-address="1"] {
+                min-height: 78px !important;
+                padding: 0.26rem 0.28rem 0.24rem !important;
+                margin-bottom: 0.22rem !important;
+                border-radius: 6px !important;
+            }
+
+            .listings-container .listing-image,
+            .listings-container .listing-image .listing-thumb,
+            .filters-content.people-tabs-layout .listing-image,
+            .filters-content.people-tabs-layout .listing-image .listing-thumb {
+                width: 34px !important;
+                height: 34px !important;
+                border-radius: 6px;
+            }
+
+            .listings-container .listing-content .listing-name,
+            .filters-content.people-tabs-layout .listing-content .listing-name {
+                font-size: 0.68rem !important;
+                margin-bottom: 0.08rem;
+            }
+
+            .listings-container .listing-content .listing-address,
+            .filters-content.people-tabs-layout .listing-content .listing-address {
+                font-size: 0.59rem !important;
+                margin-bottom: 0.08rem;
+            }
+
+            .listings-container .listing-content .listing-tags,
+            .filters-content.people-tabs-layout .listing-content .listing-tags {
+                font-size: 0.56rem !important;
+                margin-bottom: 0.1rem;
+            }
+
+            .listings-container .listing-vote-btn,
+            .listings-container .listing-comment-btn,
+            .listings-container .listing-share-btn,
+            .listings-container .listing-manage-btn,
+            .filters-content.people-tabs-layout .listing-vote-btn,
+            .filters-content.people-tabs-layout .listing-comment-btn,
+            .filters-content.people-tabs-layout .listing-share-btn,
+            .filters-content.people-tabs-layout .listing-manage-btn {
+                min-height: 22px;
+                padding: 0.05rem 0.14rem;
+                border-radius: 5px;
+                font-size: 0.58rem !important;
+            }
+
+            .mobile-quick-nav {
+                gap: 0.38rem;
+                padding: 0.44rem 0.48rem calc(0.42rem + env(safe-area-inset-bottom, 0px));
+            }
+
+            .mobile-nav-btn {
+                min-height: 38px;
+                font-size: 0.76rem;
+                border-radius: 10px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            body {
+                --mobile-nav-height: 60px;
+                --mobile-header-height: 54px;
+            }
+
+            .map-filters-bar {
+                top: 6px;
+                right: 6px;
+                left: 6px;
+                padding: 0.4rem;
+                gap: 0.28rem;
+            }
+
+            .map-filters-bar .filter-group select,
+            .map-filters-bar .filter-group input,
+            .map-filters-bar .country-switcher {
+                height: 29px;
+                font-size: 0.62rem;
+                padding: 0.18rem 0.26rem;
+            }
+
+            .combined-list-header {
+                height: 54px;
+                padding: 0.35rem 0.46rem;
+            }
+
+            .combined-list-header .header-search-sort {
+                gap: 0.18rem;
+            }
+
+            .combined-list-header .header-search-sort #searchInput,
+            .combined-list-header .header-search-sort #sortFilter {
+                height: 29px;
+                font-size: 0.66rem;
+                padding: 0.16rem 0.24rem;
+            }
+
+            .list-and-filters-columns {
+                height: calc(100% - 54px);
+            }
+
+            .list-top-caption {
+                padding: 0.22rem 0.28rem;
+                font-size: 0.56rem;
+            }
+
+            .listings-container,
+            .filters-content.people-tabs-layout {
+                padding: 0.22rem;
+            }
+
+            .listings-container .listing-card,
+            .filters-content.people-tabs-layout .listing-card,
+            .filters-content.people-tabs-layout .no-address-cards .listing-card,
+            .filters-content.people-tabs-layout .listing-card[data-no-address="1"] {
+                min-height: 72px !important;
+                padding: 0.22rem 0.24rem 0.2rem !important;
+                margin-bottom: 0.18rem !important;
+                border-radius: 5px !important;
+            }
+
+            .listings-container .listing-card-row,
+            .filters-content.people-tabs-layout .listing-card-row {
+                column-gap: 0.24rem !important;
+                row-gap: 0.08rem !important;
+            }
+
+            .listings-container .listing-image,
+            .listings-container .listing-image .listing-thumb,
+            .filters-content.people-tabs-layout .listing-image,
+            .filters-content.people-tabs-layout .listing-image .listing-thumb {
+                width: 30px !important;
+                height: 30px !important;
+                border-radius: 5px;
+            }
+
+            .listings-container .listing-content .listing-name,
+            .filters-content.people-tabs-layout .listing-content .listing-name {
+                font-size: 0.62rem !important;
+            }
+
+            .listings-container .listing-content .listing-address,
+            .filters-content.people-tabs-layout .listing-content .listing-address {
+                font-size: 0.54rem !important;
+            }
+
+            .listings-container .listing-content .listing-tags,
+            .filters-content.people-tabs-layout .listing-content .listing-tags {
+                font-size: 0.5rem !important;
+            }
+
+            .listings-container .listing-vote-btn,
+            .listings-container .listing-comment-btn,
+            .listings-container .listing-share-btn,
+            .listings-container .listing-manage-btn,
+            .filters-content.people-tabs-layout .listing-vote-btn,
+            .filters-content.people-tabs-layout .listing-comment-btn,
+            .filters-content.people-tabs-layout .listing-share-btn,
+            .filters-content.people-tabs-layout .listing-manage-btn {
+                min-height: 21px;
+                padding: 0.03rem 0.1rem;
+                font-size: 0.56rem !important;
+            }
+
+            .mobile-quick-nav {
+                gap: 0.32rem;
+                padding: 0.34rem 0.38rem calc(0.34rem + env(safe-area-inset-bottom, 0px));
+            }
+
+            .mobile-nav-btn {
+                min-height: 35px;
+                font-size: 0.72rem;
+                border-radius: 9px;
+            }
+        }
+
+        /* ============================================
+           Mobile Hard-Fix Layer (final override)
+           Keeps both lists stable, prevents overflow,
+           and applies one-line ellipsis for address.
+           ============================================ */
+        @media (max-width: 900px) {
+            #app-view-container .list-and-filters-columns {
+                display: grid !important;
+                grid-template-columns: minmax(0, 1fr) !important;
+                align-items: stretch;
+                overflow: hidden !important;
+                gap: 0 !important;
+            }
+
+            #app-view-container #listingsSection,
+            #app-view-container #filtersSection {
+                width: 100% !important;
+                max-width: none !important;
+                min-width: 0 !important;
+                height: 100% !important;
+                min-height: 0 !important;
+                flex: none !important;
+                flex-direction: column !important;
+                overflow: hidden !important;
+            }
+
+            #app-view-container #listingsSection {
+                display: flex !important;
+                border-inline-end: 0;
+            }
+
+            #app-view-container #filtersSection {
+                display: none !important;
+            }
+
+            body.mobile-list-show-without #app-view-container #listingsSection {
+                display: none !important;
+            }
+
+            body.mobile-list-show-without #app-view-container #filtersSection {
+                display: flex !important;
+            }
+
+            #app-view-container #listingsList,
+            #app-view-container #filtersPeopleContent {
+                min-width: 0 !important;
+                overflow-x: hidden !important;
+                overflow-y: auto !important;
+            }
+
+            #app-view-container #listingsList .listing-card,
+            #app-view-container #filtersPeopleContent .listing-card,
+            #app-view-container #filtersPeopleContent .no-address-cards .listing-card,
+            #app-view-container #filtersPeopleContent .listing-card[data-no-address="1"] {
+                width: 100% !important;
+                max-width: 100% !important;
+                box-sizing: border-box !important;
+                overflow: hidden !important;
+                height: auto !important;
+                min-height: 92px !important;
+                padding: 0.32rem 0.32rem 1.56rem !important;
+                margin: 0 0 0.24rem 0 !important;
+                border-radius: 7px !important;
+                border: 1px solid rgba(36, 60, 76, 0.12) !important;
+                box-shadow: none !important;
+                background: #ffffff !important;
+                position: relative !important;
+            }
+
+            #app-view-container #listingsList .listing-card-row,
+            #app-view-container #filtersPeopleContent .listing-card-row {
+                display: flex !important;
+                flex-direction: row !important;
+                align-items: flex-start !important;
+                gap: 0.3rem !important;
+                min-width: 0 !important;
+                width: 100% !important;
+            }
+
+            [dir="rtl"] #app-view-container #listingsList .listing-card-row,
+            [dir="rtl"] #app-view-container #filtersPeopleContent .listing-card-row {
+                flex-direction: row-reverse !important;
+            }
+
+            #app-view-container #listingsList .listing-content,
+            #app-view-container #filtersPeopleContent .listing-content {
+                display: block !important;
+                flex: 1 1 auto !important;
+                min-width: 0 !important;
+                max-width: 100% !important;
+                overflow: hidden !important;
+            }
+
+            #app-view-container #listingsList .listing-content-top,
+            #app-view-container #filtersPeopleContent .listing-content-top {
+                min-width: 0 !important;
+                max-width: 100% !important;
+                overflow: hidden !important;
+                padding-bottom: 0.95rem !important;
+            }
+
+            #app-view-container #listingsList .listing-image,
+            #app-view-container #filtersPeopleContent .listing-image {
+                flex: 0 0 auto !important;
+                width: 40px !important;
+                height: 40px !important;
+                min-width: 40px !important;
+            }
+
+            #app-view-container #listingsList .listing-image .listing-thumb,
+            #app-view-container #filtersPeopleContent .listing-image .listing-thumb {
+                width: 40px !important;
+                height: 40px !important;
+            }
+
+            #app-view-container #listingsList .listing-content .listing-name,
+            #app-view-container #filtersPeopleContent .listing-content .listing-name {
+                margin: 0 0 0.1rem 0 !important;
+                font-size: 0.72rem !important;
+                line-height: 1.15 !important;
+                white-space: nowrap !important;
+                overflow: hidden !important;
+                text-overflow: ellipsis !important;
+                max-width: 100% !important;
+            }
+
+            /* Requested behavior: address in "with address" list stays in one line with ellipsis */
+            #app-view-container #listingsSection .listing-content .listing-address {
+                margin: 0 0 0.1rem 0 !important;
+                font-size: 0.62rem !important;
+                line-height: 1.15 !important;
+                white-space: nowrap !important;
+                overflow: hidden !important;
+                text-overflow: ellipsis !important;
+                display: block !important;
+                max-width: 100% !important;
+            }
+
+            #app-view-container #filtersSection .listing-content .listing-address {
+                margin: 0 0 0.1rem 0 !important;
+                font-size: 0.62rem !important;
+                line-height: 1.15 !important;
+                white-space: nowrap !important;
+                overflow: hidden !important;
+                text-overflow: ellipsis !important;
+                display: block !important;
+                max-width: 100% !important;
+            }
+
+            #app-view-container #listingsList .listing-content .listing-tags,
+            #app-view-container #filtersPeopleContent .listing-content .listing-tags {
+                margin: 0 0 0.12rem 0 !important;
+                font-size: 0.58rem !important;
+                white-space: nowrap !important;
+                overflow: hidden !important;
+                text-overflow: ellipsis !important;
+            }
+
+            #app-view-container #listingsList .listing-actions,
+            #app-view-container #filtersPeopleContent .listing-actions {
+                display: flex !important;
+                align-items: center !important;
+                justify-content: flex-end !important;
+                flex-wrap: nowrap !important;
+                gap: 0.1rem !important;
+                width: max-content !important;
+                max-width: calc(100% - 0.64rem) !important;
+                min-width: 0 !important;
+                margin: 0 !important;
+                overflow: hidden !important;
+                opacity: 1 !important;
+                position: absolute !important;
+                right: 0.26rem !important;
+                bottom: 0.2rem !important;
+                z-index: 12 !important;
+            }
+
+            #app-view-container #listingsList .listing-votes,
+            #app-view-container #filtersPeopleContent .listing-votes {
+                display: flex !important;
+                gap: 0.08rem !important;
+                flex: 0 0 auto !important;
+            }
+
+            #app-view-container #listingsList .listing-vote-btn,
+            #app-view-container #listingsList .listing-comment-btn,
+            #app-view-container #listingsList .listing-manage-btn,
+            #app-view-container #filtersPeopleContent .listing-vote-btn,
+            #app-view-container #filtersPeopleContent .listing-comment-btn,
+            #app-view-container #filtersPeopleContent .listing-manage-btn {
+                min-height: 32px !important;
+                min-width: 32px !important;
+                padding: 0.2rem 0.35rem !important;
+                font-size: 0.72rem !important;
+                line-height: 1.05 !important;
+                border-radius: 6px !important;
+                border: none !important;
+                background: rgba(36, 60, 76, 0.08) !important;
+                color: #2d4b5f !important;
+                opacity: 1 !important;
+            }
+
+            #app-view-container #listingsList .listing-share-corner,
+            #app-view-container #filtersPeopleContent .listing-share-corner {
+                left: -2px !important;
+                right: auto !important;
+                top: 0 !important;
+                z-index: 30 !important;
+                opacity: 1 !important;
+            }
+
+            #app-view-container #listingsList .listing-share-corner .listing-share-btn,
+            #app-view-container #filtersPeopleContent .listing-share-corner .listing-share-btn {
+                min-width: 1.28rem !important;
+                min-height: 1.28rem !important;
+                padding: 0.06rem 0.14rem !important;
+                border-radius: 0 0 6px 0 !important;
+                background: rgba(36, 60, 76, 0.9) !important;
+                color: #ffffff !important;
+                opacity: 1 !important;
+                visibility: visible !important;
+            }
+
+            #app-view-container #listingsList .listing-share-btn .share-icon,
+            #app-view-container #filtersPeopleContent .listing-share-btn .share-icon {
+                width: 0.7rem !important;
+                height: 0.7rem !important;
+            }
+
+            /* Fix invisible "more options" dropdown on mobile cards */
+            #app-view-container #listingsList .listing-actions,
+            #app-view-container #filtersPeopleContent .listing-actions {
+                overflow: visible !important;
+            }
+
+            #app-view-container #listingsList .listing-card.listing-menu-open,
+            #app-view-container #filtersPeopleContent .listing-card.listing-menu-open {
+                overflow: visible !important;
+                z-index: 90 !important;
+            }
+
+            #app-view-container #listingsList .listing-card.listing-menu-open .listing-content,
+            #app-view-container #filtersPeopleContent .listing-card.listing-menu-open .listing-content {
+                overflow: visible !important;
+            }
+
+            #app-view-container #listingsList .listing-more-wrap,
+            #app-view-container #filtersPeopleContent .listing-more-wrap {
+                position: relative;
+                z-index: 120;
+            }
+
+            #app-view-container #listingsList .listing-more-wrap.open,
+            #app-view-container #filtersPeopleContent .listing-more-wrap.open {
+                z-index: 180;
+            }
+
+            #app-view-container #listingsList .listing-more-wrap .listing-more-menu,
+            #app-view-container #filtersPeopleContent .listing-more-wrap .listing-more-menu {
+                top: 100% !important;
+                bottom: auto !important;
+                left: 0 !important;
+                right: auto !important;
+                transform-origin: top left !important;
+                display: none !important;
+                width: max-content !important;
+                min-width: 112px !important;
+                max-width: min(168px, calc(100vw - 16px)) !important;
+                max-height: none !important;
+                overflow: visible !important;
+                padding: 0.04rem !important;
+                border-radius: 7px !important;
+                border: 1px solid #d7e1e8 !important;
+                background: #ffffff !important;
+                box-shadow: 0 8px 18px rgba(10, 22, 34, 0.22) !important;
+                z-index: 99999 !important;
+            }
+
+            #app-view-container #listingsList .listing-more-wrap.open .listing-more-menu,
+            #app-view-container #filtersPeopleContent .listing-more-wrap.open .listing-more-menu {
+                display: flex !important;
+                flex-direction: column !important;
+                gap: 0 !important;
+            }
+
+            [dir="rtl"] #app-view-container #listingsList .listing-more-wrap .listing-more-menu,
+            [dir="rtl"] #app-view-container #filtersPeopleContent .listing-more-wrap .listing-more-menu {
+                left: 0 !important;
+                right: auto !important;
+                transform-origin: top left !important;
+            }
+
+            #app-view-container #listingsList .listing-more-wrap .listing-more-item,
+            #app-view-container #filtersPeopleContent .listing-more-wrap .listing-more-item {
+                display: block !important;
+                width: 100% !important;
+                min-height: 24px !important;
+                min-width: 0 !important;
+                height: auto !important;
+                font-size: 0.62rem !important;
+                line-height: 1.08 !important;
+                padding: 0.12rem 0.18rem !important;
+                margin: 0 !important;
+                border-radius: 5px !important;
+                color: #243c4c !important;
+                background: transparent !important;
+                white-space: nowrap !important;
+                overflow: hidden !important;
+                text-overflow: ellipsis !important;
+                touch-action: manipulation !important;
+                pointer-events: auto !important;
+            }
+        }
+
+        .mobile-sheet-handle {
+            display: none;
+        }
+
+        @media (max-width: 900px) {
+            body {
+                --mobile-nav-height: 0px !important;
+                --mobile-header-height: 40px !important;
+                --mobile-sheet-handle-height: 28px;
+                --mobile-combined-header-height: 64px;
+                --mobile-list-tabs-height: 44px;
+                --mobile-sheet-peek: 56px;
+            }
+
+            #mobileQuickNav {
+                display: none !important;
+                visibility: hidden !important;
+                pointer-events: none !important;
+            }
+
+            #app-view-container .map-container {
+                inset: var(--mobile-header-height) 0 env(safe-area-inset-bottom, 0px) 0 !important;
+            }
+
+            header {
+                height: var(--mobile-header-height) !important;
+                min-height: var(--mobile-header-height) !important;
+                z-index: 1400 !important;
+            }
+
+            header nav {
+                max-width: none !important;
+                height: 100% !important;
+                padding: 0.12rem 0.48rem !important;
+                align-items: center !important;
+                gap: 0.35rem !important;
+            }
+
+            header nav .logo {
+                font-size: 0.8rem !important;
+                line-height: 1.05 !important;
+                height: auto !important;
+            }
+
+            header nav .logo-role-container {
+                min-width: 82px !important;
+                margin-left: 0.28em !important;
+            }
+
+            header nav .menu-toggle {
+                display: flex !important; /* force visible under 900px (styles.css only shows it ≤768) */
+                position: relative !important;
+                left: auto !important;
+                right: auto !important;
+                margin: 0 !important;
+                min-width: 40px !important;
+                min-height: 40px !important;
+                width: 40px !important;
+                height: 40px !important;
+                padding: 6px !important;
+                gap: 4px !important;
+                z-index: 1403 !important;
+                pointer-events: auto !important;
+                cursor: pointer !important;
+                -webkit-tap-highlight-color: transparent;
+                touch-action: manipulation;
+            }
+
+            header nav .menu-toggle span {
+                width: 18px !important;
+                pointer-events: none !important; /* bars are visual only; parent receives the tap */
+            }
+
+            header nav .nav-links {
+                top: calc(var(--mobile-header-height) + env(safe-area-inset-top, 0px)) !important;
+                left: -56vw !important;
+                right: auto !important;
+                width: 50vw !important;
+                min-width: 150px !important;
+                max-width: 190px !important;
+                height: calc(100dvh - var(--mobile-header-height) - env(safe-area-inset-top, 0px)) !important;
+                padding: 0.45rem !important;
+                gap: 0.35rem !important;
+                align-items: stretch !important;
+                justify-content: flex-start !important;
+                /* Theme-aware panel so dark-mode text is not white-on-white */
+                background: var(--background-color) !important;
+                color: var(--text-color) !important;
+                box-shadow: 2px 0 14px rgba(10, 24, 36, 0.35) !important;
+                backdrop-filter: blur(6px) !important;
+                z-index: 1402 !important;
+            }
+
+            header nav .nav-links.active {
+                left: 0 !important;
+                right: auto !important;
+                width: 50vw !important;
+                min-width: 150px !important;
+                max-width: 190px !important;
+                padding: 0.45rem !important;
+                gap: 0.35rem !important;
+            }
+
+            /* Keep mobile drawer anchored to toggle side (left), even in RTL. */
+            [dir="rtl"] header nav .nav-links {
+                left: -56vw !important;
+                right: auto !important;
+            }
+
+            [dir="rtl"] header nav .nav-links.active {
+                left: 0 !important;
+                right: auto !important;
+            }
+
+            header nav .nav-links.active a,
+            header nav .nav-links.active .nav-btn-logout,
+            header nav .nav-links.active .nav-user-info,
+            header nav .nav-links.active .nav-user-menu-toggle,
+            header nav .nav-links.active .nav-user-name {
+                width: 100% !important;
+                font-size: 0.78rem !important;
+                padding: 0.45rem 0.52rem !important;
+                border-radius: 7px !important;
+                text-align: start !important;
+                color: var(--text-color) !important;
+                background: transparent !important;
+            }
+
+            header nav .nav-links.active a.active {
+                color: var(--accent-color) !important;
+                font-weight: 700 !important;
+            }
+
+            header nav .nav-links.active a:hover,
+            header nav .nav-links.active .nav-user-menu-toggle:hover {
+                background: var(--background-alt) !important;
+            }
+
+            .mobile-nav-backdrop {
+                position: fixed;
+                top: calc(var(--mobile-header-height) + env(safe-area-inset-top, 0px));
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(10, 20, 32, 0.1);
+                opacity: 0;
+                pointer-events: none;
+                transition: opacity 140ms ease;
+                z-index: 1390;
+            }
+
+            .mobile-nav-backdrop.active {
+                opacity: 1;
+                pointer-events: auto;
+            }
+
+            /* Filter bar: 2x2 grid with usable touch targets */
+            #app-view-container #mapFiltersBar {
+                top: 6px !important;
+                left: 6px !important;
+                right: 6px !important;
+                display: grid !important;
+                grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+                align-items: stretch !important;
+                gap: 0.35rem !important;
+                height: auto !important;
+                min-height: 0 !important;
+                max-height: none !important;
+                padding: 0.4rem !important;
+                border-radius: 12px !important;
+                overflow: visible !important;
+            }
+
+            #app-view-container #mapFiltersBar .filter-group,
+            #app-view-container #mapFiltersBar .country-switcher-group {
+                width: 100% !important;
+                min-width: 0 !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                display: block !important;
+            }
+
+            #app-view-container #mapFiltersBar .filter-group label,
+            #app-view-container #mapFiltersBar .country-switcher-group label {
+                display: none !important;
+            }
+
+            #app-view-container #mapFiltersBar .filter-group select,
+            #app-view-container #mapFiltersBar .country-switcher,
+            #app-view-container #mapFiltersBar .filter-group input {
+                width: 100% !important;
+                min-width: 0 !important;
+                height: 36px !important;
+                min-height: 36px !important;
+                max-height: none !important;
+                padding: 0.25rem 0.4rem !important;
+                border-radius: 8px !important;
+                font-size: 0.78rem !important;
+                line-height: 1.15 !important;
+                white-space: nowrap !important;
+                overflow: hidden !important;
+                text-overflow: ellipsis !important;
+            }
+
+            #app-view-container .list-and-filters-wrapper {
+                top: calc(var(--mobile-header-height) + env(safe-area-inset-top, 0px)) !important;
+                bottom: 0 !important;
+                height: auto !important;
+                max-height: none !important;
+                border-radius: 16px 16px 0 0 !important;
+                --sheet-offset: calc(100% - var(--mobile-sheet-peek));
+                transform: translateY(var(--sheet-offset)) !important;
+                transition: transform 220ms ease !important;
+                overflow: hidden !important;
+                z-index: 1200 !important;
+            }
+
+            #app-view-container .list-and-filters-wrapper.sheet-dragging {
+                transition: none !important;
+            }
+
+            #app-view-container .mobile-sheet-handle {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+                gap: 4px;
+                height: var(--mobile-sheet-handle-height);
+                background: rgba(248, 251, 254, 0.98);
+                border-bottom: 1px solid var(--border-color);
+                touch-action: none;
+                cursor: ns-resize;
+            }
+
+            #app-view-container .mobile-sheet-grip {
+                width: 42px;
+                height: 4px;
+                border-radius: 999px;
+                background: rgba(36, 60, 76, 0.45);
+            }
+
+            #app-view-container .combined-list-header {
+                height: var(--mobile-combined-header-height) !important;
+            }
+
+            /* One full-width list at a time via tabs */
+            #app-view-container #mobileListTabs {
+                display: flex !important;
+                gap: 0.35rem;
+                padding: 0.35rem 0.65rem 0.45rem;
+                background: linear-gradient(120deg, #243c4c 0%, #326080 100%);
+                border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+                flex: 0 0 auto;
+            }
+
+            #app-view-container #mobileListTabs .mobile-list-tab {
+                flex: 1;
+                border: 1px solid rgba(255, 255, 255, 0.22);
+                background: rgba(255, 255, 255, 0.08);
+                color: #e8f2f8;
+                height: 36px;
+                min-height: 36px;
+                border-radius: 999px;
+                font-size: 0.82rem;
+                font-weight: 600;
+                cursor: pointer;
+                padding: 0 0.5rem;
+            }
+
+            #app-view-container #mobileListTabs .mobile-list-tab.active {
+                border-color: #00acac;
+                background: rgba(0, 172, 172, 0.28);
+                color: #ffffff;
+            }
+
+            #app-view-container .list-and-filters-columns {
+                display: grid !important;
+                grid-template-columns: minmax(0, 1fr) !important;
+                height: calc(100% - var(--mobile-sheet-handle-height) - var(--mobile-combined-header-height) - var(--mobile-list-tabs-height)) !important;
+                min-height: 0 !important;
+                overflow: hidden !important;
+                gap: 0 !important;
+            }
+
+            #app-view-container #listingsSection,
+            #app-view-container #filtersSection {
+                width: 100% !important;
+                max-width: none !important;
+                min-width: 0 !important;
+                height: 100% !important;
+                min-height: 0 !important;
+                flex: none !important;
+                flex-direction: column !important;
+                overflow: hidden !important;
+                border: 0 !important;
+            }
+
+            /* Default: with-address list; without-address when tab class is set */
+            #app-view-container #listingsSection {
+                display: flex !important;
+            }
+
+            #app-view-container #filtersSection {
+                display: none !important;
+            }
+
+            body.mobile-list-show-without #app-view-container #listingsSection {
+                display: none !important;
+            }
+
+            body.mobile-list-show-without #app-view-container #filtersSection {
+                display: flex !important;
+            }
+
+            /* Roomier single-column cards */
+            #app-view-container #listingsList .listing-card,
+            #app-view-container #filtersPeopleContent .listing-card {
+                min-height: 96px !important;
+                padding: 0.5rem 0.5rem 1.7rem !important;
+            }
+
+            #app-view-container #listingsList .listing-content .listing-name,
+            #app-view-container #filtersPeopleContent .listing-content .listing-name {
+                font-size: 0.88rem !important;
+            }
+
+            #app-view-container #listingsList .listing-content .listing-address,
+            #app-view-container #filtersPeopleContent .listing-content .listing-address {
+                font-size: 0.72rem !important;
+            }
+
+            #app-view-container #listingsList .listing-image,
+            #app-view-container #listingsList .listing-image .listing-thumb,
+            #app-view-container #filtersPeopleContent .listing-image,
+            #app-view-container #filtersPeopleContent .listing-image .listing-thumb {
+                width: 52px !important;
+                height: 52px !important;
+                min-width: 52px !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                --mobile-header-height: 38px !important;
+                --mobile-combined-header-height: 58px;
+                --mobile-sheet-handle-height: 26px;
+                --mobile-list-tabs-height: 42px;
+                --mobile-sheet-peek: 52px;
+            }
+
+            #app-view-container #mapFiltersBar {
+                gap: 0.3rem !important;
+                padding: 0.35rem !important;
+            }
+
+            #app-view-container #mapFiltersBar .filter-group select,
+            #app-view-container #mapFiltersBar .country-switcher,
+            #app-view-container #mapFiltersBar .filter-group input {
+                height: 34px !important;
+                min-height: 34px !important;
+                font-size: 0.74rem !important;
+            }
+        }
+
+        @media (max-width: 360px) {
+            body {
+                --mobile-header-height: 36px !important;
+                --mobile-combined-header-height: 54px;
+                --mobile-sheet-handle-height: 24px;
+                --mobile-sheet-peek: 48px;
+            }
+
+            header nav .logo {
+                font-size: 0.74rem !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with Navigation -->
+    <header>
+        <nav>
+            <div class="logo">
+                <span class="logo-base-text" data-i18n="index.logo">موقعیت‌های افراد :</span>
+                <span class="logo-role-container">
+                    <span class="logo-text logo-text-1"></span>
+                    <span class="logo-text logo-text-2"></span>
+                </span>
+            </div>
+            <ul class="nav-links">
+                <!-- Navigation links will be populated by navigation.js -->
+            </ul>
+            <!-- Mobile menu toggle button -->
+            <div class="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Container with 3 Sections: Filters, Listings, Map -->
+    <!-- This will be replaced by router if SPA mode is active -->
+    <div id="app-view-container" class="main-container">
+        <!-- Wrapper: one combined header (search + sort + toggles) then two columns -->
+        <div class="list-and-filters-wrapper">
+            <div class="mobile-sheet-handle" id="mobileSheetHandle" aria-label="Drag list panel">
+                <span class="mobile-sheet-grip"></span>
+            </div>
+            <!-- Single header for both lists: one search, one sort, section toggles -->
+            <div class="combined-list-header" id="combinedListHeader">
+                <div class="header-search-sort">
+                    <div class="filter-group header-filter-group">
+                        <label for="searchInput" class="sr-only" data-i18n="index.searchByNameLabel">Search name</label>
+                        <input id="searchInput" type="text" title="Search by name/family name" aria-label="Search by name/family name" data-i18n="index.searchByNamePlaceholder" data-i18n-attr="placeholder" placeholder="جستجو بر اساس نام یا نام خانوادگی...">
+                    </div>
+                    <div class="filter-group header-filter-group">
+                        <label for="sortFilter" class="sr-only" data-i18n="index.sortByLikesLabel">Sort by likes</label>
+                        <select id="sortFilter" title="Sort by likes" aria-label="Sort by likes">
+                            <option value="likes:desc" data-i18n="index.sortLikesDesc">بیشترین لایک</option>
+                            <option value="likes:asc" data-i18n="index.sortLikesAsc">کمترین لایک</option>
+                        </select>
+                    </div>
+                </div>
+                <button class="section-toggle" id="filtersToggle" aria-label="Toggle filters section">▼</button>
+                <button class="section-toggle" id="listingsToggle" aria-label="Toggle listings section">▼</button>
+            </div>
+            <div class="mobile-list-tabs" id="mobileListTabs">
+                <button type="button" class="mobile-list-tab active" data-mobile-list-tab="with" data-i18n="index.mobileListWithAddress">With Address</button>
+                <button type="button" class="mobile-list-tab" data-mobile-list-tab="without" data-i18n="index.mobileListWithoutAddress">No Address</button>
+            </div>
+            <div class="list-and-filters-columns">
+                <!-- Left: people WITH address (listings / فهرست افراد) -->
+                <div class="listings-section-standalone" id="listingsSection">
+                    <div class="list-top-caption" id="withAddressInlineCaption">فهرست افراد 0 مورد</div>
+                    <div class="listings-container" id="listingsList">
+                        <div class="loading-indicator" data-i18n="index.loadingListings">Loading listings...</div>
+                    </div>
+                </div>
+                <!-- Right: people WITHOUT address (افراد بدون آدرس) - same structure as listings: caption outside, then scroll container -->
+                <div class="filters-section-standalone" id="filtersSection">
+                    <div class="list-top-caption" id="noAddressInlineCaption">افراد بدون آدرس 0 مورد</div>
+                    <div class="filters-content people-tabs-layout" id="filtersPeopleContent">
+                        <div class="people-tab-panel active" data-people-tab-panel="without-address">
+                            <div id="noAddressListContainer" class="no-address-list-wrapper"></div>
+                        </div>
+                        <div class="people-tab-panel" data-people-tab-panel="with-address">
+                            <div id="withAddressListContainer" class="with-address-list-wrapper"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Map Container (Fourth): filters bar at top, map below -->
+        <div class="map-container">
+            <div class="map-filters-bar" id="mapFiltersBar">
+                <div class="map-filters-sheet-head">
+                    <div>
+                        <h3 class="map-filters-sheet-title" data-i18n="index.filtersHeading">Filters</h3>
+                        <p class="map-filters-sheet-subtitle" data-i18n="index.mobileFiltersSubtitle">Adjust search area and role</p>
+                    </div>
+                    <button type="button" class="map-filters-sheet-close" data-mobile-mode="map" aria-label="Close filters">×</button>
+                </div>
+                <div class="filter-group country-switcher-group">
+                    <label for="countrySwitcher" data-i18n="index.countryLabel">Country</label>
+                    <select id="countrySwitcher" class="country-switcher" title="کشور" aria-label="کشور">
+                        <option value="fa" data-i18n="index.countryIran">Iran</option>
+                        <option value="en" data-i18n="index.countryUSA">USA</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="provinceFilter" data-i18n="index.provinceLabel">Province</label>
+                    <select id="provinceFilter" class="filter-select" title="استان" aria-label="استان">
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="sectionFilter" data-i18n="index.sectionLabel">Section/County</label>
+                    <select id="sectionFilter" class="filter-select" title="بخش/شهرستان" aria-label="بخش/شهرستان">
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="roleFilter" data-i18n="index.roleFilterLabel">Role in Listing</label>
+                    <select id="roleFilter" title="نقش در فهرست" aria-label="نقش در فهرست">
+                        <option value="" data-i18n="index.roleAll">All Roles</option>
+                        <option value="چپ کمونیست" data-i18n="index.roleCommunist">چپ کمونیست</option>
+                        <option value="اصلاح طلب" data-i18n="index.roleReformist">اصلاح طلب</option>
+                        <option value="آخوند" data-i18n="index.roleAkhund">آخوند</option>
+                        <option value="سپاهی" data-i18n="index.roleSepahi">سپاهی</option>
+                        <option value="بسیجی" data-i18n="index.roleBasiji">بسیجی</option>
+                        <option value="آقازاده" data-i18n="index.roleAghazadeh">آقازاده</option>
+                        <option value="دانشجوی سهمیه‌ای" data-i18n="index.roleQuotaStudent">دانشجوی سهمیه‌ای</option>
+                        <option value="پان ترک" data-i18n="index.rolePanTurk">پان ترک</option>
+                        <option value="پانکورد" data-i18n="index.rolePanKurd">پانکورد</option>
+                        <option value="پان عرب" data-i18n="index.rolePanArab">پان عرب</option>
+                        <option value="پان بلوچ" data-i18n="index.rolePanBaloch">پان بلوچ</option>
+                        <option value="افغانی" data-i18n="index.roleAfghani">افغانی</option>
+                        <option value="افغان مال" data-i18n="index.roleAfghanMal">افغان مال</option>
+                        <option value="اختلاسگر" data-i18n="index.roleEmbezzler">اختلاسگر</option>
+                        <option value="قاچاقچی مواد" data-i18n="index.roleDrugSmuggler">قاچاقچی مواد</option>
+                        <option value="قاچاقچی انسان" data-i18n="index.roleHumanTrafficker">قاچاقچی انسان</option>
+                        <option value="بچه باز" data-i18n="index.roleChildAbuser">بچه باز</option>
+                        <option value="زورگیر" data-i18n="index.roleExtortionist">زورگیر</option>
+                        <option value="متجاوز" data-i18n="index.roleRapist">متجاوز</option>
+                        <option value="قاتل" data-i18n="index.roleMurderer">قاتل</option>
+                    </select>
+                </div>
+                <div class="filter-actions-row">
+                    <button type="button" class="filter-action-btn btn-clear-filters" data-action="clear-filters" data-i18n="common.clear">Clear</button>
+                    <button type="button" class="filter-action-btn btn-apply-filters" data-action="apply-filters" data-i18n="common.apply">Apply</button>
+                </div>
+            </div>
+            <div id="map"></div>
+        </div>
+    </div>
+
+    <!-- Comments popup modal (single global instance; opened when user clicks comment button on a listing) -->
+    <div id="listing-comments-modal" class="listing-comments-modal-overlay" aria-hidden="true" aria-label="Comments">
+        <div class="listing-comments-modal-backdrop" data-action="close-comments-modal"></div>
+        <div class="listing-comments-modal-box">
+            <div class="listing-comments-panel listing-comments-panel-in-modal" data-id="">
+                <div class="comments-list"></div>
+                <div class="comment-form">
+                    <input type="text" class="comment-input" placeholder="نظر خود را بنویسید..." maxlength="500">
+                    <button type="button" class="comment-submit-btn">ارسال</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Legacy Listings Sidebar (hidden) -->
+    <div class="listings-sidebar" style="display: none;">
+            <!-- Filters Section -->
+            <div class="filters-section">
+                <!-- Country/Language Switcher -->
+                <div class="filter-group country-switcher-group">
+                    <label for="countrySwitcher" data-i18n="index.countryLabel">Country</label>
+                    <select id="countrySwitcher" class="country-switcher">
+                        <option value="fa" data-i18n="index.countryIran">Iran</option>
+                        <option value="en" data-i18n="index.countryUSA">USA</option>
+                    </select>
+                </div>
+                
+                <h3 data-i18n="index.filtersHeading">Filters</h3>
+                
+                <div class="filter-group">
+                    <label for="roleFilter" data-i18n="index.roleFilterLabel">Role in Listing</label>
+                    <select id="roleFilter">
+                        <option value="" data-i18n="index.roleAll">All Roles</option>
+                        <option value="چپ کمونیست" data-i18n="index.roleCommunist">چپ کمونیست</option>
+                        <option value="اصلاح طلب" data-i18n="index.roleReformist">اصلاح طلب</option>
+                        <option value="آخوند" data-i18n="index.roleAkhund">آخوند</option>
+                        <option value="سپاهی" data-i18n="index.roleSepahi">سپاهی</option>
+                        <option value="بسیجی" data-i18n="index.roleBasiji">بسیجی</option>
+                        <option value="آقازاده" data-i18n="index.roleAghazadeh">آقازاده</option>
+                        <option value="دانشجوی سهمیه‌ای" data-i18n="index.roleQuotaStudent">دانشجوی سهمیه‌ای</option>
+                        <option value="پان ترک" data-i18n="index.rolePanTurk">پان ترک</option>
+                        <option value="پانکورد" data-i18n="index.rolePanKurd">پانکورد</option>
+                        <option value="پان عرب" data-i18n="index.rolePanArab">پان عرب</option>
+                        <option value="پان بلوچ" data-i18n="index.rolePanBaloch">پان بلوچ</option>
+                        <option value="افغانی" data-i18n="index.roleAfghani">افغانی</option>
+                        <option value="افغان مال" data-i18n="index.roleAfghanMal">افغان مال</option>
+                        <option value="اختلاسگر" data-i18n="index.roleEmbezzler">اختلاسگر</option>
+                        <option value="قاچاقچی مواد" data-i18n="index.roleDrugSmuggler">قاچاقچی مواد</option>
+                        <option value="قاچاقچی انسان" data-i18n="index.roleHumanTrafficker">قاچاقچی انسان</option>
+                        <option value="بچه باز" data-i18n="index.roleChildAbuser">بچه باز</option>
+                        <option value="زورگیر" data-i18n="index.roleExtortionist">زورگیر</option>
+                        <option value="متجاوز" data-i18n="index.roleRapist">متجاوز</option>
+                        <option value="قاتل" data-i18n="index.roleMurderer">قاتل</option>
+                    </select>
+                </div>
+                
+                
+            </div>
+            
+            </div>
+        </div>
+    </div>
+
+    <!-- Image Carousel Modal (click on listing image opens this) -->
+    <div id="listingsImageCarouselModal" class="image-modal" role="dialog" aria-label="Image carousel" style="display: none;">
+        <div class="image-carousel-container">
+            <span class="image-modal-close" id="listingsCarouselClose" aria-label="Close">&times;</span>
+            <div class="image-carousel-content">
+                <button type="button" class="carousel-btn carousel-prev" id="listingsCarouselPrev" aria-label="Previous image">&#10094;</button>
+                <img id="listingsCarouselImage" src="" alt="" style="max-height: 80vh; object-fit: contain;">
+                <button type="button" class="carousel-btn carousel-next" id="listingsCarouselNext" aria-label="Next image">&#10095;</button>
+            </div>
+            <div class="carousel-indicators" id="listingsCarouselDots"></div>
+            <div class="carousel-counter" id="listingsCarouselCounter">1 / 1</div>
+            <div class="carousel-details" id="listingsCarouselDetails" style="display: none;"></div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+            crossorigin=""></script>
+    
+    <!-- Homepage sheet + mobile helpers (hamburger is in navigation.js only) -->
+    <script src="script.js?v=mobile-menu-3"></script>
+    
+    <!-- Navigation Utility -->
+    <script src="analytics.js"></script>
+    <script src="auth.js"></script>
+    <script src="navigation.js?v=mobile-menu-3"></script>
+    
+    <!-- Map and Listings JavaScript -->
+    <script src="map-listings.js?v=20261123-map-setview-fix"></script>
+    
+    <!-- Rotating Logo with Random Roles -->
+    <script>
+        /**
+         * ============================================
+         * Rotating Logo with Random Roles (Morphing Text Effect)
+         * ============================================
+         * Updates the logo text to show "📍 مکان جغرافیایی [random role]"
+         * Changes the role every 3 seconds with smooth morphing/liquid transition
+         */
+        (function() {
+            let roleRotationInterval = null;
+            let animationFrameId = null;
+            const BASE_TEXT = '📍 مکان جغرافیایی';
+            const ROTATION_INTERVAL = 3000; // 3 seconds
+            const MORPH_TIME = 1.2; // Time for morphing animation (seconds)
+            const COOLDOWN_TIME = 0.3; // Cooldown between morphs (seconds)
+            
+            // Animation state: morphProgress 0â†’1 over MORPH_TIME (ease-in-out)
+            let textIndex = 0; // Currently displayed role (after morph complete)
+            let morphToIndex = 0; // Role we're morphing TO (set when morph starts)
+            let morphProgress = 0;
+            let cooldown = 0;
+            let lastTime = new Date();
+            let roles = [];
+            let text1Element = null;
+            let text2Element = null;
+            let logoContainer = null;
+            
+            /**
+             * Get all role names from the role filter dropdown
+             * Excludes the "All Roles" option (empty value)
+             */
+            function getRoleNames() {
+                const roleFilter = document.getElementById('roleFilter');
+                if (!roleFilter) {
+                    console.warn('Role filter not found, cannot extract roles');
+                    return [];
+                }
+                
+                const roleList = [];
+                for (let i = 0; i < roleFilter.options.length; i++) {
+                    const option = roleFilter.options[i];
+                    // Skip the "All Roles" option (empty value)
+                    if (option.value && option.value.trim() !== '') {
+                        roleList.push(option.value.trim());
+                    }
+                }
+                
+                console.log(`Extracted ${roleList.length} roles for logo rotation:`, roleList);
+                return roleList;
+            }
+            
+            /**
+             * Create morphing text structure in logo
+             */
+            function setupMorphingLogo() {
+                const logo = document.querySelector('.logo');
+                if (!logo) {
+                    console.warn('Logo element not found');
+                    return false;
+                }
+                
+                // Avoid re-initializing if already set up
+                if (logo.dataset.morphingReady === 'true') {
+                    return true;
+                }
+                
+                // Use existing markup if present (base text + role container)
+                let baseTextSpan = logo.querySelector('.logo-base-text');
+                let roleContainer = logo.querySelector('.logo-role-container');
+                if (!baseTextSpan || !roleContainer) {
+                    // Fallback: build structure from current text
+                    const initialBaseText = logo.textContent?.trim() || BASE_TEXT;
+                    logo.innerHTML = `
+                        <span class="logo-base-text">${initialBaseText} </span><span class="logo-role-container">
+                            <span class="logo-text logo-text-1"></span>
+                            <span class="logo-text logo-text-2"></span>
+                        </span>
+                    `;
+                    baseTextSpan = logo.querySelector('.logo-base-text');
+                    roleContainer = logo.querySelector('.logo-role-container');
+                }
+                
+                // Mark as initialized to prevent duplicate runs
+                logo.dataset.morphingReady = 'true';
+                
+                // Store references
+                logoContainer = logo;
+                text1Element = logo.querySelector('.logo-text-1');
+                text2Element = logo.querySelector('.logo-text-2');
+                
+                // Set initial role text (only the role part, not base text)
+                if (roles.length > 0) {
+                    const initialRole = roles[0];
+                    text1Element.textContent = initialRole;
+                    text2Element.textContent = roles[1 % roles.length];
+                    
+                    // Calculate fixed width for role container based on longest role
+                    const longestRole = roles.reduce((a, b) => a.length > b.length ? a : b);
+                    const tempSpan = document.createElement('span');
+                    tempSpan.style.visibility = 'hidden';
+                    tempSpan.style.position = 'absolute';
+                    tempSpan.style.fontSize = getComputedStyle(logo).fontSize;
+                    tempSpan.style.fontWeight = getComputedStyle(logo).fontWeight;
+                    tempSpan.style.fontFamily = getComputedStyle(logo).fontFamily;
+                    tempSpan.textContent = longestRole;
+                    document.body.appendChild(tempSpan);
+                    const roleWidth = tempSpan.offsetWidth + 25; // Add padding for blur effect
+                    document.body.removeChild(tempSpan);
+                    
+                    // Set fixed width for role container to prevent shifting
+                    roleContainer.style.minWidth = `${roleWidth}px`;
+                    roleContainer.style.width = `${roleWidth}px`;
+                    roleContainer.style.display = 'inline-block';
+                    roleContainer.style.textAlign = 'right'; // Right align for RTL
+                    roleContainer.style.marginLeft = '0.5em'; // Small space between base text and role
+                    roleContainer.style.marginRight = '0';
+                    roleContainer.style.paddingLeft = '0';
+                    roleContainer.style.paddingRight = '0';
+                    roleContainer.style.verticalAlign = 'baseline';
+                    roleContainer.style.direction = 'rtl'; // RTL for Persian
+                    
+                    // Calculate total logo width (base text + role container)
+                    // They should stick together with no gap
+                    const baseTextSpan = logo.querySelector('.logo-base-text');
+                    // Wait a moment for base text to render, then measure
+                    setTimeout(() => {
+                        const baseTextWidth = baseTextSpan.offsetWidth;
+                        // No gap - they stick together
+                        const totalWidth = baseTextWidth + roleWidth;
+                        logo.style.minWidth = `${totalWidth}px`;
+                        logo.style.width = `${totalWidth}px`;
+                    }, 10);
+                } else {
+                    text1Element.textContent = '';
+                    text2Element.textContent = '';
+                }
+                
+                return true;
+            }
+            
+            /**
+             * Ease-in-out: smooth start and end
+             */
+            function easeInOutCubic(t) {
+                return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+            }
+            
+            /**
+             * Apply morphing styles based on fraction (0 to 1)
+             * Smooth crossfade with subtle blur for liquid effect
+             */
+            function setMorphStyles(fraction) {
+                if (!text1Element || !text2Element || !roles || roles.length === 0) return;
+                
+                const eased = easeInOutCubic(fraction);
+                
+                // Text2 (incoming): fade in, blur out
+                const blur2 = (1 - eased) * 4; // 4px max blur at start
+                const opacity2 = eased * 100;
+                text2Element.style.filter = `blur(${blur2}px)`;
+                text2Element.style.opacity = `${opacity2}%`;
+                
+                // Text1 (outgoing): fade out, blur in
+                const opacity1 = (1 - eased) * 100;
+                const blur1 = eased * 4;
+                text1Element.style.filter = `blur(${blur1}px)`;
+                text1Element.style.opacity = `${opacity1}%`;
+                
+                text1Element.textContent = roles[textIndex % roles.length];
+                text2Element.textContent = roles[morphToIndex % roles.length];
+            }
+            
+            /**
+             * Morphing animation step - progress 0â†’1 over MORPH_TIME
+             */
+            function doMorph(dt) {
+                morphProgress = Math.min(1, morphProgress + dt / MORPH_TIME);
+                const fraction = morphProgress;
+                
+                setMorphStyles(fraction);
+                
+                if (fraction >= 1) {
+                    morphProgress = 0;
+                    cooldown = COOLDOWN_TIME;
+                    textIndex = morphToIndex;
+                    const temp = text1Element;
+                    text1Element = text2Element;
+                    text2Element = temp;
+                    text1Element.className = 'logo-text logo-text-1';
+                    text2Element.className = 'logo-text logo-text-2';
+                }
+            }
+            
+            /**
+             * Cooldown phase - reset styles between morphs
+             */
+            function doCooldown() {
+                morphProgress = 0;
+                if (text1Element && text2Element) {
+                    text1Element.style.filter = 'none';
+                    text1Element.style.opacity = '100%';
+                    text2Element.style.filter = 'none';
+                    text2Element.style.opacity = '0%';
+                }
+            }
+            
+            /**
+             * Animation loop using requestAnimationFrame
+             */
+            function animate() {
+                animationFrameId = requestAnimationFrame(animate);
+                const newTime = new Date();
+                const dt = Math.min((newTime.getTime() - lastTime.getTime()) / 1000, 0.1);
+                lastTime = newTime;
+                
+                if (cooldown > 0) {
+                    cooldown -= dt;
+                    if (cooldown <= 0) doCooldown();
+                } else {
+                    doMorph(dt);
+                }
+            }
+            
+            /**
+             * Trigger new morph (change to next role)
+             */
+            function triggerMorph() {
+                if (roles.length === 0) return;
+                
+                let nextIndex;
+                do {
+                    nextIndex = Math.floor(Math.random() * roles.length);
+                } while (nextIndex === textIndex && roles.length > 1);
+                
+                morphToIndex = nextIndex;
+                morphProgress = 0;
+                cooldown = 0;
+            }
+            
+            /**
+             * Update logo text with random role (legacy function - now uses morphing)
+             */
+            function updateLogoWithRandomRole() {
+                if (roles.length === 0) {
+                    roles = getRoleNames();
+                    if (roles.length === 0) {
+                        return;
+                    }
+                }
+                triggerMorph();
+            }
+            
+            /**
+             * Initialize rotating logo with morphing effect
+             * Waits for DOM to be ready and role filter to be loaded
+             */
+            function initRotatingLogo() {
+                // Wait a bit for role filter to be populated
+                setTimeout(() => {
+                    roles = getRoleNames();
+                    if (roles.length === 0) {
+                        console.warn('No roles found, retrying in 1 second...');
+                        setTimeout(initRotatingLogo, 1000);
+                        return;
+                    }
+                    
+                    // Setup morphing logo structure
+                    if (!setupMorphingLogo()) {
+                        console.warn('Failed to setup morphing logo');
+                        return;
+                    }
+                    
+                    // Start animation loop
+                    if (animationFrameId) {
+                        cancelAnimationFrame(animationFrameId);
+                    }
+                    lastTime = new Date();
+                    animate();
+                    
+                    // Trigger first morph immediately
+                    triggerMorph();
+                    
+                    // Then trigger morph every 3 seconds
+                    if (roleRotationInterval) {
+                        clearInterval(roleRotationInterval);
+                    }
+                    roleRotationInterval = setInterval(updateLogoWithRandomRole, ROTATION_INTERVAL);
+                    
+                    console.log('âœ… Rotating logo with morphing effect initialized - changing role every 3 seconds');
+                }, 500);
+            }
+
+            /**
+             * Re-read #roleFilter after /people/tags loads so new/renamed portal tags appear in the logo.
+             */
+            function refreshRotatingLogoFromRoleFilter() {
+                const nextRoles = getRoleNames();
+                if (!nextRoles.length) return;
+
+                roles = nextRoles;
+                const logo = document.querySelector('.logo');
+                if (logo) {
+                    logo.dataset.morphingReady = 'false'; // Allow setupMorphingLogo to rebuild widths for new longest tag.
+                }
+
+                if (!setupMorphingLogo()) {
+                    initRotatingLogo();
+                    return;
+                }
+
+                if (animationFrameId) {
+                    cancelAnimationFrame(animationFrameId);
+                }
+                lastTime = new Date();
+                animate();
+                triggerMorph();
+
+                if (roleRotationInterval) {
+                    clearInterval(roleRotationInterval);
+                }
+                roleRotationInterval = setInterval(updateLogoWithRandomRole, ROTATION_INTERVAL);
+                console.log(`Logo roles refreshed from live filter (${roles.length} tags)`);
+            }
+            
+            /**
+             * Cleanup function to stop animation
+             */
+            function cleanupRotatingLogo() {
+                if (roleRotationInterval) {
+                    clearInterval(roleRotationInterval);
+                    roleRotationInterval = null;
+                }
+                if (animationFrameId) {
+                    cancelAnimationFrame(animationFrameId);
+                    animationFrameId = null;
+                }
+            }
+            
+            // Initialize when DOM is ready
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initRotatingLogo);
+            } else {
+                // DOM already loaded
+                initRotatingLogo();
+            }
+            
+            // Re-initialize if page is navigated to (for SPA mode)
+            if (typeof window !== 'undefined') {
+                window.initRotatingLogo = initRotatingLogo;
+                window.refreshRotatingLogoFromRoleFilter = refreshRotatingLogoFromRoleFilter;
+                window.cleanupRotatingLogo = cleanupRotatingLogo;
+            }
+
+            document.addEventListener('roleFilterOptionsLoaded', () => {
+                refreshRotatingLogoFromRoleFilter();
+            });
+            
+            // Also re-initialize when home view is loaded (for SPA router)
+            // Listen for custom event or check periodically if role filter becomes available
+            const checkRoleFilterInterval = setInterval(() => {
+                const roleFilter = document.getElementById('roleFilter');
+                if (roleFilter && roleFilter.options.length > 1) {
+                    // Role filter is loaded, initialize if not already running
+                    if (!roleRotationInterval) {
+                        initRotatingLogo();
+                    }
+                    clearInterval(checkRoleFilterInterval);
+                }
+            }, 500);
+            
+            // Stop checking after 10 seconds to avoid infinite checking
+            setTimeout(() => {
+                clearInterval(checkRoleFilterInterval);
+            }, 10000);
+        })();
+    </script>
+    
+    <!-- Guest Notification Script -->
+    <script>
+        /**
+         * Show Guest notification banner if user is Guest
+         */
+        document.addEventListener('DOMContentLoaded', function() {
+            // Wait for auth API to be available
+            function checkGuestStatus() {
+                if (typeof authAPI !== 'undefined' && authAPI.getCurrentUser()) {
+                    const user = authAPI.getCurrentUser();
+                    if (user && user.role === 'Guest') {
+                        const banner = document.getElementById('guestNotificationBanner');
+                        if (banner) {
+                            banner.classList.add('show');
+                        }
+                    }
+                } else {
+                    // Check again after a short delay
+                    setTimeout(checkGuestStatus, 500);
+                }
+            }
+            checkGuestStatus();
+        });
+    </script>
+    
+    <!-- Mobile Collapsible Sections Script -->
+    <script>
+        /**
+         * ============================================
+         * Mobile Collapsible Sections
+         * ============================================
+         * Handles collapsing/expanding of filters and listings sections on mobile
+         * Improves mobile UX by allowing users to focus on map or specific sections
+         */
+        document.addEventListener('DOMContentLoaded', () => {
+            // Only enable on mobile devices (screen width <= 768px)
+            function isMobile() {
+                return window.innerWidth <= 768;
+            }
+            
+            // Get section elements (combined header has both toggles; no separate header click)
+            const filtersSection = document.getElementById('filtersSection');
+            const filtersToggle = document.getElementById('filtersToggle');
+            const listingsSection = document.getElementById('listingsSection');
+            const listingsToggle = document.getElementById('listingsToggle');
+            
+            /**
+             * Toggle filters section (tablet only; mobile uses 50/50 map+filters, no collapse)
+             */
+            function toggleFilters() {
+                if (!isMobile()) return;
+                if (window.innerWidth <= 768) return;
+                
+                if (filtersSection) filtersSection.classList.toggle('collapsed');
+                if (filtersToggle) {
+                    filtersToggle.classList.toggle('active');
+                    const isCollapsed = filtersSection && filtersSection.classList.contains('collapsed');
+                    filtersToggle.textContent = isCollapsed ? '▲' : '▼';
+                }
+                console.log('Filters section toggled:', filtersSection && filtersSection.classList.contains('collapsed') ? 'collapsed' : 'expanded');
+            }
+            
+            /**
+             * Toggle listings section (tablet only; mobile hides listings entirely)
+             */
+            function toggleListings() {
+                if (!isMobile()) return;
+                if (window.innerWidth <= 768) return;
+                
+                if (listingsSection) listingsSection.classList.toggle('collapsed');
+                if (listingsToggle) {
+                    listingsToggle.classList.toggle('active');
+                    const isCollapsed = listingsSection && listingsSection.classList.contains('collapsed');
+                    listingsToggle.textContent = isCollapsed ? '▲' : '▼';
+                }
+                console.log('Listings section toggled:', listingsSection && listingsSection.classList.contains('collapsed') ? 'collapsed' : 'expanded');
+            }
+            
+            /* Only the toggle buttons trigger collapse (combined header has no full-header click) */
+            if (filtersToggle) filtersToggle.addEventListener('click', (e) => { e.stopPropagation(); toggleFilters(); });
+            if (listingsToggle) listingsToggle.addEventListener('click', (e) => { e.stopPropagation(); toggleListings(); });
+            
+            // Handle window resize - remove collapsed state if screen becomes larger
+            let resizeTimer;
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(() => {
+                    if (!isMobile()) {
+                        // Remove collapsed state on larger screens
+                        if (filtersSection) filtersSection.classList.remove('collapsed');
+                        if (listingsSection) listingsSection.classList.remove('collapsed');
+                        if (filtersToggle) {
+                            filtersToggle.classList.remove('active');
+                            filtersToggle.textContent = '▼';
+                        }
+                        if (listingsToggle) {
+                            listingsToggle.classList.remove('active');
+                            listingsToggle.textContent = '▼';
+                        }
+                    }
+                }, 250);
+            });
+            
+            console.log('Mobile collapsible sections initialized');
+        });
+    </script>
+    
+    <!-- Country Switcher Script -->
+    <script>
+        /**
+         * ============================================
+         * Country Switcher Initialization
+         * ============================================
+         * Handles country switching in the filters section
+         */
+        document.addEventListener('DOMContentLoaded', () => {
+            const countrySwitcher = document.getElementById('countrySwitcher');
+            
+            if (countrySwitcher && typeof languageManager !== 'undefined') {
+                // Set current country in switcher
+                countrySwitcher.value = languageManager.getCurrentLanguage();
+                
+                // Update switcher display with current country info
+                updateCountrySwitcherDisplay();
+                
+                // Listen for country change
+                countrySwitcher.addEventListener('change', (e) => {
+                    const selectedCountry = e.target.value;
+                    console.log('Country changed to:', selectedCountry);
+                    
+                    // Switch language first
+                    languageManager.switchLanguage(selectedCountry);
+                    updateCountrySwitcherDisplay();
+                    
+                    // Center map on selected country
+                    centerMapOnCountry(selectedCountry);
+                });
+                
+                /**
+                 * Center map on selected country
+                 * 
+                 * @param {string} countryCode - Country code ('fa' for Iran, 'en' for USA)
+                 */
+                function centerMapOnCountry(countryCode) {
+                    // id="map" also creates window.map as the DIV — only use a real Leaflet instance
+                    const mapInstance = (window.mapListingsContext && window.mapListingsContext.map)
+                        || (window.map && typeof window.map.setView === 'function' ? window.map : null);
+                    if (!mapInstance) {
+                        setTimeout(() => centerMapOnCountry(countryCode), 500); // map-listings init still running
+                        return;
+                    }
+
+                    const coordinates = languageManager.getCountryMapCoordinates(countryCode);
+                    if (coordinates && coordinates.center) {
+                        console.log('Centering map on country:', countryCode, coordinates);
+                        if (window.mapListingsContext) {
+                            window.mapListingsContext.isProgrammaticMovement = true; // skip viewport reload mid-animation
+                        } else {
+                            console.warn('window.mapListingsContext is not available! Cannot prevent reloads during programmatic movement.');
+                        }
+
+                        mapInstance.setView(coordinates.center, coordinates.zoom, {
+                            animate: true,
+                            duration: 1.0,
+                            easeLinearity: 0.25
+                        });
+
+                        setTimeout(() => {
+                            if (window.mapListingsContext) {
+                                window.mapListingsContext.isProgrammaticMovement = false;
+                                console.log('Programmatic movement flag cleared');
+                            }
+                        }, 2000);
+                    } else {
+                        console.warn('No coordinates found for country:', countryCode);
+                    }
+                }
+                
+                // Center map on initial country when page loads
+                // Wait for map to be initialized
+                setTimeout(() => {
+                    const hasSharedPerson = new URLSearchParams(window.location.search).has('person');
+                    if (hasSharedPerson) {
+                        console.log('Shared person deep-link detected: skipping initial country recenter');
+                        return;
+                    }
+                    const initialCountry = languageManager.getCurrentLanguage();
+                    centerMapOnCountry(initialCountry);
+                }, 1000); // Wait 1 second for map initialization
+                
+                // Listen for language change events (in case language changes elsewhere)
+                document.addEventListener('languageChanged', () => {
+                    countrySwitcher.value = languageManager.getCurrentLanguage();
+                    updateCountrySwitcherDisplay();
+                });
+            }
+            
+            /**
+             * Update country switcher display with current country information
+             */
+            function updateCountrySwitcherDisplay() {
+                if (!countrySwitcher || !languageManager) return;
+                
+                const currentCountry = languageManager.getCurrentCountry();
+                if (currentCountry) {
+                    // The option text will be updated by the translation system
+                    // We just need to make sure the value is correct
+                }
+            }
+        });
+    </script>
+    <script src="pwa.js"></script>
+</body>
+</html>

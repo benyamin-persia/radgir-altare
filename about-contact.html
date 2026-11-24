@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#243C4C">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Radgir">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192x192.png">
+    <link rel="apple-touch-icon" href="/icons/icon-192x192.png">
+    <meta name="description" content="درباره من و راه‌های ارتباطی">
+    <title>درباره من / تماس با من - ردگیر</title>
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        // Apply theme immediately to prevent flash of unstyled content
+        (function() {
+            const savedTheme = localStorage.getItem('theme');
+            const systemPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const theme = savedTheme || (systemPrefersDark ? 'dark' : 'light');
+            document.documentElement.setAttribute('data-theme', theme);
+        })();
+    </script>
+    <script src="translations.js"></script>
+    <script src="i18n.js"></script>
+    <script src="theme.js"></script>
+    <style>
+        body {
+            min-height: 100vh;
+            margin: 0;
+            background: var(--background-alt);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .about-page {
+            width: 100%;
+            max-width: 960px;
+            margin: 2rem auto;
+            padding: 0 1rem 2rem;
+        }
+
+        .about-card {
+            background: var(--background-color);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+        }
+
+        .about-card h1 {
+            margin: 0 0 0.5rem;
+            color: var(--primary-color);
+            font-size: 1.75rem;
+        }
+
+        .about-lead {
+            margin: 0.75rem 0 0;
+            padding: 0;
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr)); /* Four tag columns on desktop */
+            gap: 0.45rem 1.25rem;
+            color: var(--text-color);
+            font-size: 1rem;
+            line-height: 1.45;
+        }
+
+        .about-lead li {
+            position: relative;
+            padding-inline-start: 1.1rem;
+            color: var(--text-color);
+            min-width: 0;
+        }
+
+        .about-lead li::before {
+            content: '';
+            position: absolute;
+            inset-inline-start: 0;
+            top: 0.55em;
+            width: 0.4rem;
+            height: 0.4rem;
+            border-radius: 50%;
+            background: var(--accent-color);
+        }
+
+        .about-lead.is-plain {
+            display: block;
+            color: var(--text-light);
+        }
+
+        .about-lead.is-plain li::before {
+            display: none;
+        }
+
+        .about-lead.is-plain li {
+            padding-inline-start: 0;
+        }
+
+        @media (max-width: 900px) {
+            .about-lead {
+                grid-template-columns: repeat(2, minmax(0, 1fr)); /* Tablet: 2 columns */
+            }
+        }
+
+        @media (max-width: 560px) {
+            .about-lead {
+                grid-template-columns: minmax(0, 1fr); /* Phone: single column */
+            }
+        }
+
+        .section-block {
+            margin-top: 1.5rem;
+        }
+
+        .section-block h2 {
+            margin: 0 0 0.75rem;
+            color: var(--text-color);
+            font-size: 1.1rem;
+        }
+
+        .section-block p {
+            margin: 0.5rem 0;
+            color: var(--text-color);
+            white-space: pre-line;
+        }
+
+        .contact-item {
+            background: var(--background-alt);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 0.75rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+            max-width: 460px;
+        }
+
+        .contact-item .label {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .contact-item a {
+            color: var(--accent-color);
+            text-decoration: none;
+            word-break: break-all;
+        }
+
+        .contact-item a:hover {
+            text-decoration: underline;
+        }
+
+        /* Social icon cards — IconGrid-style hover cards without React/Tailwind */
+        .social-icon-grid {
+            margin-top: 0.85rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(6rem, 1fr));
+            gap: 0.85rem;
+            max-width: 34rem; /* Room for email + Telegram, Instagram, X, Facebook */
+        }
+
+        .social-icon-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.45rem;
+            text-decoration: none;
+            color: var(--text-color);
+            min-width: 0;
+        }
+
+        .social-icon-card .social-icon-face {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 5.5rem;
+            height: 5.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            background: var(--background-alt);
+            padding: 1rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+        }
+
+        .social-icon-card .social-icon-face svg {
+            width: 2.5rem;
+            height: 2.5rem;
+            color: var(--text-color);
+            opacity: 0.85;
+            transition: transform 0.3s ease, opacity 0.3s ease, color 0.3s ease;
+        }
+
+        .social-icon-card .social-icon-label {
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        .social-icon-card:hover .social-icon-face,
+        .social-icon-card:focus-visible .social-icon-face {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.1);
+            background: var(--background-color);
+            outline: none;
+        }
+
+        .social-icon-card:hover .social-icon-face svg,
+        .social-icon-card:focus-visible .social-icon-face svg {
+            transform: scale(1.1);
+            opacity: 1;
+            color: var(--accent-color);
+        }
+
+        .social-icon-card:focus-visible {
+            outline: none;
+        }
+
+        /* Card-based contact form: soft gradient panel with white inputs + pill CTA */
+        .message-form-card {
+            margin-top: 1.25rem;
+            padding: 1.5rem;
+            border-radius: 18px;
+            background: linear-gradient(135deg, var(--background-cream) 0%, var(--background-alt) 100%); /* Cream → mint atmosphere like the reference */
+            border: 1px solid var(--border-color);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+        }
+
+        .message-form-card h2 {
+            margin: 0 0 1.1rem;
+            color: var(--primary-color);
+            font-size: 1.45rem;
+            font-weight: 700;
+        }
+
+        .message-form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 0.85rem;
+        }
+
+        .message-form-grid .full {
+            grid-column: 1 / -1; /* Message spans both columns */
+        }
+
+        .message-form-card input,
+        .message-form-card textarea {
+            width: 100%;
+            border: none;
+            border-radius: 12px;
+            background: var(--background-color); /* White floating fields on the gradient */
+            color: var(--text-color);
+            padding: 0.9rem 1rem;
+            font: inherit;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+
+        .message-form-card input::placeholder,
+        .message-form-card textarea::placeholder {
+            color: var(--text-light);
+        }
+
+        .message-form-card textarea {
+            min-height: 140px;
+            resize: vertical;
+        }
+
+        .message-form-card input:focus,
+        .message-form-card textarea:focus {
+            outline: 2px solid var(--accent-color);
+            outline-offset: 1px;
+        }
+
+        .message-form-actions {
+            margin-top: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.85rem;
+            flex-wrap: wrap;
+        }
+
+        .message-form-submit {
+            border: none;
+            border-radius: 999px; /* Pill CTA matching the reference */
+            background: var(--color-orange);
+            color: #fff;
+            font: inherit;
+            font-weight: 700;
+            padding: 0.75rem 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(195, 86, 39, 0.25);
+        }
+
+        .message-form-submit:hover:not(:disabled) {
+            background: var(--color-orange-light);
+        }
+
+        .message-form-submit:disabled {
+            opacity: 0.7;
+            cursor: wait;
+        }
+
+        .message-form-status {
+            margin: 0;
+            font-size: 0.95rem;
+            color: var(--text-dark);
+        }
+
+        .message-form-status.is-error {
+            color: var(--color-orange);
+        }
+
+        .message-form-status.is-success {
+            color: var(--accent-color);
+        }
+
+        @media (max-width: 640px) {
+            .message-form-grid {
+                grid-template-columns: 1fr; /* Stack fields on small screens */
+            }
+
+            .message-form-card {
+                padding: 1.1rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .about-page {
+                margin: 1rem auto;
+                padding: 0 0.75rem 1.5rem;
+            }
+
+            .about-card {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">🔐 Radgir</div>
+            <ul class="nav-links">
+                <!-- Navigation links will be populated by navigation.js -->
+            </ul>
+            <div class="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <main class="about-page">
+        <section class="about-card">
+            <h1 id="aboutHeadline">درباره من و راه‌های ارتباطی</h1>
+
+            <!-- 1) Contact first -->
+            <div class="section-block">
+                <div class="social-icon-grid" aria-label="راه‌های ارتباطی">
+                    <a class="social-icon-card" id="aboutEmailLink" href="mailto:radgir@protonmail.com" title="radgir@protonmail.com" aria-label="ایمیل radgir@protonmail.com">
+                        <span class="social-icon-face" aria-hidden="true">
+                            <!-- Lucide Mail -->
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect width="20" height="16" x="2" y="4" rx="2"/>
+                                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+                            </svg>
+                        </span>
+                        <span class="social-icon-label">ایمیل</span>
+                    </a>
+                    <a class="social-icon-card" href="https://t.me/radgir_com" target="_blank" rel="noopener noreferrer" aria-label="تلگرام">
+                        <span class="social-icon-face" aria-hidden="true">
+                            <!-- Lucide-style Send/Telegram glyph -->
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="m22 2-7 20-4-9-9-4Z"/>
+                                <path d="M22 2 11 13"/>
+                            </svg>
+                        </span>
+                        <span class="social-icon-label">تلگرام</span>
+                    </a>
+                    <a class="social-icon-card" href="https://www.instagram.com/radgir_com/" target="_blank" rel="noopener noreferrer" aria-label="اینستاگرام">
+                        <span class="social-icon-face" aria-hidden="true">
+                            <!-- Lucide Instagram -->
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
+                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                                <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
+                            </svg>
+                        </span>
+                        <span class="social-icon-label">اینستاگرام</span>
+                    </a>
+                    <a class="social-icon-card" href="https://x.com/radgir_com" target="_blank" rel="noopener noreferrer" aria-label="ایکس">
+                        <span class="social-icon-face" aria-hidden="true">
+                            <!-- X (Twitter) logo mark -->
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.227-8.451L1.61 2.25H8.08l4.253 5.622L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/>
+                            </svg>
+                        </span>
+                        <span class="social-icon-label">X</span>
+                    </a>
+                    <a class="social-icon-card" href="https://www.facebook.com/radgir_com" target="_blank" rel="noopener noreferrer" aria-label="فیسبوک">
+                        <span class="social-icon-face" aria-hidden="true">
+                            <!-- Lucide Facebook -->
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+                            </svg>
+                        </span>
+                        <span class="social-icon-label">فیسبوک</span>
+                    </a>
+                </div>
+
+                <form class="message-form-card" id="aboutMessageForm" novalidate>
+                    <h2 data-i18n="aboutContact.formTitle">پیام خود را اینجا بنویسید</h2>
+                    <div class="message-form-grid">
+                        <input type="text" name="firstName" id="contactFirstName" autocomplete="given-name" data-i18n="aboutContact.firstName" data-i18n-attr="placeholder" placeholder="نام">
+                        <input type="text" name="lastName" id="contactLastName" autocomplete="family-name" data-i18n="aboutContact.lastName" data-i18n-attr="placeholder" placeholder="نام خانوادگی">
+                        <input type="tel" name="phone" id="contactPhone" autocomplete="tel" data-i18n="aboutContact.phone" data-i18n-attr="placeholder" placeholder="شماره تلفن">
+                        <input type="email" name="email" id="contactEmail" autocomplete="email" required data-i18n="aboutContact.email" data-i18n-attr="placeholder" placeholder="آدرس ایمیل">
+                        <textarea class="full" name="message" id="contactMessage" required data-i18n="aboutContact.message" data-i18n-attr="placeholder" placeholder="پیام..."></textarea>
+                    </div>
+                    <div class="message-form-actions">
+                        <button type="submit" class="message-form-submit" id="contactSubmitBtn" data-i18n="aboutContact.submit">ارسال پیام</button>
+                        <p class="message-form-status" id="contactFormStatus" role="status" aria-live="polite"></p>
+                    </div>
+                </form>
+            </div>
+
+            <!-- 2) About us / collaboration second -->
+            <div class="section-block">
+                <h2>درباره ما</h2>
+                <p id="aboutSeeking"></p>
+            </div>
+
+            <!-- 3) Tag list last, with its own mission header -->
+            <div class="section-block">
+                <h2 id="aboutTagsHeading">ما مکان جغرافیایی این افراد رو شناسایی می‌کنیم. اینا باید جواب بدن.</h2>
+                <ul class="about-lead" id="aboutSummary" aria-label="برچسب‌ها">
+                    <li>در حال بارگذاری...</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+    <script src="analytics.js"></script>
+    <script src="auth.js"></script>
+    <script src="navigation.js"></script>
+    <script>
+        const DEFAULT_ABOUT_CONTENT = {
+            headline: 'درباره من و راه‌های ارتباطی',
+            summary: 'این صفحه برای معرفی کوتاه و دریافت نظرها و پیشنهادهای شما ساخته شده است.',
+            seeking: 'به دنبال افراد عاقل و کاربلد برای همکاری هستم.',
+            email: 'radgir@protonmail.com'
+        };
+
+        /** Translate a key with a safe fallback when i18n is unavailable. */
+        function tAbout(key, fallback) {
+            if (typeof languageManager !== 'undefined' && languageManager.getTranslation) {
+                const value = languageManager.getTranslation(key);
+                if (value) return value;
+            }
+            return fallback;
+        }
+
+        /** Split a space-joined tag summary into list items without breaking multi-word Persian tag names when we already have an array. */
+        function normalizeSummaryItems(summary, tagList) {
+            if (Array.isArray(tagList) && tagList.length > 0) {
+                return tagList;
+            }
+            const text = typeof summary === 'string' ? summary.trim() : '';
+            if (!text) return [];
+            // Prefer splitting on newlines / bullets if present; otherwise keep as one plain paragraph item.
+            if (/[\n•·|]/.test(text)) {
+                return text.split(/[\n•·|]+/).map((part) => part.trim()).filter(Boolean);
+            }
+            return [text];
+        }
+
+        function renderAboutSummary(summaryEl, items, { asTags = false } = {}) {
+            summaryEl.innerHTML = '';
+            summaryEl.classList.toggle('is-plain', !asTags);
+
+            if (!items.length) {
+                const li = document.createElement('li');
+                li.textContent = DEFAULT_ABOUT_CONTENT.summary;
+                summaryEl.appendChild(li);
+                return;
+            }
+
+            items.forEach((item) => {
+                const li = document.createElement('li');
+                li.textContent = item;
+                summaryEl.appendChild(li);
+            });
+        }
+
+        function applyAboutContent(content, tagList) {
+            const merged = { ...DEFAULT_ABOUT_CONTENT, ...(content || {}) };
+
+            const headlineEl = document.getElementById('aboutHeadline');
+            const summaryEl = document.getElementById('aboutSummary');
+            const seekingEl = document.getElementById('aboutSeeking');
+            const emailEl = document.getElementById('aboutEmailLink');
+
+            headlineEl.textContent = merged.headline;
+            const items = normalizeSummaryItems(merged.summary, tagList);
+            renderAboutSummary(summaryEl, items, { asTags: Array.isArray(tagList) && tagList.length > 0 });
+            seekingEl.textContent = merged.seeking;
+            if (emailEl) {
+                const address = merged.email || DEFAULT_ABOUT_CONTENT.email;
+                emailEl.href = `mailto:${address}`; // Keep mailto in sync with portal-edited address
+                emailEl.title = address;
+                emailEl.setAttribute('aria-label', `ایمیل ${address}`);
+            }
+        }
+
+        async function loadAboutContent() {
+            try {
+                // Prefer live PersonTag catalog so about lead always matches portal tag manager.
+                let liveTags = [];
+                try {
+                    const tagsRes = await fetch(`${window.location.origin}/api/people/tags`);
+                    const tagsJson = await tagsRes.json();
+                    const tags = Array.isArray(tagsJson?.data?.tags) ? tagsJson.data.tags : [];
+                    liveTags = tags
+                        .map((item) => (typeof item === 'string' ? item : item?.name))
+                        .filter((name) => typeof name === 'string' && name.trim())
+                        .map((name) => name.trim());
+                } catch (tagsError) {
+                    console.warn('Could not load live tags for about summary:', tagsError);
+                }
+
+                const response = await fetch(`${window.location.origin}/api/users/about-contact`);
+                const result = await response.json();
+                if (result.success && result.data && result.data.aboutContact) {
+                    applyAboutContent(result.data.aboutContact, liveTags);
+                } else {
+                    applyAboutContent(DEFAULT_ABOUT_CONTENT, liveTags);
+                }
+            } catch (error) {
+                console.error('Failed to load about/contact content:', error);
+                applyAboutContent(DEFAULT_ABOUT_CONTENT, []);
+            }
+        }
+
+        function bindContactForm() {
+            const form = document.getElementById('aboutMessageForm');
+            const statusEl = document.getElementById('contactFormStatus');
+            const submitBtn = document.getElementById('contactSubmitBtn');
+            if (!form || !statusEl || !submitBtn) return;
+
+            form.addEventListener('submit', async (event) => {
+                event.preventDefault();
+                statusEl.textContent = '';
+                statusEl.classList.remove('is-error', 'is-success');
+
+                const payload = {
+                    firstName: document.getElementById('contactFirstName').value.trim(),
+                    lastName: document.getElementById('contactLastName').value.trim(),
+                    phone: document.getElementById('contactPhone').value.trim(),
+                    email: document.getElementById('contactEmail').value.trim(),
+                    message: document.getElementById('contactMessage').value.trim()
+                };
+
+                if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(payload.email)) {
+                    statusEl.textContent = tAbout('aboutContact.emailRequired', 'لطفا یک ایمیل معتبر وارد کنید.');
+                    statusEl.classList.add('is-error');
+                    return;
+                }
+                if (!payload.message) {
+                    statusEl.textContent = tAbout('aboutContact.messageRequired', 'لطفا پیام خود را بنویسید.');
+                    statusEl.classList.add('is-error');
+                    return;
+                }
+
+                const originalLabel = submitBtn.textContent;
+                submitBtn.disabled = true;
+                submitBtn.textContent = tAbout('aboutContact.sending', 'در حال ارسال...');
+
+                try {
+                    const response = await fetch(`${window.location.origin}/api/users/about-contact/message`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+                    const result = await response.json().catch(() => ({}));
+                    if (!response.ok || !result.success) {
+                        throw new Error(result.message || 'send failed');
+                    }
+                    form.reset();
+                    if (typeof languageManager !== 'undefined' && languageManager.translatePage) {
+                        languageManager.translatePage(); // Re-apply placeholders after reset clears them
+                    }
+                    statusEl.textContent = tAbout('aboutContact.success', 'پیام شما با موفقیت ارسال شد.');
+                    statusEl.classList.add('is-success');
+                } catch (error) {
+                    console.error('Contact form submit failed:', error);
+                    statusEl.textContent = tAbout('aboutContact.error', 'ارسال پیام ممکن نشد. لطفا دوباره تلاش کنید.');
+                    statusEl.classList.add('is-error');
+                } finally {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = tAbout('aboutContact.submit', originalLabel);
+                }
+            });
+        }
+
+        if (typeof languageManager !== 'undefined' && languageManager.translatePage) {
+            languageManager.translatePage();
+        }
+        bindContactForm();
+        loadAboutContent();
+    </script>
+    <script src="pwa.js"></script>
+</body>
+</html>

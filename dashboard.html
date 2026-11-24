@@ -1,0 +1,1861 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#243C4C">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Radgir">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192x192.png">
+    <link rel="apple-touch-icon" href="/icons/icon-192x192.png">
+    <title data-i18n="dashboard.title">Dashboard - Radgir</title>
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        // Apply theme immediately to prevent flash of unstyled content
+        (function() {
+            const savedTheme = localStorage.getItem('theme');
+            const systemPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const theme = savedTheme || (systemPrefersDark ? 'dark' : 'light');
+            document.documentElement.setAttribute('data-theme', theme);
+        })();
+    </script>
+    <!-- Load translations first, then i18n manager -->
+    <script src="translations.js"></script>
+    <script src="i18n.js"></script>
+    <script src="theme.js"></script>
+    <style>
+        body {
+            background-color: var(--background-alt);
+            min-height: 100vh;
+        }
+
+        .dashboard-header {
+            background: var(--primary-light);
+            color: white;
+            padding: 20px 0;
+            margin-top: 0;
+        }
+
+        .dashboard-header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .dashboard-header-left {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .dashboard-header h1 {
+            margin: 0;
+            font-size: 1.8rem;
+        }
+
+        /* Navigation links in dashboard header */
+        .dashboard-nav-links {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+            margin: 0;
+            padding: 0;
+            align-items: center;
+        }
+
+        .dashboard-nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 0.95rem;
+            padding: 5px 10px;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        .dashboard-nav-links a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .dashboard-nav-links a.active {
+            background-color: rgba(255, 255, 255, 0.2);
+            font-weight: 600;
+        }
+
+        .dashboard-nav-links button {
+            padding: 8px 16px;
+            background-color: var(--background-color);
+            color: var(--primary-light);
+            border: 1px solid var(--background-color);
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .dashboard-nav-links button:hover {
+            background-color: var(--background-alt);
+        }
+
+        .btn-logout {
+            padding: 8px 16px;
+            background: var(--background-color);
+            color: var(--primary-light);
+            border: 1px solid var(--background-color);
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-logout:hover {
+            background: var(--background-alt);
+        }
+
+        .dashboard-container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .dashboard-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            overflow-x: auto;
+            padding-bottom: 4px;
+        }
+
+        .dashboard-tab {
+            flex: 0 0 auto;
+            padding: 10px 18px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background: var(--background-color);
+            color: var(--text-color);
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .dashboard-tab:hover,
+        .dashboard-tab[aria-selected="true"] {
+            border-color: var(--primary-color);
+            background: var(--primary-color);
+            color: white;
+        }
+
+        [data-dashboard-tab-panel][hidden] {
+            display: none !important;
+        }
+
+        .profile-card {
+            background: var(--background-color);
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-card h2 {
+            margin-top: 0;
+            color: var(--primary-color);
+        }
+
+        .profile-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .info-item {
+            padding: 15px;
+            background: var(--background-alt);
+            border-radius: 5px;
+        }
+
+        .info-item label {
+            display: block;
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+
+        .info-item .value {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .badge-almighty { background: #C35627; color: white; }
+        .badge-superadmin { background: #326080; color: white; }
+        .badge-admin { background: #5289AD; color: white; }
+        .badge-manager { background: #00ACAC; color: white; }
+        .badge-user { background: #A2A2A2; color: white; }
+        .badge-guest { background: #F4FCFB; color: var(--text-color); }
+
+        /* Posts Section Styles */
+        .posts-section {
+            background: var(--background-color);
+            padding: 30px;
+            border-radius: 8px;
+            margin-top: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .posts-section h2 {
+            margin-top: 0;
+            color: var(--primary-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .posts-header-actions {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .posts-search {
+            padding: 8px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            background: var(--background-alt);
+            color: var(--text-color);
+            font-size: 0.9rem;
+            min-width: 200px;
+        }
+
+        .posts-page-size {
+            padding: 8px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            background: var(--background-alt);
+            color: var(--text-color);
+            font-size: 0.9rem;
+        }
+
+        .posts-list {
+            margin-top: 20px;
+        }
+
+        /* Inbox / Messaging Section */
+        .messages-section {
+            background: var(--background-color);
+            padding: 30px;
+            border-radius: 8px;
+            margin-top: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .messages-section h2 {
+            margin: 0;
+            color: var(--primary-color);
+        }
+
+        .messages-subtitle {
+            margin-top: 8px;
+            margin-bottom: 20px;
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        .messages-toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+        }
+
+        .messages-toggle {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-color);
+            font-size: 0.95rem;
+        }
+
+        .messages-settings-status {
+            color: var(--text-light);
+            font-size: 0.85rem;
+        }
+
+        .messages-new-conversation {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .messages-new-conversation input {
+            flex: 1;
+            min-width: 220px;
+            padding: 8px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            background: var(--background-alt);
+            color: var(--text-color);
+            font-size: 0.9rem;
+        }
+
+        .message-user-search-results {
+            margin-bottom: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .message-user-result {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            padding: 10px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            background: var(--background-alt);
+        }
+
+        .message-user-result-name {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .message-user-result-meta {
+            color: var(--text-light);
+            font-size: 0.82rem;
+        }
+
+        .messages-layout {
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 15px;
+        }
+
+        .messages-conversations-panel,
+        .messages-thread-panel {
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background: var(--background-alt);
+        }
+
+        .messages-conversations-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .messages-refresh-btn {
+            padding: 4px 10px;
+            font-size: 0.8rem;
+        }
+
+        .messages-conversations-list {
+            max-height: 420px;
+            overflow-y: auto;
+        }
+
+        .messages-conversation-item {
+            border-bottom: 1px solid var(--border-color);
+            padding: 10px 12px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .messages-conversation-item:hover {
+            background: rgba(0, 172, 172, 0.08);
+        }
+
+        .messages-conversation-item.active {
+            background: rgba(0, 172, 172, 0.14);
+        }
+
+        .messages-conversation-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 8px;
+        }
+
+        .messages-conversation-name {
+            color: var(--primary-color);
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .messages-conversation-preview {
+            color: var(--text-light);
+            font-size: 0.85rem;
+            margin-top: 3px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .messages-unread-badge {
+            min-width: 20px;
+            height: 20px;
+            border-radius: 999px;
+            background: #dc3545;
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 6px;
+        }
+
+        .messages-empty {
+            padding: 20px;
+            text-align: center;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .messages-thread-header {
+            padding: 12px;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .messages-thread-list {
+            min-height: 240px;
+            max-height: 420px;
+            overflow-y: auto;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .messages-bubble {
+            max-width: 78%;
+            padding: 8px 10px;
+            border-radius: 10px;
+            border: 1px solid transparent;
+            word-break: break-word;
+            white-space: pre-wrap;
+        }
+
+        .messages-bubble.own {
+            align-self: flex-end;
+            background: rgba(0, 172, 172, 0.16);
+            border-color: rgba(0, 172, 172, 0.28);
+        }
+
+        .messages-bubble.other {
+            align-self: flex-start;
+            background: var(--background-color);
+            border-color: var(--border-color);
+        }
+
+        .messages-bubble-header {
+            font-size: 0.78rem;
+            color: var(--text-light);
+            margin-bottom: 4px;
+        }
+
+        .messages-bubble-content {
+            color: var(--text-color);
+            font-size: 0.92rem;
+        }
+
+        .messages-composer {
+            display: flex;
+            align-items: flex-end;
+            gap: 10px;
+            border-top: 1px solid var(--border-color);
+            padding: 12px;
+        }
+
+        .messages-composer textarea {
+            flex: 1;
+            resize: vertical;
+            min-height: 42px;
+            max-height: 150px;
+            padding: 8px 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            background: var(--background-color);
+            color: var(--text-color);
+            font-size: 0.9rem;
+            font-family: inherit;
+        }
+
+        .post-card {
+            background: var(--background-alt);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .post-card:hover {
+            border-color: var(--accent-color);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .post-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .post-card-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin: 0;
+        }
+
+        .post-card-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-edit, .btn-delete {
+            padding: 6px 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .btn-edit {
+            background: var(--primary-light);
+            color: white;
+        }
+
+        .btn-edit:hover {
+            background: var(--primary-color);
+        }
+
+        .btn-delete {
+            background: #dc3545;
+            color: white;
+        }
+
+        .btn-delete:hover {
+            background: #c82333;
+        }
+
+        .post-card-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .post-card-field {
+            padding: 10px;
+            background: var(--background-color);
+            border-radius: 5px;
+        }
+
+        .post-card-field label {
+            display: block;
+            color: var(--text-light);
+            font-size: 0.85rem;
+            margin-bottom: 5px;
+        }
+
+        .post-card-field .value {
+            color: var(--text-color);
+            font-size: 0.95rem;
+        }
+
+        .post-card-images {
+            display: flex;
+            gap: 0.5rem;
+            margin: 10px 0;
+            flex-wrap: wrap;
+        }
+
+        .person-thumbnail {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 4px;
+            cursor: pointer;
+            border: 2px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .person-thumbnail:hover {
+            border-color: var(--accent-color);
+            transform: scale(1.1);
+        }
+
+        .post-card-tags {
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid var(--border-light);
+        }
+
+        .person-tag {
+            display: inline-block;
+            background: var(--primary-light);
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            margin-right: 0.5rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .post-status {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .post-status.active {
+            background: #28a745;
+            color: white;
+        }
+
+        .post-status.inactive {
+            background: #6c757d;
+            color: white;
+        }
+
+        .loading-posts, .no-posts {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-light);
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .pagination button {
+            padding: 8px 16px;
+            border: 1px solid var(--border-color);
+            background: var(--background-color);
+            color: var(--text-color);
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .pagination button:hover:not(:disabled) {
+            background: var(--primary-light);
+            color: white;
+            border-color: var(--primary-light);
+        }
+
+        .pagination button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .pagination button.active {
+            background: var(--primary-light);
+            color: white;
+            border-color: var(--primary-light);
+            font-weight: 700;
+        }
+
+        .pagination-ellipsis {
+            color: var(--text-light);
+            padding: 0 4px;
+            user-select: none;
+        }
+
+        .pagination-info {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        /* Image Modal Styles */
+        .image-modal {
+            display: none;
+            position: fixed;
+            z-index: 10000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .image-modal-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+            margin: auto;
+        }
+
+        .image-modal-content img {
+            width: 100%;
+            height: auto;
+            max-height: 90vh;
+            object-fit: contain;
+        }
+
+        .image-modal-close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 10001;
+        }
+
+        .image-modal-close:hover {
+            color: #bbb;
+        }
+
+        .more-images {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--background-alt);
+            border: 2px solid var(--border-color);
+            border-radius: 4px;
+            color: var(--text-color);
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .more-images:hover {
+            background: var(--primary-light);
+            color: white;
+            border-color: var(--primary-light);
+        }
+        
+        /* ============================================
+           Mobile Responsive Styles for Dashboard
+           ============================================ */
+        @media (max-width: 768px) {
+            .dashboard-header-content {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+            
+            .dashboard-header-left {
+                width: 100%;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+            
+            .dashboard-header h1 {
+                font-size: 1.5rem;
+            }
+            
+            .dashboard-nav-links {
+                flex-direction: column;
+                width: 100%;
+                gap: 10px;
+                align-items: stretch;
+            }
+            
+            .dashboard-nav-links a,
+            .dashboard-nav-links button {
+                width: 100%;
+                text-align: center;
+                padding: 12px 16px;
+                min-height: 44px;
+                font-size: 1rem;
+            }
+            
+            .dashboard-container {
+                padding: 0 15px;
+                margin: 20px auto;
+            }
+            
+            .profile-card,
+            .posts-section,
+            .messages-section {
+                padding: 20px;
+            }
+            
+            .profile-info {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .posts-header-actions {
+                flex-direction: column;
+                width: 100%;
+                gap: 10px;
+            }
+            
+            .posts-search {
+                width: 100%;
+                min-width: auto;
+            }
+
+            .posts-page-size {
+                width: 100%;
+            }
+
+            .messages-new-conversation {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .messages-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .messages-thread-list,
+            .messages-conversations-list {
+                max-height: 320px;
+            }
+            
+            .post-card-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .post-card-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .post-card-actions {
+                width: 100%;
+                justify-content: stretch;
+            }
+            
+            .post-card-actions .btn-edit,
+            .post-card-actions .btn-delete {
+                flex: 1;
+                min-height: 44px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .dashboard-header h1 {
+                font-size: 1.3rem;
+            }
+            
+            .profile-card,
+            .posts-section,
+            .messages-section {
+                padding: 15px;
+            }
+            
+            .posts-section h2 {
+                font-size: 1.3rem;
+            }
+
+            .messages-bubble {
+                max-width: 90%;
+            }
+            
+            .post-card-title {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Shared site header; navigation.js fills the links for every role -->
+    <header>
+        <nav>
+            <div class="logo">Radgir</div>
+            <ul class="nav-links"></ul>
+            <div class="menu-toggle" role="button" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Dashboard Container -->
+    <div class="dashboard-container">
+        <h1 class="page-title" data-i18n="dashboard.heading" style="margin: 0 0 20px 0; color: var(--primary-color);">Dashboard</h1>
+        <nav class="dashboard-tabs" aria-label="Dashboard sections" role="tablist">
+            <button class="dashboard-tab" type="button" role="tab" data-dashboard-tab="profile" aria-selected="true"><span data-i18n="dashboard.profileHeading">User Profile</span></button>
+            <button class="dashboard-tab" type="button" role="tab" data-dashboard-tab="messages" aria-selected="false"><span data-i18n="dashboard.inboxHeading">Inbox</span></button>
+            <button class="dashboard-tab" type="button" role="tab" data-dashboard-tab="posts" aria-selected="false"><span data-i18n="dashboard.myPosts">My Posts</span></button>
+            <button class="dashboard-tab" type="button" role="tab" data-dashboard-tab="bookmarks" aria-selected="false"><span data-i18n="dashboard.bookmarkedCards">Bookmarked Cards</span></button>
+        </nav>
+
+        <div class="profile-card" id="profileSection" data-dashboard-tab-panel="profile">
+            <h2 data-i18n="dashboard.profileHeading">User Profile</h2>
+            <div id="loadingIndicator" style="text-align: center; padding: 40px; color: var(--text-light);" data-i18n="dashboard.loadingProfile">
+                Loading profile...
+            </div>
+            <div id="profileContent" style="display: none;">
+                <div class="profile-info" id="profileInfo">
+                    <!-- Profile information will be loaded here -->
+                </div>
+                
+                <!-- Email Verification Status -->
+                <div id="emailVerificationStatus" style="margin-top: 20px; padding: 15px; background: var(--background-alt); border-radius: 5px; display: none;">
+                    <!-- Will be populated by JavaScript -->
+                </div>
+                
+                <!-- Role Upgrade Request Section (for Guest users) -->
+                <!-- This section is prominently displayed for Guest users to request elevation -->
+                <div id="roleUpgradeSection" style="margin-top: 20px; padding: 25px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 8px; display: none; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); visibility: visible; opacity: 1;">
+                    <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 20px;">
+                        <div style="font-size: 2.5rem;">🔒</div>
+                        <div style="flex: 1;">
+                            <h3 style="margin: 0; color: white; font-size: 1.3rem;" data-i18n="dashboard.roleUpgradeHeading">Request Account Elevation</h3>
+                            <p style="margin: 5px 0 0 0; color: rgba(255, 255, 255, 0.9); font-size: 0.95rem;" data-i18n="dashboard.roleUpgradeSubtitle">
+                                As a Guest user, you have read-only access. Request elevation to User role to create and manage posts (5 posts per day).
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div id="upgradeRequestStatus" style="margin-bottom: 15px;"></div>
+                    
+                    <form id="roleUpgradeForm" style="display: none;">
+                        <input type="hidden" id="requestedRole" value="User">
+                        <div style="margin-bottom: 15px; padding: 15px; background: rgba(255, 255, 255, 0.15); border-radius: 5px; backdrop-filter: blur(10px);">
+                            <div style="color: white; font-weight: 600; margin-bottom: 5px;" data-i18n="dashboard.roleUpgradeRequesting">Requesting: Guest -> User</div>
+                            <div style="color: rgba(255, 255, 255, 0.9); font-size: 0.9rem;" data-i18n="dashboard.roleUpgradeBenefits">
+                                As a User, you can create and manage your own posts with a limit of 5 posts per day.
+                            </div>
+                        </div>
+                        <div style="margin-bottom: 15px;">
+                            <label for="upgradeMessage" style="display: block; margin-bottom: 8px; color: white; font-weight: 500;" data-i18n="dashboard.roleUpgradeMessageLabel">Message (Optional):</label>
+                            <textarea id="upgradeMessage" rows="3" style="width: 100%; padding: 10px; border: 2px solid rgba(255, 255, 255, 0.3); border-radius: 5px; background: rgba(255, 255, 255, 0.95); color: var(--text-color); font-size: 0.95rem; box-sizing: border-box;" placeholder="Explain why you need this role upgrade (optional)..." data-i18n="dashboard.roleUpgradeMessagePlaceholder" data-i18n-attr="placeholder"></textarea>
+                        </div>
+                        <button type="submit" class="btn-edit" style="width: 100%; padding: 12px; font-size: 1rem; font-weight: 600; background: white; color: #667eea; border: none; border-radius: 5px; cursor: pointer; transition: all 0.3s ease;" data-i18n="dashboard.roleUpgradeSubmit">Request Elevation to User Role</button>
+                        
+                        
+                    </form>
+                </div>
+
+                <div id="upgradeApproverNotice" style="display: none; margin-top: 20px; padding: 16px; border-radius: 8px; border: 1px solid rgba(255, 193, 7, 0.45); background: rgba(255, 193, 7, 0.12); color: var(--text-color);"></div>
+                
+                <!-- Data Privacy Section -->
+                <div style="margin-top: 20px; padding: 20px; background: var(--background-alt); border-radius: 5px; border-top: 2px solid var(--primary-color);">
+                    <h3 style="margin-top: 0; color: var(--primary-color);" data-i18n="dashboard.dataPrivacy">Data Privacy</h3>
+                    <div style="display: flex; flex-direction: column; gap: 10px;">
+                        <button onclick="exportUserData()" class="btn-edit" style="width: 100%;" data-i18n="dashboard.exportData">Export My Data</button>
+                        <button onclick="viewActivityLogs()" class="btn-edit" style="width: 100%;" data-i18n="dashboard.viewActivity">View Activity Logs</button>
+                        <button onclick="deleteAccount()" class="btn-delete" style="width: 100%;" data-i18n="dashboard.deleteAccount">Delete My Account</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Inbox / Messaging Section -->
+        <div class="messages-section" id="messagesSection" data-dashboard-tab-panel="messages" hidden>
+            <h2 data-i18n="dashboard.inboxHeading">Inbox</h2>
+            <p class="messages-subtitle" data-i18n="dashboard.inboxSubtitle">Send and receive direct messages from other users.</p>
+
+            <div class="messages-toolbar">
+                <label class="messages-toggle">
+                    <input type="checkbox" id="allowDirectMessagesToggle">
+                    <span data-i18n="dashboard.allowDirectMessages">Allow direct messages from other users</span>
+                </label>
+                <span class="messages-settings-status" id="messagesSettingsStatus"></span>
+            </div>
+
+            <div class="messages-new-conversation">
+                <input type="text" id="messageUserSearchInput" placeholder="Search users by username or email..." data-i18n-placeholder="dashboard.searchUsersPlaceholder">
+                <button type="button" id="messageUserSearchBtn" class="btn-edit" data-i18n="dashboard.searchUsersButton">Search</button>
+            </div>
+            <div id="messageUserSearchResults" class="message-user-search-results"></div>
+
+            <div class="messages-layout">
+                <div class="messages-conversations-panel">
+                    <div class="messages-conversations-header">
+                        <span data-i18n="dashboard.conversations">Conversations</span>
+                        <button type="button" id="refreshConversationsBtn" class="btn-edit messages-refresh-btn" data-i18n="dashboard.refreshConversations">Refresh</button>
+                    </div>
+                    <div id="messagesConversationsList" class="messages-conversations-list">
+                        <div class="messages-empty" data-i18n="dashboard.loadingConversations">Loading conversations...</div>
+                    </div>
+                </div>
+                <div class="messages-thread-panel">
+                    <div id="messagesThreadHeader" class="messages-thread-header" data-i18n="dashboard.selectConversationPrompt">Select a conversation to start messaging.</div>
+                    <div id="messagesThreadList" class="messages-thread-list">
+                        <div class="messages-empty" data-i18n="dashboard.selectConversationPrompt">Select a conversation to start messaging.</div>
+                    </div>
+                    <form id="messagesComposerForm" class="messages-composer" style="display: none;">
+                        <textarea id="messagesComposerInput" rows="2" maxlength="4000" placeholder="Type your message..." data-i18n-placeholder="dashboard.messageComposerPlaceholder"></textarea>
+                        <button type="submit" id="messagesSendBtn" class="btn-edit" data-i18n="dashboard.sendMessage">Send</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Posts Section -->
+        <div class="posts-section" id="postsSection" data-dashboard-tab-panel="posts" hidden>
+            <h2>
+                <span data-i18n="dashboard.myPosts">My Posts</span>
+                <div class="posts-header-actions">
+                    <input type="text" id="postsSearch" class="posts-search" placeholder="Search posts..." data-i18n-placeholder="dashboard.searchPosts">
+                    <select id="postsPageSize" class="posts-page-size" title="Posts per page" aria-label="Posts per page">
+                        <option value="5">5 / page</option>
+                        <option value="10" selected>10 / page</option>
+                        <option value="20">20 / page</option>
+                        <option value="50">50 / page</option>
+                    </select>
+                    <a href="create-person.html" id="createPostLink" class="btn-edit" style="text-decoration: none;" data-i18n="dashboard.createNewPost">Create New Post</a>
+                </div>
+            </h2>
+            <div id="postsLoading" class="loading-posts" style="display: none;" data-i18n="dashboard.loadingPosts">
+                Loading posts...
+            </div>
+            <div id="postsList" class="posts-list">
+                <!-- Posts will be loaded here -->
+            </div>
+            <div id="postsPagination" class="pagination" style="display: none;">
+                <!-- Pagination will be loaded here -->
+            </div>
+        </div>
+
+        <div class="posts-section" id="bookmarksSection" data-dashboard-tab-panel="bookmarks" hidden>
+            <h2>
+                <span data-i18n="dashboard.bookmarkedCards">Bookmarked Cards</span>
+            </h2>
+            <div id="bookmarksLoading" class="loading-posts" style="display: none;" data-i18n="dashboard.loadingBookmarkedCards">
+                Loading bookmarked cards...
+            </div>
+            <div id="bookmarksList" class="posts-list">
+                <!-- Bookmarked cards will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Image Modal -->
+    <div id="imageModal" class="image-modal" style="display: none;">
+        <div class="image-modal-content">
+            <span class="image-modal-close" onclick="closeImageModal()">&times;</span>
+            <img id="modalImage" src="" alt="Full size image">
+        </div>
+    </div>
+
+    <!-- Authentication and Navigation Scripts -->
+    <script src="analytics.js"></script>
+    <script src="auth.js"></script>
+    <script src="navigation.js"></script>
+    <script src="dashboard.js?v=20260220-1"></script>
+    <script src="messages-dashboard.js"></script>
+    <script>
+        /**
+         * ============================================
+         * Dashboard JavaScript
+         * ============================================
+         * Loads and displays user profile information
+         */
+
+        function tr(key, fallback) {
+            if (typeof languageManager !== 'undefined' && languageManager) {
+                const value = languageManager.getTranslation(key);
+                if (value) return value;
+            }
+            return fallback;
+        }
+
+        // Check authentication on page load
+        window.addEventListener('DOMContentLoaded', async () => {
+            // Check if user is authenticated
+            if (!authAPI.isAuthenticated()) {
+                console.log('User not authenticated, redirecting to login');
+                window.location.href = 'login.html';
+                return;
+            }
+
+            const user = authAPI.getCurrentUser();
+            
+            // Almighty users can also use the dashboard to see their posts
+            // They have access to both dashboard and portal
+            // No redirect needed - let them use the dashboard
+
+            // Load user profile
+            await loadProfile();
+        });
+
+        /**
+         * Load user profile information
+         */
+        async function loadProfile() {
+            try {
+                console.log('Loading user profile...');
+                
+                const response = await authAPI.getCurrentUserInfo();
+
+                if (response.success) {
+                    const user = response.data.user;
+                    
+                    // CRITICAL: Always update localStorage with fresh user data from server
+                    // This ensures we have the latest role information
+                    localStorage.setItem('user', JSON.stringify(user));
+                    console.log('User profile loaded and cached. Current role:', user.role);
+                    
+                    displayProfile(user);
+                }
+            } catch (error) {
+                // Comprehensive error handling for profile loading
+                console.error('Error loading profile:', error);
+                
+                // Extract error message based on error type and status
+                let errorMessage = 'Error loading profile';
+                
+                // If token is invalid or expired, redirect to login
+                if (error.status === 401) {
+                    errorMessage = languageManager.getTranslation('dashboard.sessionExpired') || 'Session expired. Please login again.';
+                    alert(errorMessage);
+                    authAPI.logout();
+                    return; // Exit early as we're redirecting
+                } else if (error.status === 403) {
+                    // Forbidden
+                    errorMessage = languageManager.getTranslation('dashboard.accessDenied') || 'Access denied.';
+                    alert(errorMessage);
+                    authAPI.logout();
+                    return;
+                } else if (error.status === 404) {
+                    // User not found
+                    errorMessage = languageManager.getTranslation('dashboard.userNotFound') || 'User profile not found.';
+                } else if (error.status === 500) {
+                    // Server error
+                    errorMessage = languageManager.getTranslation('dashboard.serverError') || 'Server error. Please try again later.';
+                } else if (error.message) {
+                    // Use specific error message if available
+                    errorMessage = `Error: ${error.message}`;
+                }
+                
+                // Display error message to user
+                document.getElementById('loadingIndicator').textContent = errorMessage;
+            }
+        }
+
+        /**
+         * Display user profile information
+         * 
+         * @param {Object} user - User object
+         */
+        function displayProfile(user) {
+            // Update the cached user in authAPI to ensure consistency
+            if (user) {
+                localStorage.setItem('user', JSON.stringify(user));
+            }
+            
+            const profileInfo = document.getElementById('profileInfo');
+            
+            // Get badge class for role
+            const roleBadgeClass = `badge-${user.role.toLowerCase()}`;
+            
+            // Format dates
+            const createdAt = new Date(user.createdAt).toLocaleString();
+            const updatedAt = new Date(user.updatedAt).toLocaleString();
+            const lastLogin = user.lastLogin 
+                ? new Date(user.lastLogin).toLocaleString() 
+                : 'Never';
+
+            // Get translations for labels
+            const t = languageManager.getTranslations(languageManager.getCurrentLanguage());
+            const dashboardT = t ? t.dashboard : null;
+            const commonT = t ? t.common : null;
+            
+            const usernameLabel = dashboardT ? dashboardT.usernameLabel : 'Username';
+            const emailLabel = dashboardT ? dashboardT.emailLabel : 'Email';
+            const roleLabel = dashboardT ? dashboardT.roleLabel : 'Role';
+            const levelLabel = dashboardT ? dashboardT.levelLabel : 'Level';
+            const statusLabel = dashboardT ? dashboardT.statusLabel : 'Status';
+            const lastLoginLabel = dashboardT ? dashboardT.lastLoginLabel : 'Last Login';
+            const accountCreatedLabel = dashboardT ? dashboardT.accountCreatedLabel : 'Account Created';
+            const lastUpdatedLabel = dashboardT ? dashboardT.lastUpdatedLabel : 'Last Updated';
+            const activeText = commonT ? commonT.active : 'Active';
+            const inactiveText = commonT ? commonT.inactive : 'Inactive';
+            const neverText = dashboardT ? dashboardT.never : 'Never';
+            
+            profileInfo.innerHTML = `
+                <div class="info-item">
+                    <label>${usernameLabel}</label>
+                    <div class="value">${escapeHtml(user.username)}</div>
+                </div>
+                <div class="info-item">
+                    <label>${emailLabel}</label>
+                    <div class="value">${escapeHtml(user.email)}</div>
+                </div>
+                <div class="info-item">
+                    <label>${roleLabel}</label>
+                    <div class="value">
+                        <span class="badge ${roleBadgeClass}">${escapeHtml(user.role)}</span>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <label>${levelLabel}</label>
+                    <div class="value">${user.level}</div>
+                </div>
+                <div class="info-item">
+                    <label>${statusLabel}</label>
+                    <div class="value">${user.isActive ? activeText : inactiveText}</div>
+                </div>
+                <div class="info-item">
+                    <label>${lastLoginLabel}</label>
+                    <div class="value">${lastLogin === 'Never' ? neverText : lastLogin}</div>
+                </div>
+                <div class="info-item">
+                    <label>${accountCreatedLabel}</label>
+                    <div class="value">${createdAt}</div>
+                </div>
+                <div class="info-item">
+                    <label>${lastUpdatedLabel}</label>
+                    <div class="value">${updatedAt}</div>
+                </div>
+            `;
+
+            // Show profile content, hide loading
+            document.getElementById('loadingIndicator').style.display = 'none';
+            document.getElementById('profileContent').style.display = 'block';
+            
+            // Show email verification status
+            displayEmailVerificationStatus(user);
+            
+            // Show role upgrade section for Guest users (MUST be called after profile is displayed)
+            // This function will refresh user data from server to get latest role
+            console.log('Calling displayRoleUpgradeSection for user:', user);
+            displayRoleUpgradeSection(user);
+        }
+        
+        /**
+         * Refresh user data from server
+         * This ensures we have the latest user information including role changes
+         */
+        async function refreshUserData() {
+            try {
+                console.log('Refreshing user data from server...');
+                const response = await authAPI.request('/auth/me');
+                
+                if (response.success && response.data && response.data.user) {
+                    const updatedUser = response.data.user;
+                    console.log('User data refreshed:', updatedUser);
+                    
+                    // Update localStorage with fresh user data
+                    localStorage.setItem('user', JSON.stringify(updatedUser));
+                    
+                    // Return updated user
+                    return updatedUser;
+                }
+            } catch (error) {
+                console.error('Error refreshing user data:', error);
+            }
+            return null;
+        }
+
+        /**
+         * Show pending role-upgrade notification for reviewers (Almighty/SuperAdmin).
+         */
+        async function loadUpgradeApprovalNotification(user) {
+            const notice = document.getElementById('upgradeApproverNotice');
+            if (!notice) return;
+
+            const role = user && user.role;
+            const canReview = role === 'Almighty' || role === 'SuperAdmin';
+            if (!canReview) {
+                notice.style.display = 'none';
+                notice.innerHTML = '';
+                return;
+            }
+
+            try {
+                const response = await authAPI.request('/role-upgrade/pending?page=1&limit=1');
+                const total = Number(
+                    response?.data?.pagination?.total ??
+                    response?.data?.total ??
+                    (Array.isArray(response?.data?.requests) ? response.data.requests.length : 0)
+                );
+
+                if (!Number.isFinite(total) || total <= 0) {
+                    notice.style.display = 'none';
+                    notice.innerHTML = '';
+                    return;
+                }
+
+                const locale = languageManager ? languageManager.getCurrentLanguage() : 'fa-IR';
+                const countText = new Intl.NumberFormat(locale).format(total);
+                const title = tr('dashboard.roleUpgradeApproverTitle', 'Pending role upgrade requests');
+                const pendingLabel = tr('dashboard.roleUpgradeApproverPending', 'Pending requests');
+                const openLabel = tr('dashboard.roleUpgradeApproverOpen', 'Open review panel');
+
+                notice.innerHTML = `
+                    <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap;">
+                        <div>
+                            <div style="font-weight: 700; margin-bottom: 6px;">${escapeHtml(title)}</div>
+                            <div>${escapeHtml(pendingLabel)}: <strong>${countText}</strong></div>
+                        </div>
+                        <a href="almighty-portal.html#upgradeRequestsSection" class="btn-edit" style="text-decoration: none;">${escapeHtml(openLabel)}</a>
+                    </div>
+                `;
+                notice.style.display = 'block';
+            } catch (error) {
+                console.error('Error loading upgrade approval notification:', error);
+                notice.style.display = 'none';
+            }
+        }
+        
+        /**
+         * Display role upgrade section for Guest users
+         * This function checks the user's current role and shows/hides the section accordingly
+         * It always refreshes user data from server to ensure we have the latest role
+         */
+        async function displayRoleUpgradeSection(user) {
+            console.log('displayRoleUpgradeSection called with user:', user);
+            
+            // ALWAYS refresh user data from server to get latest role
+            // This is critical because the role may have been changed by an admin
+            const refreshedUser = await refreshUserData();
+            const currentUser = refreshedUser || user;
+            
+            console.log('User role from cache:', user ? user.role : 'undefined');
+            console.log('User role after server refresh:', currentUser ? currentUser.role : 'undefined');
+
+            // Show reviewer notification (Almighty/SuperAdmin) if there are pending requests.
+            await loadUpgradeApprovalNotification(currentUser);
+            
+            const upgradeSection = document.getElementById('roleUpgradeSection');
+            if (!upgradeSection) {
+                console.error('❌ Role upgrade section not found in DOM! Element ID: roleUpgradeSection');
+                return;
+            }
+            
+            console.log('✅ Role upgrade section found in DOM');
+            
+            // Only show for Guest users - ALWAYS check the refreshed role from server
+            if (currentUser && currentUser.role === 'Guest') {
+                console.log('✅ User is Guest - displaying role upgrade section');
+                upgradeSection.style.display = 'block';
+                upgradeSection.style.visibility = 'visible';
+                upgradeSection.style.opacity = '1';
+                loadUpgradeRequestStatus();
+            } else {
+                // User is NOT Guest - hide the section completely
+                console.log('❌ User is not Guest - hiding role upgrade section. Current role:', currentUser ? currentUser.role : 'undefined');
+                upgradeSection.style.display = 'none';
+                upgradeSection.style.visibility = 'hidden';
+                upgradeSection.style.opacity = '0';
+                
+                // Clear any status messages in the upgrade section
+                const statusDiv = document.getElementById('upgradeRequestStatus');
+                if (statusDiv) {
+                    statusDiv.innerHTML = '';
+                    statusDiv.style.display = 'none';
+                }
+                
+                // Hide the form as well
+                const form = document.getElementById('roleUpgradeForm');
+                if (form) {
+                    form.style.display = 'none';
+                }
+                
+                // If user was upgraded (role changed from Guest to something else), show success message
+                const cachedRole = user ? user.role : null;
+                if (cachedRole === 'Guest' && currentUser && currentUser.role !== 'Guest') {
+                    console.log('✅ User role was upgraded! Showing success message');
+                    // Show success message in profile section (not in hidden upgrade section)
+                    const profileContent = document.getElementById('profileContent');
+                    if (profileContent && !document.getElementById('roleUpgradeSuccess')) {
+                        const successMsg = document.createElement('div');
+                        successMsg.id = 'roleUpgradeSuccess';
+                        successMsg.style.cssText = 'padding: 15px; background: rgba(40, 167, 69, 0.2); border-left: 4px solid #28a745; border-radius: 5px; color: #155724; margin-top: 15px; margin-bottom: 15px;';
+                        successMsg.innerHTML = `
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <span style="font-size: 1.5rem;">&#10003;</span>
+                                <div>
+                                    <strong style="font-size: 1.1rem;">${tr('dashboard.roleUpgradeElevatedTitle', 'Account elevated successfully!')}</strong>
+                                    <br>${tr('dashboard.roleUpgradeElevatedBody', 'Your account has been upgraded from Guest to')} <strong>${currentUser.role}</strong>
+                                    <br><small>${tr('dashboard.roleUpgradeElevatedRefresh', 'Refreshing page in 3 seconds to show all changes...')}</small>
+                                </div>
+                            </div>
+                        `;
+                        // Insert after profile info
+                        const profileInfo = document.getElementById('profileInfo');
+                        if (profileInfo && profileInfo.parentNode) {
+                            profileInfo.parentNode.insertBefore(successMsg, profileInfo.nextSibling);
+                        }
+                        
+                        // Auto-refresh the page after 3 seconds to show updated UI
+                        setTimeout(() => {
+                            window.location.reload();
+                        }, 3000);
+                    }
+                }
+            }
+        }
+        
+        // Also call on page load in case user profile loads before this script
+        document.addEventListener('DOMContentLoaded', function() {
+            // Wait a bit for auth to initialize
+            setTimeout(async function() {
+                if (typeof authAPI !== 'undefined' && authAPI.getCurrentUser()) {
+                    const user = authAPI.getCurrentUser();
+                    if (user) {
+                        console.log('DOMContentLoaded: Checking user role, calling displayRoleUpgradeSection');
+                        await displayRoleUpgradeSection(user);
+                    }
+                }
+            }, 1000);
+        });
+        
+        // Set up periodic role check (every 15 seconds) to detect role changes
+        // This ensures if an admin approves a request, the UI updates automatically
+        // Only check if user is currently Guest (to avoid unnecessary API calls)
+        let roleCheckInterval = null;
+        function startRoleCheckInterval() {
+            if (roleCheckInterval) {
+                clearInterval(roleCheckInterval);
+            }
+            
+            if (typeof authAPI !== 'undefined' && authAPI.isAuthenticated()) {
+                const cachedUser = authAPI.getCurrentUser();
+                if (cachedUser && cachedUser.role === 'Guest') {
+                    console.log('Starting periodic role check (every 15 seconds)...');
+                    roleCheckInterval = setInterval(async function() {
+                        if (typeof authAPI !== 'undefined' && authAPI.isAuthenticated()) {
+                            const currentCachedUser = authAPI.getCurrentUser();
+                            // Only check if still Guest (if role changed, we'll detect it)
+                            if (currentCachedUser && currentCachedUser.role === 'Guest') {
+                                console.log('Periodic check: Refreshing user data to check for role changes...');
+                                const refreshedUser = await refreshUserData();
+                                if (refreshedUser && refreshedUser.role !== 'Guest') {
+                                    console.log('✅ Role change detected! User is now:', refreshedUser.role);
+                                    // Clear interval since user is no longer Guest
+                                    if (roleCheckInterval) {
+                                        clearInterval(roleCheckInterval);
+                                        roleCheckInterval = null;
+                                    }
+                                    // Reload the profile to update the UI
+                                    await loadProfile();
+                                }
+                            } else {
+                                // User is no longer Guest, stop checking
+                                if (roleCheckInterval) {
+                                    clearInterval(roleCheckInterval);
+                                    roleCheckInterval = null;
+                                    console.log('Stopped periodic role check - user is no longer Guest');
+                                }
+                            }
+                        }
+                    }, 15000); // Check every 15 seconds
+                    
+                    // Stop checking after 10 minutes (request should be processed by then)
+                    setTimeout(() => {
+                        if (roleCheckInterval) {
+                            clearInterval(roleCheckInterval);
+                            roleCheckInterval = null;
+                            console.log('Stopped periodic role check (10 minutes elapsed)');
+                        }
+                    }, 600000); // 10 minutes
+                }
+            }
+        }
+        
+        // Start periodic check when page loads
+        window.addEventListener('DOMContentLoaded', function() {
+            setTimeout(startRoleCheckInterval, 2000);
+        });
+        
+        /**
+         * Load upgrade request status
+         */
+        async function loadUpgradeRequestStatus() {
+            try {
+                console.log('Loading upgrade request status...');
+                const token = authAPI.getToken();
+                if (!token) {
+                    console.error('No authentication token found');
+                    return;
+                }
+                
+                const response = await fetch(`${window.location.origin}/api/role-upgrade/my-requests`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                
+                const result = await response.json();
+                console.log('Upgrade request status response:', result);
+                
+                const statusDiv = document.getElementById('upgradeRequestStatus');
+                const form = document.getElementById('roleUpgradeForm');
+                
+                if (!statusDiv || !form) {
+                    console.error('Status div or form not found');
+                    return;
+                }
+                
+                if (result.success && result.data && result.data.requests) {
+                    const pendingRequest = result.data.requests.find(r => r.status === 'pending');
+                    
+                    if (pendingRequest) {
+                        // Show pending request status
+                        const pendingCreatedAt = new Date(pendingRequest.createdAt).toLocaleString(languageManager ? languageManager.getCurrentLanguage() : undefined);
+                        statusDiv.innerHTML = `
+                            <div style="padding: 15px; background: rgba(255, 243, 205, 0.95); border-left: 4px solid #ffc107; border-radius: 5px; color: #856404; margin-bottom: 15px;">
+                                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+                                    <span style="font-size: 1.5rem;">&#9203;</span>
+                                    <strong style="font-size: 1.1rem;">${tr('dashboard.roleUpgradePendingTitle', 'Pending Request')}</strong>
+                                </div>
+                                <div style="margin-left: 2rem;">
+                                    ${tr('dashboard.roleUpgradeRequesting', 'Requesting: Guest -> User')}: <strong>${escapeHtml(pendingRequest.currentRole)}</strong> -> <strong>${escapeHtml(pendingRequest.requestedRole)}</strong>
+                                    <br><small>${tr('dashboard.roleUpgradePendingSubmitted', 'Submitted')}: ${pendingCreatedAt}</small>
+                                    ${pendingRequest.message ? `<br><br><strong>${tr('dashboard.roleUpgradePendingMessage', 'Your Message')}:</strong><br>${escapeHtml(pendingRequest.message)}` : ''}
+                                    <br><br><small style="color: #856404;">${tr('dashboard.roleUpgradePendingFooter', 'An Almighty or SuperAdmin will review your request soon.')}</small>
+                                </div>
+                            </div>
+                        `;
+                        form.style.display = 'none';
+                    } else {
+                        // No pending request, show form
+                        statusDiv.innerHTML = '';
+                        form.style.display = 'block';
+                        console.log('No pending request found, showing form');
+                    }
+                } else {
+                    // No requests at all, show form
+                    statusDiv.innerHTML = '';
+                    form.style.display = 'block';
+                    console.log('No requests found, showing form');
+                }
+            } catch (error) {
+                console.error('Error loading upgrade request status:', error);
+                // On error, still show the form
+                const form = document.getElementById('roleUpgradeForm');
+                if (form) {
+                    form.style.display = 'block';
+                }
+            }
+        }
+        
+        /**
+         * Submit role upgrade request
+         */
+        const roleUpgradeForm = document.getElementById('roleUpgradeForm');
+        if (roleUpgradeForm) {
+            roleUpgradeForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                console.log('Role upgrade form submitted');
+                
+                const requestedRole = document.getElementById('requestedRole').value;
+                const message = document.getElementById('upgradeMessage').value.trim();
+                
+                // Disable submit button
+                const submitBtn = roleUpgradeForm.querySelector('button[type="submit"]');
+                if (submitBtn) {
+                    submitBtn.disabled = true;
+                    submitBtn.textContent = tr('dashboard.roleUpgradeSubmitting', 'Submitting Request...');
+                }
+                
+                try {
+                    const token = authAPI.getToken();
+                    if (!token) {
+                        alert(tr('dashboard.roleUpgradeSubmitLoginRequired', 'You must be logged in to submit a request.'));
+                        return;
+                    }
+                    
+                    console.log('Submitting upgrade request:', { requestedRole, message });
+                    
+                    const response = await fetch(`${window.location.origin}/api/role-upgrade/request`, {
+                        method: 'POST',
+                        headers: {
+                            'Authorization': `Bearer ${token}`,
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            requestedRole,
+                            message: message || undefined
+                        })
+                    });
+                    
+                    const result = await response.json();
+                    console.log('Upgrade request response:', result);
+                    
+                    if (result.success) {
+                        alert(`${tr('dashboard.roleUpgradeSubmitSuccess', 'Role upgrade request submitted successfully!')}\n\n${tr('dashboard.roleUpgradeSubmitSuccessDetail', 'An Almighty or SuperAdmin administrator will review your request. You will be notified once it is processed.')}`);
+                        // Clear form
+                        document.getElementById('upgradeMessage').value = '';
+                        // Reload status to show pending request
+                        loadUpgradeRequestStatus();
+                        
+                        // Set up more frequent check for role changes (in case request is approved quickly)
+                        // Check every 5 seconds for role changes
+                        let checkCount = 0;
+                        const maxChecks = 60; // Check for 5 minutes (60 * 5 seconds)
+                        const roleCheckInterval = setInterval(async function() {
+                            checkCount++;
+                            console.log(`Checking for role change (attempt ${checkCount}/${maxChecks})...`);
+                            const refreshedUser = await refreshUserData();
+                            if (refreshedUser && refreshedUser.role !== 'Guest') {
+                                console.log('Role changed detected! User is now:', refreshedUser.role);
+                                clearInterval(roleCheckInterval);
+                                // Show success message and reload
+                                alert(`${tr('dashboard.roleUpgradeElevatedTitle', 'Account elevated successfully!')} ${refreshedUser.role}.`);
+                                window.location.reload();
+                            } else if (checkCount >= maxChecks) {
+                                console.log('Stopping role check - max attempts reached');
+                                clearInterval(roleCheckInterval);
+                            }
+                        }, 5000); // Check every 5 seconds
+                    } else {
+                        alert(result.message || tr('dashboard.roleUpgradeSubmitError', 'Error submitting request. Please try again.'));
+                        // Re-enable submit button
+                        if (submitBtn) {
+                            submitBtn.disabled = false;
+                            submitBtn.textContent = tr('dashboard.roleUpgradeSubmit', 'Request Elevation to User Role');
+                        }
+                    }
+                } catch (error) {
+                    console.error('Error submitting upgrade request:', error);
+                    alert(tr('dashboard.roleUpgradeSubmitError', 'Error submitting request. Please try again.'));
+                    // Re-enable submit button
+                    if (submitBtn) {
+                        submitBtn.disabled = false;
+                        submitBtn.textContent = tr('dashboard.roleUpgradeSubmit', 'Request Elevation to User Role');
+                    }
+                }
+            });
+        } else {
+            console.error('Role upgrade form not found in DOM');
+        }
+        
+        /**
+         * Display email verification status
+         */
+        function displayEmailVerificationStatus(user) {
+            const statusDiv = document.getElementById('emailVerificationStatus');
+            if (!statusDiv) return;
+            
+            if (user.emailVerified) {
+                statusDiv.innerHTML = `
+                    <div style="display: flex; align-items: center; gap: 10px; color: #28a745;">
+                        <span style="font-size: 1.2rem;">✓</span>
+                        <span><strong>Email Verified</strong> - Your email address has been verified.</span>
+                    </div>
+                `;
+            } else {
+                statusDiv.innerHTML = `
+                    <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
+                        <div style="display: flex; align-items: center; gap: 10px; color: #ffc107;">
+                            <span style="font-size: 1.2rem;">⚠</span>
+                            <span><strong>Email Not Verified</strong> - Please verify your email address.</span>
+                        </div>
+                        <button onclick="resendVerificationEmail()" class="btn-edit" style="padding: 6px 12px; font-size: 0.9rem;">
+                            Resend Verification Email
+                        </button>
+                    </div>
+                `;
+            }
+            statusDiv.style.display = 'block';
+        }
+        
+        /**
+         * Resend verification email
+         */
+        async function resendVerificationEmail() {
+            try {
+                const user = authAPI.getCurrentUser();
+                if (!user || !user.email) {
+                    alert('Email address not found');
+                    return;
+                }
+                
+                const response = await fetch(`${window.location.origin}/api/auth/resend-verification`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${authAPI.getToken()}`
+                    },
+                    body: JSON.stringify({ email: user.email })
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    // Prefer opening the link when SMTP is off (dev returns previewUrl)
+                    if (result.previewUrl) {
+                        const openLink = confirm(`${result.message}\n\nOpen verification link now?`);
+                        if (openLink) window.location.href = result.previewUrl;
+                    } else if (result.emailSent === false) {
+                        alert(result.message || 'Email could not be sent. Check server SMTP settings / logs.');
+                    } else {
+                        alert('Verification email sent! Please check your inbox.');
+                    }
+                } else {
+                    alert(result.message || 'Error sending verification email');
+                }
+            } catch (error) {
+                console.error('Error resending verification:', error);
+                alert('Error sending verification email');
+            }
+        }
+        
+        /**
+         * Export user data
+         */
+        async function exportUserData() {
+            if (!confirm('This will export all your data. Continue?')) return;
+            
+            try {
+                const token = authAPI.getToken();
+                const response = await fetch(`${window.location.origin}/api/privacy/export`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    // Create download link
+                    const dataStr = JSON.stringify(result.data, null, 2);
+                    const dataBlob = new Blob([dataStr], { type: 'application/json' });
+                    const url = URL.createObjectURL(dataBlob);
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.download = `user-data-export-${new Date().toISOString().split('T')[0]}.json`;
+                    link.click();
+                    URL.revokeObjectURL(url);
+                    alert('Data export downloaded successfully!');
+                } else {
+                    alert(result.message || 'Error exporting data');
+                }
+            } catch (error) {
+                console.error('Error exporting data:', error);
+                alert('Error exporting data');
+            }
+        }
+        
+        /**
+         * View activity logs
+         */
+        async function viewActivityLogs() {
+            try {
+                const token = authAPI.getToken();
+                const response = await fetch(`${window.location.origin}/api/privacy/activity`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    // Display activity logs in a modal or new page
+                    const logs = result.data.logs;
+                    const logsText = logs.map(log => 
+                        `${new Date(log.createdAt).toLocaleString()} - ${log.action}: ${log.description} ${log.success ? '✓' : '✗'}`
+                    ).join('\n');
+                    
+                    alert(`Your Recent Activity:\n\n${logsText}\n\n(Showing ${logs.length} of ${result.data.pagination.total} logs)`);
+                } else {
+                    alert(result.message || 'Error fetching activity logs');
+                }
+            } catch (error) {
+                console.error('Error fetching activity logs:', error);
+                alert('Error fetching activity logs');
+            }
+        }
+        
+        /**
+         * Delete account
+         */
+        async function deleteAccount() {
+            const password = prompt('Enter your password to confirm account deletion:');
+            if (!password) return;
+            
+            const confirmText = prompt('Type DELETE to confirm permanent account deletion:');
+            if (confirmText !== 'DELETE') {
+                alert('Account deletion cancelled');
+                return;
+            }
+            
+            if (!confirm('⚠️ WARNING: This will permanently delete your account and ALL associated data. This action cannot be undone. Are you absolutely sure?')) {
+                return;
+            }
+            
+            try {
+                const token = authAPI.getToken();
+                const response = await fetch(`${window.location.origin}/api/privacy/delete`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ password, confirm: confirmText })
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    alert('Account deleted successfully. You will be logged out now.');
+                    authAPI.logout();
+                    window.location.href = 'login.html';
+                } else {
+                    alert(result.message || 'Error deleting account');
+                }
+            } catch (error) {
+                console.error('Error deleting account:', error);
+                alert('Error deleting account');
+            }
+        }
+
+        /**
+         * Escape HTML to prevent XSS
+         * 
+         * @param {string} text - Text to escape
+         * @returns {string} Escaped text
+         */
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+    </script>
+    <script src="pwa.js"></script>
+</body>
+</html>
