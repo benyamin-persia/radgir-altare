@@ -245,15 +245,23 @@ app.use(errorHandler);
  * 3. Starts the HTTP server
  */
 async function startServer() {
+    // Bind immediately so App Hosting health checks pass even if Mongo/Atlas is down
+    const listenPort = Number(process.env.SERVER_PORT || process.env.APP_PORT || PORT);
+    app.listen(listenPort, '0.0.0.0', () => {
+        console.log('===========================================');
+        console.log(`✓ Server running on 0.0.0.0:${listenPort}`);
+        console.log(`✓ Environment: ${process.env.NODE_ENV || 'development'}`);
+        console.log(`✓ API Base URL: http://0.0.0.0:${listenPort}/api`);
+        console.log('===========================================');
+    });
+
     try {
-        // Connect to MongoDB database
-        // This uses the connection string from environment variables
+        // Connect to MongoDB after listen so a dead Atlas host does not take the whole site offline
         console.log('Attempting to connect to MongoDB...');
         await connectDB();
         console.log('✓ MongoDB connected successfully');
 
         // Initialize Almighty user if it doesn't exist
-        // This ensures the system always has at least one super admin
         console.log('Checking for Almighty user...');
         await initializeAlmighty();
         console.log('✓ Almighty user initialized');
@@ -277,22 +285,10 @@ async function startServer() {
         startAnalyticsRollupScheduler();
         // Live private Telegram analytics snapshot (edits one message in place).
         startAnalyticsTelegramScheduler();
-
-        // Bind 0.0.0.0 so cloud hosts (Altare/Heroku) can reach the process from outside the container
-        const listenPort = Number(process.env.SERVER_PORT || process.env.APP_PORT || PORT);
-        app.listen(listenPort, '0.0.0.0', () => {
-            console.log('===========================================');
-            console.log(`✓ Server running on 0.0.0.0:${listenPort}`);
-            console.log(`✓ Environment: ${process.env.NODE_ENV || 'development'}`);
-            console.log(`✓ API Base URL: http://0.0.0.0:${listenPort}/api`);
-            console.log('===========================================');
-        });
     } catch (error) {
-        // If database connection fails, log error and exit
-        // This prevents the server from running without a database
-        console.error('✗ Failed to start server:', error.message);
+        // Stay up for static pages/UI; API routes that need DB will fail until Mongo is fixed
+        console.error('✗ Database init failed (server still listening):', error.message);
         console.error('Full error:', error);
-        process.exit(1); // Exit with error code
     }
 }
 
