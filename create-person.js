@@ -32,7 +32,7 @@ let mapInitAbortedForZeroSize = false;
 const MAP_INIT_RETRY_DELAY_MS = 100;
 const MAX_MAP_INIT_RETRIES = 30;
 const MAX_METADATA_NOTES_LENGTH = 10000;
-const CREATE_PERSON_SCRIPT_VERSION = '2026-11-24-card-photo';
+const CREATE_PERSON_SCRIPT_VERSION = '2026-11-24-card-photo-2';
 const ADDRESS_STATUS = Object.freeze({
     EXACT: 'exact',
     APPROXIMATE: 'approximate',
@@ -570,13 +570,16 @@ async function populateFormWithPerson(person) {
             div.setAttribute('data-existing-url', url); // stable URL key sent as cardPhoto on submit
             div.setAttribute('role', 'button');
             div.setAttribute('tabindex', '0');
-            div.setAttribute('title', t('createPerson.cardPhotoHelp', 'Click an image to use it as the photo on the listing card.'));
+            div.setAttribute('title', t('createPerson.cardPhotoHelp', 'Click an image (or its button) to use it as the photo on the listing card.'));
             div.innerHTML = `
                 <span class="card-photo-badge">${escapeAttr(t('createPerson.cardPhotoBadge', 'Card photo'))}</span>
                 <img src="${escapeAttr(url)}" alt="Existing ${idx + 1}">
                 <span class="image-name">Existing image ${idx + 1}</span>
+                <button type="button" class="card-photo-pick">${escapeAttr(t('createPerson.cardPhotoPick', 'Use as card photo'))}</button>
             `;
-            div.addEventListener('click', () => setCardPhotoPreview(div)); // pick this existing image as the listing card photo
+            const pickBtn = div.querySelector('.card-photo-pick');
+            pickBtn.addEventListener('click', (e) => { e.stopPropagation(); setCardPhotoPreview(div); }); // explicit button for card photo
+            div.addEventListener('click', () => setCardPhotoPreview(div)); // whole thumbnail also selectable
             div.addEventListener('keydown', (e) => {
                 if (e.key === 'Enter' || e.key === ' ') {
                     e.preventDefault();
@@ -2660,12 +2663,18 @@ function hideAlert() {
 function setCardPhotoPreview(item) {
     const previewContainer = document.getElementById('imagePreview');
     if (!previewContainer || !item) return;
-    previewContainer.querySelectorAll('.image-preview-item.is-card-photo').forEach((el) => {
+    const pickLabel = t('createPerson.cardPhotoPick', 'Use as card photo');
+    const selectedLabel = t('createPerson.cardPhotoSelected', 'Selected as card photo');
+    previewContainer.querySelectorAll('.image-preview-item').forEach((el) => {
         el.classList.remove('is-card-photo');
         el.removeAttribute('aria-pressed');
+        const btn = el.querySelector('.card-photo-pick');
+        if (btn) btn.textContent = pickLabel; // reset other buttons to the pick action label
     });
     item.classList.add('is-card-photo');
     item.setAttribute('aria-pressed', 'true');
+    const selectedBtn = item.querySelector('.card-photo-pick');
+    if (selectedBtn) selectedBtn.textContent = selectedLabel; // show this one is the card photo
 }
 
 /**
@@ -2747,15 +2756,18 @@ function setupImageUpload() {
             previewItem.dataset.index = index; // index among newly selected files (cardPhoto type:'new')
             previewItem.setAttribute('role', 'button');
             previewItem.setAttribute('tabindex', '0');
-            previewItem.setAttribute('title', t('createPerson.cardPhotoHelp', 'Click an image to use it as the photo on the listing card.'));
+            previewItem.setAttribute('title', t('createPerson.cardPhotoHelp', 'Click an image (or its button) to use it as the photo on the listing card.'));
             
             previewItem.innerHTML = `
                 <span class="card-photo-badge">${escapeAttr(t('createPerson.cardPhotoBadge', 'Card photo'))}</span>
                 <img src="${e.target.result}" alt="${escapeAttr(file.name)}">
                 <button type="button" class="remove-image" onclick="event.stopPropagation(); removeImagePreview(${index})" title="${escapeAttr(t('createPerson.removeImageTitle', 'Remove image'))}">×</button>
                 <div class="image-name">${escapeAttr(file.name)}</div>
+                <button type="button" class="card-photo-pick">${escapeAttr(t('createPerson.cardPhotoPick', 'Use as card photo'))}</button>
             `;
 
+            const pickBtn = previewItem.querySelector('.card-photo-pick');
+            pickBtn.addEventListener('click', (ev) => { ev.stopPropagation(); setCardPhotoPreview(previewItem); });
             previewItem.addEventListener('click', () => setCardPhotoPreview(previewItem)); // new upload can also be the card photo
             previewItem.addEventListener('keydown', (ev) => {
                 if (ev.key === 'Enter' || ev.key === ' ') {

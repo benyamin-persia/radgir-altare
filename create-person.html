@@ -500,6 +500,18 @@
             margin-top: 1rem;
         }
 
+        .card-photo-help {
+            display: block;
+            margin: 0.5rem 0 0;
+            padding: 0.55rem 0.75rem;
+            border: 1px solid var(--color-orange);
+            border-radius: 4px;
+            background: rgba(255, 140, 0, 0.12);
+            color: var(--text-light);
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
         .image-preview-item {
             position: relative;
             border: 2px solid var(--border-color);
@@ -511,7 +523,7 @@
 
         .image-preview-item.is-card-photo {
             border-color: var(--color-orange); /* selected card photo stands out */
-            box-shadow: 0 0 0 1px var(--color-orange);
+            box-shadow: 0 0 0 2px var(--color-orange);
         }
 
         .image-preview-item img {
@@ -527,9 +539,9 @@
             left: 5px;
             background: var(--color-orange);
             color: #fff;
-            font-size: 0.7rem;
-            font-weight: 600;
-            padding: 0.2rem 0.45rem;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.25rem 0.5rem;
             border-radius: 3px;
             display: none; /* only shown on the selected card photo */
             z-index: 1;
@@ -537,6 +549,24 @@
 
         .image-preview-item.is-card-photo .card-photo-badge {
             display: inline-block;
+        }
+
+        .image-preview-item .card-photo-pick {
+            display: block;
+            width: 100%;
+            border: none;
+            border-top: 1px solid var(--border-color);
+            background: var(--background);
+            color: var(--text-light);
+            padding: 0.45rem 0.5rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .image-preview-item.is-card-photo .card-photo-pick {
+            background: var(--color-orange);
+            color: #fff;
         }
 
         .image-preview-item .remove-image {
@@ -880,7 +910,7 @@
                         <label for="images" data-i18n="createPerson.imagesHint">Upload Images</label>
                         <input type="file" id="images" name="images" multiple accept="image/jpeg,image/jpg,image/png,image/gif,image/webp">
                         <small data-i18n="createPerson.imagesHelp">You can select multiple images (JPEG, PNG, GIF, WebP). Max 10 images, 5MB each.</small>
-                        <small data-i18n="createPerson.cardPhotoHelp" style="display:block;margin-top:0.35rem;">Click an image to use it as the photo on the listing card.</small>
+                        <p class="card-photo-help" data-i18n="createPerson.cardPhotoHelp">Click an image (or its button) to use it as the photo on the listing card.</p>
                         <div id="imagePreview" class="image-preview-container"></div>
                     </div>
                 </div>
@@ -926,7 +956,7 @@
             });
         }
     </script>
-    <script src="create-person.js?v=20261124-card-photo"></script>
+    <script src="create-person.js?v=20261124-card-photo-2"></script>
     
     <!-- Go Back Function for standalone page -->
     <script>
