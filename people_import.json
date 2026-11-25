@@ -15,14 +15,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 1)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -47,14 +43,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 2)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -79,14 +71,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 3)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -111,14 +99,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 4)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -143,14 +127,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 5)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -175,14 +155,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 6)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -207,14 +183,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 7)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -239,14 +211,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 8)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -271,14 +239,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 9)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -303,14 +267,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 10)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -335,14 +295,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 11)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -371,14 +327,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 12)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -403,14 +355,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 13)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -439,14 +387,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 14)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -475,14 +419,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 15)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -511,14 +451,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 16)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -547,14 +483,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 17)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -579,14 +511,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 18)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -615,14 +543,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 19)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -648,12 +572,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 20)",
       "tags": [
-        "gold_standard"
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -683,14 +607,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 21)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -719,14 +639,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 22)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -751,14 +667,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 23)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -783,14 +695,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 24)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -819,14 +727,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 25)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -856,12 +760,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "سپاهی"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 26)",
       "tags": [
-        "gold_standard"
+        "سپاهی"
       ]
     },
     "images": [
@@ -891,14 +795,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 27)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -923,14 +823,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 28)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -959,14 +855,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 29)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -995,14 +887,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 30)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -1027,14 +915,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 31)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -1059,14 +943,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 32)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -1091,14 +971,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 33)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -1123,14 +999,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 34)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -1155,14 +1027,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 35)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -1187,14 +1055,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 36)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -1219,14 +1083,10 @@
     "instagramAccount": "drpayambabaeigo",
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 37)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -1251,14 +1111,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 38)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -1283,14 +1139,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 39)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -1315,14 +1167,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 40)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -1347,14 +1195,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 41)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -1379,14 +1223,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 42)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -1411,14 +1251,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 43)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -1447,14 +1283,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 44)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -1479,14 +1311,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 45)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -1511,14 +1339,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 46)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -1544,12 +1368,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "بسیجی"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 47)",
       "tags": [
-        "gold_standard"
+        "بسیجی"
       ]
     },
     "images": [
@@ -1575,14 +1399,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 48)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -1607,14 +1427,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 49)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -1639,14 +1455,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 50)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -1671,14 +1483,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 51)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -1707,14 +1515,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 52)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -1744,12 +1548,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 53)",
       "tags": [
-        "gold_standard"
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -1779,14 +1583,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 54)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -1819,14 +1619,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 55)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -1852,12 +1648,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 56)",
       "tags": [
-        "gold_standard"
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -1884,12 +1680,14 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "آقازاده",
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 57)",
       "tags": [
-        "gold_standard"
+        "آقازاده",
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -1916,12 +1714,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 58)",
       "tags": [
-        "gold_standard"
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -1948,12 +1746,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 59)",
       "tags": [
-        "gold_standard"
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -1988,12 +1786,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 60)",
       "tags": [
-        "gold_standard"
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -2020,12 +1818,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 61)",
       "tags": [
-        "gold_standard"
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -2064,12 +1862,14 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "آقازاده",
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 62)",
       "tags": [
-        "gold_standard"
+        "آقازاده",
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -2108,12 +1908,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 63)",
       "tags": [
-        "gold_standard"
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -2140,12 +1940,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 64)",
       "tags": [
-        "gold_standard"
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -2176,12 +1976,14 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "آقازاده",
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 65)",
       "tags": [
-        "gold_standard"
+        "آقازاده",
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -2212,12 +2014,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 66)",
       "tags": [
-        "gold_standard"
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -2248,12 +2050,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 67)",
       "tags": [
-        "gold_standard"
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -2284,12 +2086,14 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "آقازاده",
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 68)",
       "tags": [
-        "gold_standard"
+        "آقازاده",
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -2320,12 +2124,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 69)",
       "tags": [
-        "gold_standard"
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -2352,12 +2156,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 70)",
       "tags": [
-        "gold_standard"
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -2388,12 +2192,14 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "دانشجوی سهمیه‌ای",
+      "سپاهی"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 71)",
       "tags": [
-        "gold_standard"
+        "دانشجوی سهمیه‌ای",
+        "سپاهی"
       ]
     },
     "images": [
@@ -2420,12 +2226,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 72)",
       "tags": [
-        "gold_standard"
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -2456,12 +2262,14 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "آقازاده",
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 73)",
       "tags": [
-        "gold_standard"
+        "آقازاده",
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -2496,12 +2304,14 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "آقازاده",
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 74)",
       "tags": [
-        "gold_standard"
+        "آقازاده",
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -2532,12 +2342,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 75)",
       "tags": [
-        "gold_standard"
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -2568,12 +2378,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 76)",
       "tags": [
-        "gold_standard"
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -2600,12 +2410,16 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "بسیجی",
+      "دانشجوی سهمیه‌ای",
+      "سپاهی"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 77)",
       "tags": [
-        "gold_standard"
+        "بسیجی",
+        "دانشجوی سهمیه‌ای",
+        "سپاهی"
       ]
     },
     "images": [
@@ -2640,12 +2454,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 78)",
       "tags": [
-        "gold_standard"
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -2672,12 +2486,14 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "آقازاده",
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 79)",
       "tags": [
-        "gold_standard"
+        "آقازاده",
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -2712,12 +2528,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 80)",
       "tags": [
-        "gold_standard"
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -2743,14 +2559,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 81)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -2776,12 +2588,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 82)",
       "tags": [
-        "gold_standard"
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -2808,12 +2620,14 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "آقازاده",
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 83)",
       "tags": [
-        "gold_standard"
+        "آقازاده",
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -2848,12 +2662,14 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "آقازاده",
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 84)",
       "tags": [
-        "gold_standard"
+        "آقازاده",
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -2880,12 +2696,14 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "آقازاده",
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 85)",
       "tags": [
-        "gold_standard"
+        "آقازاده",
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -2912,12 +2730,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 86)",
       "tags": [
-        "gold_standard"
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -2944,12 +2762,14 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "آقازاده",
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 87)",
       "tags": [
-        "gold_standard"
+        "آقازاده",
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -2976,12 +2796,16 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "آقازاده",
+      "دانشجوی سهمیه‌ای",
+      "آخوند"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 88)",
       "tags": [
-        "gold_standard"
+        "آقازاده",
+        "دانشجوی سهمیه‌ای",
+        "آخوند"
       ]
     },
     "images": [
@@ -3012,12 +2836,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 89)",
       "tags": [
-        "gold_standard"
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -3048,12 +2872,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 90)",
       "tags": [
-        "gold_standard"
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -3080,12 +2904,14 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "آقازاده",
+      "آخوند"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 91)",
       "tags": [
-        "gold_standard"
+        "آقازاده",
+        "آخوند"
       ]
     },
     "images": [
@@ -3112,12 +2938,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 92)",
       "tags": [
-        "gold_standard"
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -3148,12 +2974,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 93)",
       "tags": [
-        "gold_standard"
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -3180,12 +3006,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 94)",
       "tags": [
-        "gold_standard"
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -3212,12 +3038,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 95)",
       "tags": [
-        "gold_standard"
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -3244,12 +3070,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 96)",
       "tags": [
-        "gold_standard"
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -3276,12 +3102,16 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "آقازاده",
+      "دانشجوی سهمیه‌ای",
+      "آخوند"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 97)",
       "tags": [
-        "gold_standard"
+        "آقازاده",
+        "دانشجوی سهمیه‌ای",
+        "آخوند"
       ]
     },
     "images": [
@@ -3308,12 +3138,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 98)",
       "tags": [
-        "gold_standard"
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -3339,14 +3169,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 99)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -3408,12 +3234,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 100)",
       "tags": [
-        "gold_standard"
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -3440,12 +3266,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 101)",
       "tags": [
-        "gold_standard"
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -3480,12 +3306,14 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "بسیجی",
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 102)",
       "tags": [
-        "gold_standard"
+        "بسیجی",
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -3512,12 +3340,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 103)",
       "tags": [
-        "gold_standard"
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -3548,12 +3376,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 104)",
       "tags": [
-        "gold_standard"
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -3584,12 +3412,14 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "آقازاده",
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 105)",
       "tags": [
-        "gold_standard"
+        "آقازاده",
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -3616,12 +3446,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 106)",
       "tags": [
-        "gold_standard"
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -3648,12 +3478,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 107)",
       "tags": [
-        "gold_standard"
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -3680,12 +3510,14 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "بسیجی",
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 108)",
       "tags": [
-        "gold_standard"
+        "بسیجی",
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -3712,12 +3544,16 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "آقازاده",
+      "دانشجوی سهمیه‌ای",
+      "اصلاح طلب"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 109)",
       "tags": [
-        "gold_standard"
+        "آقازاده",
+        "دانشجوی سهمیه‌ای",
+        "اصلاح طلب"
       ]
     },
     "images": [
@@ -3744,12 +3580,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 110)",
       "tags": [
-        "gold_standard"
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -3780,12 +3616,14 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "دانشجوی سهمیه‌ای",
+      "سپاهی"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 111)",
       "tags": [
-        "gold_standard"
+        "دانشجوی سهمیه‌ای",
+        "سپاهی"
       ]
     },
     "images": [
@@ -3812,12 +3650,14 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "آقازاده",
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 112)",
       "tags": [
-        "gold_standard"
+        "آقازاده",
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -3844,12 +3684,14 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "آقازاده",
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 113)",
       "tags": [
-        "gold_standard"
+        "آقازاده",
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -3880,12 +3722,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "قاتل"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 114)",
       "tags": [
-        "gold_standard"
+        "قاتل"
       ]
     },
     "images": [
@@ -3912,12 +3754,14 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "آقازاده",
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 115)",
       "tags": [
-        "gold_standard"
+        "آقازاده",
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -3944,12 +3788,14 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "بسیجی",
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 116)",
       "tags": [
-        "gold_standard"
+        "بسیجی",
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -3988,12 +3834,14 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "بسیجی",
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 117)",
       "tags": [
-        "gold_standard"
+        "بسیجی",
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -4020,12 +3868,14 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "آقازاده",
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 118)",
       "tags": [
-        "gold_standard"
+        "آقازاده",
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -4052,12 +3902,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 119)",
       "tags": [
-        "gold_standard"
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -4084,12 +3934,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 120)",
       "tags": [
-        "gold_standard"
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -4128,12 +3978,16 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "آقازاده",
+      "دانشجوی سهمیه‌ای",
+      "سپاهی"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 121)",
       "tags": [
-        "gold_standard"
+        "آقازاده",
+        "دانشجوی سهمیه‌ای",
+        "سپاهی"
       ]
     },
     "images": [
@@ -4160,12 +4014,14 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "آقازاده",
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 122)",
       "tags": [
-        "gold_standard"
+        "آقازاده",
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -4191,14 +4047,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 123)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -4228,12 +4080,14 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "آقازاده",
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 124)",
       "tags": [
-        "gold_standard"
+        "آقازاده",
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -4260,12 +4114,14 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "آقازاده",
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 125)",
       "tags": [
-        "gold_standard"
+        "آقازاده",
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -4300,12 +4156,14 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "آقازاده",
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 126)",
       "tags": [
-        "gold_standard"
+        "آقازاده",
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -4340,12 +4198,14 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "آقازاده",
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 127)",
       "tags": [
-        "gold_standard"
+        "آقازاده",
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -4376,12 +4236,14 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "آقازاده",
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 128)",
       "tags": [
-        "gold_standard"
+        "آقازاده",
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -4411,14 +4273,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 129)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -4448,12 +4306,16 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "آقازاده",
+      "سپاهی",
+      "آخوند"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 130)",
       "tags": [
-        "gold_standard"
+        "آقازاده",
+        "سپاهی",
+        "آخوند"
       ]
     },
     "images": [
@@ -4484,12 +4346,18 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "آقازاده",
+      "دانشجوی سهمیه‌ای",
+      "سپاهی",
+      "آخوند"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 131)",
       "tags": [
-        "gold_standard"
+        "آقازاده",
+        "دانشجوی سهمیه‌ای",
+        "سپاهی",
+        "آخوند"
       ]
     },
     "images": [
@@ -4520,12 +4388,16 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "آقازاده",
+      "دانشجوی سهمیه‌ای",
+      "آخوند"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 132)",
       "tags": [
-        "gold_standard"
+        "آقازاده",
+        "دانشجوی سهمیه‌ای",
+        "آخوند"
       ]
     },
     "images": [
@@ -4552,12 +4424,16 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "آقازاده",
+      "دانشجوی سهمیه‌ای",
+      "آخوند"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 133)",
       "tags": [
-        "gold_standard"
+        "آقازاده",
+        "دانشجوی سهمیه‌ای",
+        "آخوند"
       ]
     },
     "images": [
@@ -4584,12 +4460,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 134)",
       "tags": [
-        "gold_standard"
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -4616,12 +4492,16 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "آقازاده",
+      "دانشجوی سهمیه‌ای",
+      "آخوند"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 135)",
       "tags": [
-        "gold_standard"
+        "آقازاده",
+        "دانشجوی سهمیه‌ای",
+        "آخوند"
       ]
     },
     "images": [
@@ -4648,12 +4528,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 136)",
       "tags": [
-        "gold_standard"
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -4680,12 +4560,14 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "آقازاده",
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 137)",
       "tags": [
-        "gold_standard"
+        "آقازاده",
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -4712,12 +4594,14 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "آقازاده",
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 138)",
       "tags": [
-        "gold_standard"
+        "آقازاده",
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -4780,12 +4664,14 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "آقازاده",
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 139)",
       "tags": [
-        "gold_standard"
+        "آقازاده",
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -4812,12 +4698,16 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "آقازاده",
+      "دانشجوی سهمیه‌ای",
+      "سپاهی"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 140)",
       "tags": [
-        "gold_standard"
+        "آقازاده",
+        "دانشجوی سهمیه‌ای",
+        "سپاهی"
       ]
     },
     "images": [
@@ -4844,12 +4734,14 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "آقازاده",
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 141)",
       "tags": [
-        "gold_standard"
+        "آقازاده",
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -4880,12 +4772,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 142)",
       "tags": [
-        "gold_standard"
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -4912,12 +4804,14 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "آقازاده",
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 143)",
       "tags": [
-        "gold_standard"
+        "آقازاده",
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -4944,12 +4838,14 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "بسیجی",
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 144)",
       "tags": [
-        "gold_standard"
+        "بسیجی",
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -4976,12 +4872,14 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "آقازاده",
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 145)",
       "tags": [
-        "gold_standard"
+        "آقازاده",
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -5008,12 +4906,14 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "آقازاده",
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 146)",
       "tags": [
-        "gold_standard"
+        "آقازاده",
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -5044,12 +4944,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 147)",
       "tags": [
-        "gold_standard"
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -5080,12 +4980,14 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "آقازاده",
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 148)",
       "tags": [
-        "gold_standard"
+        "آقازاده",
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -5116,12 +5018,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 149)",
       "tags": [
-        "gold_standard"
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -5156,12 +5058,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 150)",
       "tags": [
-        "gold_standard"
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -5192,12 +5094,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 151)",
       "tags": [
-        "gold_standard"
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -5228,12 +5130,14 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "آقازاده",
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 152)",
       "tags": [
-        "gold_standard"
+        "آقازاده",
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -5272,12 +5176,14 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "آقازاده",
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 153)",
       "tags": [
-        "gold_standard"
+        "آقازاده",
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -5316,12 +5222,14 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "آقازاده",
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 154)",
       "tags": [
-        "gold_standard"
+        "آقازاده",
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -5360,12 +5268,14 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "آقازاده",
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 155)",
       "tags": [
-        "gold_standard"
+        "آقازاده",
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -5404,12 +5314,14 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "آقازاده",
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 156)",
       "tags": [
-        "gold_standard"
+        "آقازاده",
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -5436,12 +5348,14 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "آقازاده",
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 157)",
       "tags": [
-        "gold_standard"
+        "آقازاده",
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -5468,12 +5382,16 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "آقازاده",
+      "دانشجوی سهمیه‌ای",
+      "سپاهی"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 158)",
       "tags": [
-        "gold_standard"
+        "آقازاده",
+        "دانشجوی سهمیه‌ای",
+        "سپاهی"
       ]
     },
     "images": [
@@ -5512,12 +5430,14 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "دانشجوی سهمیه‌ای",
+      "سپاهی"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 159)",
       "tags": [
-        "gold_standard"
+        "دانشجوی سهمیه‌ای",
+        "سپاهی"
       ]
     },
     "images": [
@@ -5556,12 +5476,14 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "آقازاده",
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 160)",
       "tags": [
-        "gold_standard"
+        "آقازاده",
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -5588,12 +5510,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 161)",
       "tags": [
-        "gold_standard"
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -5620,12 +5542,14 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "آقازاده",
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 162)",
       "tags": [
-        "gold_standard"
+        "آقازاده",
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -5660,12 +5584,14 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "آقازاده",
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 163)",
       "tags": [
-        "gold_standard"
+        "آقازاده",
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -5700,12 +5626,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 164)",
       "tags": [
-        "gold_standard"
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -5732,12 +5658,14 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "آقازاده",
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 165)",
       "tags": [
-        "gold_standard"
+        "آقازاده",
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -5764,12 +5692,14 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "آقازاده",
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 166)",
       "tags": [
-        "gold_standard"
+        "آقازاده",
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -5800,12 +5730,14 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "آقازاده",
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 167)",
       "tags": [
-        "gold_standard"
+        "آقازاده",
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -5836,12 +5768,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 168)",
       "tags": [
-        "gold_standard"
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -5872,12 +5804,14 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "بسیجی",
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 169)",
       "tags": [
-        "gold_standard"
+        "بسیجی",
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -5904,12 +5838,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 170)",
       "tags": [
-        "gold_standard"
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -5936,12 +5870,14 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "آقازاده",
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 171)",
       "tags": [
-        "gold_standard"
+        "آقازاده",
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -5968,12 +5904,14 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "آقازاده",
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 172)",
       "tags": [
-        "gold_standard"
+        "آقازاده",
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -6000,12 +5938,14 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "آقازاده",
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 173)",
       "tags": [
-        "gold_standard"
+        "آقازاده",
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -6040,12 +5980,14 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "آقازاده",
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 174)",
       "tags": [
-        "gold_standard"
+        "آقازاده",
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -6080,12 +6022,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 175)",
       "tags": [
-        "gold_standard"
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -6112,12 +6054,14 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "دانشجوی سهمیه‌ای",
+      "سپاهی"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 176)",
       "tags": [
-        "gold_standard"
+        "دانشجوی سهمیه‌ای",
+        "سپاهی"
       ]
     },
     "images": [
@@ -6144,12 +6088,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 177)",
       "tags": [
-        "gold_standard"
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -6176,12 +6120,14 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "بسیجی",
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 178)",
       "tags": [
-        "gold_standard"
+        "بسیجی",
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -6208,12 +6154,14 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "آقازاده",
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 179)",
       "tags": [
-        "gold_standard"
+        "آقازاده",
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -6240,12 +6188,16 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "آقازاده",
+      "دانشجوی سهمیه‌ای",
+      "اصلاح طلب"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 180)",
       "tags": [
-        "gold_standard"
+        "آقازاده",
+        "دانشجوی سهمیه‌ای",
+        "اصلاح طلب"
       ]
     },
     "images": [
@@ -6272,12 +6224,14 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "آقازاده",
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 181)",
       "tags": [
-        "gold_standard"
+        "آقازاده",
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -6304,12 +6258,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 182)",
       "tags": [
-        "gold_standard"
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -6336,12 +6290,14 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "آقازاده",
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 183)",
       "tags": [
-        "gold_standard"
+        "آقازاده",
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -6372,12 +6328,14 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "دانشجوی سهمیه‌ای",
+      "قاتل"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 184)",
       "tags": [
-        "gold_standard"
+        "دانشجوی سهمیه‌ای",
+        "قاتل"
       ]
     },
     "images": [
@@ -6427,14 +6385,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 185)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -6460,12 +6414,14 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "آقازاده",
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 186)",
       "tags": [
-        "gold_standard"
+        "آقازاده",
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -6495,14 +6451,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 187)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -6528,12 +6480,14 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "آقازاده",
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 188)",
       "tags": [
-        "gold_standard"
+        "آقازاده",
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -6560,12 +6514,14 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "آقازاده",
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 189)",
       "tags": [
-        "gold_standard"
+        "آقازاده",
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -6592,12 +6548,16 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "بسیجی",
+      "دانشجوی سهمیه‌ای",
+      "سپاهی"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 190)",
       "tags": [
-        "gold_standard"
+        "بسیجی",
+        "دانشجوی سهمیه‌ای",
+        "سپاهی"
       ]
     },
     "images": [
@@ -6624,12 +6584,16 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "آقازاده",
+      "دانشجوی سهمیه‌ای",
+      "آخوند"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 191)",
       "tags": [
-        "gold_standard"
+        "آقازاده",
+        "دانشجوی سهمیه‌ای",
+        "آخوند"
       ]
     },
     "images": [
@@ -6656,12 +6620,14 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "آقازاده",
+      "چپ کمونیست"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 192)",
       "tags": [
-        "gold_standard"
+        "آقازاده",
+        "چپ کمونیست"
       ]
     },
     "images": [
@@ -6688,12 +6654,16 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "آقازاده",
+      "دانشجوی سهمیه‌ای",
+      "سپاهی"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 193)",
       "tags": [
-        "gold_standard"
+        "آقازاده",
+        "دانشجوی سهمیه‌ای",
+        "سپاهی"
       ]
     },
     "images": [
@@ -6724,12 +6694,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 194)",
       "tags": [
-        "gold_standard"
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -6756,12 +6726,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 195)",
       "tags": [
-        "gold_standard"
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -6788,12 +6758,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "آخوند"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 196)",
       "tags": [
-        "gold_standard"
+        "آخوند"
       ]
     },
     "images": [
@@ -6824,12 +6794,14 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "آقازاده",
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 197)",
       "tags": [
-        "gold_standard"
+        "آقازاده",
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -6860,12 +6832,14 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "بسیجی",
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 198)",
       "tags": [
-        "gold_standard"
+        "بسیجی",
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -6892,12 +6866,14 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "آقازاده",
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 199)",
       "tags": [
-        "gold_standard"
+        "آقازاده",
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -6924,12 +6900,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 200)",
       "tags": [
-        "gold_standard"
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -6956,12 +6932,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 201)",
       "tags": [
-        "gold_standard"
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -6988,12 +6964,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 202)",
       "tags": [
-        "gold_standard"
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -7020,12 +6996,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 203)",
       "tags": [
-        "gold_standard"
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -7052,12 +7028,14 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "دانشجوی سهمیه‌ای",
+      "سپاهی"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 204)",
       "tags": [
-        "gold_standard"
+        "دانشجوی سهمیه‌ای",
+        "سپاهی"
       ]
     },
     "images": [
@@ -7084,12 +7062,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 205)",
       "tags": [
-        "gold_standard"
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -7116,12 +7094,14 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "دانشجوی سهمیه‌ای",
+      "سپاهی"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 206)",
       "tags": [
-        "gold_standard"
+        "دانشجوی سهمیه‌ای",
+        "سپاهی"
       ]
     },
     "images": [
@@ -7148,12 +7128,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 207)",
       "tags": [
-        "gold_standard"
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -7180,12 +7160,14 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "دانشجوی سهمیه‌ای",
+      "سپاهی"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 208)",
       "tags": [
-        "gold_standard"
+        "دانشجوی سهمیه‌ای",
+        "سپاهی"
       ]
     },
     "images": [
@@ -7211,14 +7193,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 209)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -7252,12 +7230,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 210)",
       "tags": [
-        "gold_standard"
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -7284,12 +7262,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 211)",
       "tags": [
-        "gold_standard"
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -7316,12 +7294,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 212)",
       "tags": [
-        "gold_standard"
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -7348,12 +7326,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 213)",
       "tags": [
-        "gold_standard"
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -7380,12 +7358,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 214)",
       "tags": [
-        "gold_standard"
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -7412,12 +7390,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 215)",
       "tags": [
-        "gold_standard"
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -7444,12 +7422,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 216)",
       "tags": [
-        "gold_standard"
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -7496,12 +7474,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 217)",
       "tags": [
-        "gold_standard"
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -7528,12 +7506,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 218)",
       "tags": [
-        "gold_standard"
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -7564,12 +7542,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 219)",
       "tags": [
-        "gold_standard"
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -7600,12 +7578,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 220)",
       "tags": [
-        "gold_standard"
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -7636,12 +7614,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 221)",
       "tags": [
-        "gold_standard"
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -7676,12 +7654,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 222)",
       "tags": [
-        "gold_standard"
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -7728,12 +7706,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 223)",
       "tags": [
-        "gold_standard"
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -7780,12 +7758,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 224)",
       "tags": [
-        "gold_standard"
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -7832,12 +7810,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 225)",
       "tags": [
-        "gold_standard"
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -7872,12 +7850,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 226)",
       "tags": [
-        "gold_standard"
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -7911,14 +7889,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 227)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -7963,14 +7937,10 @@
     "instagramAccount": null,
     "xAccount": "@fatemi_sadr",
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 228)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -8007,14 +7977,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 229)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -8051,14 +8017,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 230)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -8083,14 +8045,10 @@
     "instagramAccount": "@dr_mahdi_rahbar",
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 231)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -8123,14 +8081,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 232)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -8163,14 +8117,10 @@
     "instagramAccount": "@ashyanpooyan",
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 233)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -8196,12 +8146,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "بسیجی"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 234)",
       "tags": [
-        "gold_standard"
+        "بسیجی"
       ]
     },
     "images": [
@@ -8227,14 +8177,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 235)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -8275,14 +8221,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 236)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -8312,12 +8254,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "سپاهی"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 237)",
       "tags": [
-        "gold_standard"
+        "سپاهی"
       ]
     },
     "images": [
@@ -8348,12 +8290,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 238)",
       "tags": [
-        "gold_standard"
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -8387,14 +8329,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 239)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -8423,14 +8361,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 240)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -8463,14 +8397,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 241)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -8495,14 +8425,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 242)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -8535,14 +8461,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 243)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -8572,12 +8494,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "سپاهی"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 244)",
       "tags": [
-        "gold_standard"
+        "سپاهی"
       ]
     },
     "images": [
@@ -8603,14 +8525,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 245)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -8635,14 +8553,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 246)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -8675,14 +8589,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 247)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -8707,14 +8617,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 248)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -8755,14 +8661,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 249)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -8788,12 +8690,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "قاتل"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 251)",
       "tags": [
-        "gold_standard"
+        "قاتل"
       ]
     },
     "images": [
@@ -8836,12 +8738,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "قاتل"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 252)",
       "tags": [
-        "gold_standard"
+        "قاتل"
       ]
     },
     "images": [
@@ -8884,12 +8786,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "قاتل"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 253)",
       "tags": [
-        "gold_standard"
+        "قاتل"
       ]
     },
     "images": [
@@ -8931,14 +8833,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 254)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -8967,14 +8865,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 255)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -9003,14 +8897,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 256)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -9035,14 +8925,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 257)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -9067,14 +8953,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 258)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -9104,12 +8986,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "سپاهی"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 259)",
       "tags": [
-        "gold_standard"
+        "سپاهی"
       ]
     },
     "images": [
@@ -9143,14 +9025,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 260)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -9183,14 +9061,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 261)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -9239,14 +9113,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 262)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -9271,14 +9141,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 263)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -9307,14 +9173,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 264)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -9343,14 +9205,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 265)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -9379,14 +9237,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 266)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -9415,14 +9269,10 @@
     "instagramAccount": "abassabri.h.a",
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 267)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -9459,14 +9309,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 268)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -9491,14 +9337,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 269)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -9523,14 +9365,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 270)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -9555,14 +9393,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 271)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -9587,14 +9421,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 272)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -9623,14 +9453,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 273)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -9659,14 +9485,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 274)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -9691,14 +9513,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 275)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -9723,14 +9541,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 276)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -9755,14 +9569,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 277)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -9788,12 +9598,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 278)",
       "tags": [
-        "gold_standard"
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -9819,14 +9629,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 279)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -9855,14 +9661,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 280)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -9891,14 +9693,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 281)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -9923,14 +9721,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 282)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -9955,14 +9749,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 283)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -9987,14 +9777,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 284)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -10027,14 +9813,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 285)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -10059,14 +9841,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 286)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -10099,14 +9877,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 287)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -10131,14 +9905,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 288)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -10167,14 +9937,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 289)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -10235,14 +10001,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 290)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -10271,14 +10033,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 291)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -10311,14 +10069,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 292)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -10343,14 +10097,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 293)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -10379,14 +10129,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 294)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -10415,14 +10161,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 295)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -10447,14 +10189,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 296)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -10479,14 +10217,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 297)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -10512,12 +10246,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 298)",
       "tags": [
-        "gold_standard"
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -10543,14 +10277,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 299)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -10576,12 +10306,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 300)",
       "tags": [
-        "gold_standard"
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -10611,14 +10341,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 301)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -10647,14 +10373,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 302)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -10679,14 +10401,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 303)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -10711,14 +10429,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 304)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -10747,14 +10461,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 305)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -10783,14 +10493,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 306)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -10819,14 +10525,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 307)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -10855,14 +10557,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 308)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -10887,14 +10585,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 309)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -10923,14 +10617,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 310)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -10959,14 +10649,10 @@
     "instagramAccount": "@drmvahdati",
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 311)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -11007,14 +10693,10 @@
     "instagramAccount": "@skshakouri",
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 312)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -11056,12 +10738,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 313)",
       "tags": [
-        "gold_standard"
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -11087,14 +10769,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 314)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -11119,14 +10797,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 315)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -11152,12 +10826,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "دانشجوی سهمیه‌ای"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 316)",
       "tags": [
-        "gold_standard"
+        "دانشجوی سهمیه‌ای"
       ]
     },
     "images": [
@@ -11195,14 +10869,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 317)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -11239,14 +10909,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 318)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -11275,14 +10941,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 319)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -11311,14 +10973,10 @@
     "instagramAccount": "@pvmohsen_sohrabi",
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 320)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -11343,14 +11001,10 @@
     "instagramAccount": "@armanmasnadi",
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 321)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -11383,14 +11037,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 322)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -11423,14 +11073,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 323)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -11459,14 +11105,10 @@
     "instagramAccount": "@imannavvabi",
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 324)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -11491,14 +11133,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 325)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -11543,14 +11181,10 @@
     "instagramAccount": "@dr_mojtaba_ghadami",
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 326)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -11579,14 +11213,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 327)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -11619,14 +11249,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 328)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -11659,14 +11285,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 329)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -11695,14 +11317,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 330)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -11727,14 +11345,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 331)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -11759,14 +11373,10 @@
     "instagramAccount": "@atiyeh_shapuri",
     "xAccount": "@shapuri",
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 332)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -11811,14 +11421,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 333)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -11843,14 +11449,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 334)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -11875,14 +11477,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 335)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -11907,14 +11505,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 336)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -11939,14 +11533,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 337)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -11971,14 +11561,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 338)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -12003,14 +11589,10 @@
     "instagramAccount": "@drmariasharif",
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 339)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -12035,14 +11617,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 340)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -12071,14 +11649,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 341)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -12103,14 +11677,10 @@
     "instagramAccount": "@dr_karim_marjany",
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 342)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -12147,14 +11717,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 343)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -12183,14 +11749,10 @@
     "instagramAccount": "@samanehnz",
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 344)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -12223,14 +11785,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 345)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -12255,14 +11813,10 @@
     "instagramAccount": "@sahandhf",
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 346)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -12295,14 +11849,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 347)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -12335,14 +11885,10 @@
     "instagramAccount": "@bahman_naghipour",
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 348)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -12383,14 +11929,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 349)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -12423,14 +11965,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 350)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -12463,14 +12001,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 351)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -12495,14 +12029,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 352)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -12535,14 +12065,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 353)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -12567,14 +12093,10 @@
     "instagramAccount": "@dr_masoudsaberi",
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 354)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -12599,14 +12121,10 @@
     "instagramAccount": "@ata_montazam",
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 355)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -12639,14 +12157,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 356)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -12679,14 +12193,10 @@
     "instagramAccount": "@mahyaa_slh",
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 357)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -12731,14 +12241,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 358)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -12783,14 +12289,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 359)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -12815,14 +12317,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 360)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -12847,14 +12345,10 @@
     "instagramAccount": "@navid_madinei",
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 361)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -12891,14 +12385,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 362)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -12928,12 +12418,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "آخوند"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 363)",
       "tags": [
-        "gold_standard"
+        "آخوند"
       ]
     },
     "images": [
@@ -12964,12 +12454,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "آقازاده"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 364)",
       "tags": [
-        "gold_standard"
+        "آقازاده"
       ]
     },
     "images": [
@@ -12999,14 +12489,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 365)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -13036,12 +12522,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "آقازاده"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 366)",
       "tags": [
-        "gold_standard"
+        "آقازاده"
       ]
     },
     "images": [
@@ -13071,14 +12557,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 367)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -13111,14 +12593,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 368)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -13143,14 +12621,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 369)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -13179,14 +12653,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 370)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -13215,14 +12685,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 371)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -13251,14 +12717,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 372)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -13287,14 +12749,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 373)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -13335,14 +12793,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 374)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -13375,14 +12829,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 375)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -13407,14 +12857,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 376)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -13439,14 +12885,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 377)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -13471,14 +12913,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 378)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -13507,14 +12945,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 379)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -13543,14 +12977,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 380)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -13587,14 +13017,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 381)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -13631,14 +13057,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 382)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -13663,14 +13085,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 383)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -13699,14 +13117,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 384)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -13735,14 +13149,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 385)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -13768,12 +13178,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "سپاهی"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 386)",
       "tags": [
-        "gold_standard"
+        "سپاهی"
       ]
     },
     "images": [
@@ -13807,14 +13217,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 387)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -13839,14 +13245,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 388)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -13871,14 +13273,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 389)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -13903,14 +13301,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 390)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -13935,14 +13329,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 391)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -13983,14 +13373,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 392)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -14019,14 +13405,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 393)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -14051,14 +13433,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 394)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -14087,14 +13465,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 395)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -14119,14 +13493,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 396)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -14151,14 +13521,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 397)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -14187,14 +13553,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 398)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -14227,14 +13589,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 399)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -14259,14 +13617,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 400)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -14291,14 +13645,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 401)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -14323,14 +13673,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 402)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -14355,14 +13701,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 403)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -14387,14 +13729,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 404)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -14419,14 +13757,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 405)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -14451,14 +13785,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 406)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -14483,14 +13813,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 407)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -14515,14 +13841,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 408)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": [
       {
@@ -14547,14 +13869,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 409)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": []
   },
@@ -14574,14 +13892,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 410)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": []
   },
@@ -14601,14 +13915,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 411)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": []
   },
@@ -14628,14 +13938,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 412)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": []
   },
@@ -14656,12 +13962,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "سپاهی"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 413)",
       "tags": [
-        "gold_standard"
+        "سپاهی"
       ]
     },
     "images": []
@@ -14682,14 +13988,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 416)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": []
   },
@@ -14709,14 +14011,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 418)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": []
   },
@@ -14736,14 +14034,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 419)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": []
   },
@@ -14763,14 +14057,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 420)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": []
   },
@@ -14790,14 +14080,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 421)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": []
   },
@@ -14817,14 +14103,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 422)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": []
   },
@@ -14844,14 +14126,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 423)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": []
   },
@@ -14871,14 +14149,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 424)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": []
   },
@@ -14898,14 +14172,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 425)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": []
   },
@@ -14925,14 +14195,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 426)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": []
   },
@@ -14952,14 +14218,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 427)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": []
   },
@@ -14979,14 +14241,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 428)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": []
   },
@@ -15006,14 +14264,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 429)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": []
   },
@@ -15033,14 +14287,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 430)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": []
   },
@@ -15060,14 +14310,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 431)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": []
   },
@@ -15087,14 +14333,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 433)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": []
   },
@@ -15114,14 +14356,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 434)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": []
   },
@@ -15141,14 +14379,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 435)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": []
   },
@@ -15168,14 +14402,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 436)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": []
   },
@@ -15195,14 +14425,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 437)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": []
   },
@@ -15222,14 +14448,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 438)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": []
   },
@@ -15249,14 +14471,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 439)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": []
   },
@@ -15276,14 +14494,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 440)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": []
   },
@@ -15303,14 +14517,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 441)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": []
   },
@@ -15330,14 +14540,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 442)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": []
   },
@@ -15357,14 +14563,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 443)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": []
   },
@@ -15384,14 +14586,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 444)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": []
   },
@@ -15411,14 +14609,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 445)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": []
   },
@@ -15438,14 +14632,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 446)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": []
   },
@@ -15465,14 +14655,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 447)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": []
   },
@@ -15492,14 +14678,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 448)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": []
   },
@@ -15519,14 +14701,10 @@
     "instagramAccount": "mahsa.hosseini",
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 449)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": []
   },
@@ -15546,14 +14724,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 450)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": []
   },
@@ -15573,14 +14747,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 451)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": []
   },
@@ -15601,12 +14771,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "بسیجی"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 452)",
       "tags": [
-        "gold_standard"
+        "بسیجی"
       ]
     },
     "images": []
@@ -15628,12 +14798,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "بسیجی"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 453)",
       "tags": [
-        "gold_standard"
+        "بسیجی"
       ]
     },
     "images": []
@@ -15654,14 +14824,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 454)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": []
   },
@@ -15681,14 +14847,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 455)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": []
   },
@@ -15708,14 +14870,10 @@
     "instagramAccount": "dr.v.modabber",
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 456)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": []
   },
@@ -15736,12 +14894,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "آخوند"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 457)",
       "tags": [
-        "gold_standard"
+        "آخوند"
       ]
     },
     "images": []
@@ -15762,14 +14920,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 458)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": []
   },
@@ -15790,12 +14944,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "آخوند"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 459)",
       "tags": [
-        "gold_standard"
+        "آخوند"
       ]
     },
     "images": []
@@ -15816,14 +14970,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 460)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": []
   },
@@ -15843,14 +14993,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 461)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": []
   },
@@ -15870,14 +15016,10 @@
     "instagramAccount": "daryoshalvani",
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 462)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": []
   },
@@ -15897,14 +15039,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 463)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": []
   },
@@ -15924,14 +15062,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 464)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": []
   },
@@ -15951,14 +15085,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 465)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": []
   },
@@ -15978,14 +15108,10 @@
     "instagramAccount": "drghazaleh_aghaee",
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 466)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": []
   },
@@ -16005,14 +15131,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 467)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": []
   },
@@ -16032,14 +15154,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 468)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": []
   },
@@ -16059,14 +15177,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 469)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": []
   },
@@ -16087,12 +15201,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "سپاهی"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 470)",
       "tags": [
-        "gold_standard"
+        "سپاهی"
       ]
     },
     "images": []
@@ -16113,14 +15227,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 471)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": []
   },
@@ -16141,12 +15251,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "سپاهی"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 472)",
       "tags": [
-        "gold_standard"
+        "سپاهی"
       ]
     },
     "images": []
@@ -16168,12 +15278,14 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "بسیجی",
+      "سپاهی"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 473)",
       "tags": [
-        "gold_standard"
+        "بسیجی",
+        "سپاهی"
       ]
     },
     "images": []
@@ -16195,12 +15307,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "سپاهی"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 474)",
       "tags": [
-        "gold_standard"
+        "سپاهی"
       ]
     },
     "images": []
@@ -16222,12 +15334,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "اصلاح طلب"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 475)",
       "tags": [
-        "gold_standard"
+        "اصلاح طلب"
       ]
     },
     "images": []
@@ -16248,14 +15360,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 476)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": []
   },
@@ -16276,12 +15384,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "اصلاح طلب"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 477)",
       "tags": [
-        "gold_standard"
+        "اصلاح طلب"
       ]
     },
     "images": []
@@ -16303,12 +15411,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "اصلاح طلب"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 478)",
       "tags": [
-        "gold_standard"
+        "اصلاح طلب"
       ]
     },
     "images": []
@@ -16330,12 +15438,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "سپاهی"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 480)",
       "tags": [
-        "gold_standard"
+        "سپاهی"
       ]
     },
     "images": []
@@ -16357,12 +15465,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "بسیجی"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 481)",
       "tags": [
-        "gold_standard"
+        "بسیجی"
       ]
     },
     "images": []
@@ -16383,14 +15491,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 482)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": []
   },
@@ -16411,12 +15515,14 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "بسیجی",
+      "سپاهی"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 483)",
       "tags": [
-        "gold_standard"
+        "بسیجی",
+        "سپاهی"
       ]
     },
     "images": []
@@ -16437,14 +15543,10 @@
     "instagramAccount": "muaythai.3388",
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 484)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": []
   },
@@ -16465,12 +15567,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "بسیجی"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 485)",
       "tags": [
-        "gold_standard"
+        "بسیجی"
       ]
     },
     "images": []
@@ -16492,12 +15594,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "سپاهی"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 486)",
       "tags": [
-        "gold_standard"
+        "سپاهی"
       ]
     },
     "images": []
@@ -16518,14 +15620,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 487)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": []
   },
@@ -16545,14 +15643,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 488)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": []
   },
@@ -16573,12 +15667,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "سپاهی"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 489)",
       "tags": [
-        "gold_standard"
+        "سپاهی"
       ]
     },
     "images": []
@@ -16600,12 +15694,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "سپاهی"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 490)",
       "tags": [
-        "gold_standard"
+        "سپاهی"
       ]
     },
     "images": []
@@ -16627,12 +15721,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "سپاهی"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 491)",
       "tags": [
-        "gold_standard"
+        "سپاهی"
       ]
     },
     "images": []
@@ -16654,12 +15748,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "بسیجی"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 492)",
       "tags": [
-        "gold_standard"
+        "بسیجی"
       ]
     },
     "images": []
@@ -16681,12 +15775,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "سپاهی"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 493)",
       "tags": [
-        "gold_standard"
+        "سپاهی"
       ]
     },
     "images": []
@@ -16708,12 +15802,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "آخوند"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 494)",
       "tags": [
-        "gold_standard"
+        "آخوند"
       ]
     },
     "images": []
@@ -16735,12 +15829,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "سپاهی"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 495)",
       "tags": [
-        "gold_standard"
+        "سپاهی"
       ]
     },
     "images": []
@@ -16762,12 +15856,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "بسیجی"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 496)",
       "tags": [
-        "gold_standard"
+        "بسیجی"
       ]
     },
     "images": []
@@ -16789,12 +15883,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "بسیجی"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 497)",
       "tags": [
-        "gold_standard"
+        "بسیجی"
       ]
     },
     "images": []
@@ -16816,12 +15910,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "بسیجی"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 498)",
       "tags": [
-        "gold_standard"
+        "بسیجی"
       ]
     },
     "images": []
@@ -16842,14 +15936,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 499)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": []
   },
@@ -16870,12 +15960,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "بسیجی"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 500)",
       "tags": [
-        "gold_standard"
+        "بسیجی"
       ]
     },
     "images": []
@@ -16897,12 +15987,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "سپاهی"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 501)",
       "tags": [
-        "gold_standard"
+        "سپاهی"
       ]
     },
     "images": []
@@ -16923,14 +16013,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 502)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": []
   },
@@ -16951,12 +16037,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "بسیجی"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 503)",
       "tags": [
-        "gold_standard"
+        "بسیجی"
       ]
     },
     "images": []
@@ -16978,12 +16064,14 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "بسیجی",
+      "سپاهی"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 504)",
       "tags": [
-        "gold_standard"
+        "بسیجی",
+        "سپاهی"
       ]
     },
     "images": []
@@ -17004,14 +16092,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 505)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": []
   },
@@ -17032,12 +16116,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "بسیجی"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 506)",
       "tags": [
-        "gold_standard"
+        "بسیجی"
       ]
     },
     "images": []
@@ -17059,12 +16143,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "بسیجی"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 507)",
       "tags": [
-        "gold_standard"
+        "بسیجی"
       ]
     },
     "images": []
@@ -17086,12 +16170,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "بسیجی"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 508)",
       "tags": [
-        "gold_standard"
+        "بسیجی"
       ]
     },
     "images": []
@@ -17113,12 +16197,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "بسیجی"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 509)",
       "tags": [
-        "gold_standard"
+        "بسیجی"
       ]
     },
     "images": []
@@ -17140,12 +16224,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "اختلاسگر"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 510)",
       "tags": [
-        "gold_standard"
+        "اختلاسگر"
       ]
     },
     "images": []
@@ -17167,12 +16251,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "سپاهی"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 511)",
       "tags": [
-        "gold_standard"
+        "سپاهی"
       ]
     },
     "images": []
@@ -17194,12 +16278,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "بسیجی"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 512)",
       "tags": [
-        "gold_standard"
+        "بسیجی"
       ]
     },
     "images": []
@@ -17220,14 +16304,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 513)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": []
   },
@@ -17248,12 +16328,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "بسیجی"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 514)",
       "tags": [
-        "gold_standard"
+        "بسیجی"
       ]
     },
     "images": []
@@ -17275,12 +16355,14 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "بسیجی",
+      "سپاهی"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 515)",
       "tags": [
-        "gold_standard"
+        "بسیجی",
+        "سپاهی"
       ]
     },
     "images": []
@@ -17301,14 +16383,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 516)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": []
   },
@@ -17329,12 +16407,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "سپاهی"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 517)",
       "tags": [
-        "gold_standard"
+        "سپاهی"
       ]
     },
     "images": []
@@ -17356,12 +16434,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "بسیجی"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 519)",
       "tags": [
-        "gold_standard"
+        "بسیجی"
       ]
     },
     "images": []
@@ -17383,12 +16461,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "بسیجی"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 520)",
       "tags": [
-        "gold_standard"
+        "بسیجی"
       ]
     },
     "images": []
@@ -17409,14 +16487,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 521)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": []
   },
@@ -17437,12 +16511,14 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "بسیجی",
+      "سپاهی"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 522)",
       "tags": [
-        "gold_standard"
+        "بسیجی",
+        "سپاهی"
       ]
     },
     "images": []
@@ -17464,12 +16540,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "بسیجی"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 523)",
       "tags": [
-        "gold_standard"
+        "بسیجی"
       ]
     },
     "images": []
@@ -17491,12 +16567,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "بسیجی"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 524)",
       "tags": [
-        "gold_standard"
+        "بسیجی"
       ]
     },
     "images": []
@@ -17518,12 +16594,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "بسیجی"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 525)",
       "tags": [
-        "gold_standard"
+        "بسیجی"
       ]
     },
     "images": []
@@ -17545,12 +16621,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "بسیجی"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 526)",
       "tags": [
-        "gold_standard"
+        "بسیجی"
       ]
     },
     "images": []
@@ -17571,14 +16647,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 527)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": []
   },
@@ -17599,12 +16671,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "بسیجی"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 528)",
       "tags": [
-        "gold_standard"
+        "بسیجی"
       ]
     },
     "images": []
@@ -17626,12 +16698,14 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "بسیجی",
+      "سپاهی"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 529)",
       "tags": [
-        "gold_standard"
+        "بسیجی",
+        "سپاهی"
       ]
     },
     "images": []
@@ -17653,12 +16727,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "سپاهی"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 530)",
       "tags": [
-        "gold_standard"
+        "سپاهی"
       ]
     },
     "images": []
@@ -17680,12 +16754,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "سپاهی"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 531)",
       "tags": [
-        "gold_standard"
+        "سپاهی"
       ]
     },
     "images": []
@@ -17707,12 +16781,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "سپاهی"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 532)",
       "tags": [
-        "gold_standard"
+        "سپاهی"
       ]
     },
     "images": []
@@ -17733,14 +16807,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 533)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": []
   },
@@ -17760,14 +16830,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 534)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": []
   },
@@ -17788,12 +16854,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "سپاهی"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 535)",
       "tags": [
-        "gold_standard"
+        "سپاهی"
       ]
     },
     "images": []
@@ -17814,14 +16880,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 536)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": []
   },
@@ -17841,14 +16903,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 537)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": []
   },
@@ -17869,12 +16927,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "آخوند"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 538)",
       "tags": [
-        "gold_standard"
+        "آخوند"
       ]
     },
     "images": []
@@ -17895,14 +16953,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 539)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": []
   },
@@ -17923,12 +16977,14 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "سپاهی",
+      "آخوند"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 540)",
       "tags": [
-        "gold_standard"
+        "سپاهی",
+        "آخوند"
       ]
     },
     "images": []
@@ -17950,12 +17006,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "سپاهی"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 541)",
       "tags": [
-        "gold_standard"
+        "سپاهی"
       ]
     },
     "images": []
@@ -17976,14 +17032,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 542)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": []
   },
@@ -18004,12 +17056,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "آخوند"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 543)",
       "tags": [
-        "gold_standard"
+        "آخوند"
       ]
     },
     "images": []
@@ -18031,12 +17083,12 @@
     "xAccount": null,
     "isActive": true,
     "tags": [
-      "gold_standard"
+      "آخوند"
     ],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 544)",
       "tags": [
-        "gold_standard"
+        "آخوند"
       ]
     },
     "images": []
@@ -18057,14 +17109,10 @@
     "instagramAccount": null,
     "xAccount": null,
     "isActive": true,
-    "tags": [
-      "gold_standard"
-    ],
+    "tags": [],
     "metadata": {
       "notes": "Extracted from gold intelligence DB (Entity ID: 545)",
-      "tags": [
-        "gold_standard"
-      ]
+      "tags": []
     },
     "images": []
   }
