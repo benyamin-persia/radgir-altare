@@ -66,20 +66,15 @@ let provinceSectionsData = null;
     console.warn('[sections] province-sections.json not found at any path; sections will use Boundary only.');
 })();
 
-/**
- * Reverse map: section name (county/bakhsh) -> province name.
- * Built from province-sections.json so regions-by-point returns the correct province for a section
- * (e.g. قائم شهر -> مازندران, not سمنان from wrong DB parent).
- * Keys are normalized section names; value is { name, nameFa }.
- */
+// Reverse map: section name (county/bakhsh) -> province name.
 let sectionToProvince = null;
 (function buildSectionToProvince() {
     if (!provinceSectionsData || !provinceSectionsData.provinces) return;
     sectionToProvince = {};
-    const norm = (s) => (s || '').trim().replace(/\u0643/g, '\u06A9').replace(/\u064A/g, '\u06CC').replace(/\u06D2/g, '\u06CC').replace(/\s+/g, ' ');
+    const norm = (s) => (s || '').trim().normalize('NFC').replace(/\u0643/g, '\u06A9').replace(/\u064A/g, '\u06CC').replace(/\u06D2/g, '\u06CC').replace(/\s+/g, ' ');
     for (const [provinceName, data] of Object.entries(provinceSectionsData.provinces)) {
         const nameFa = (provinceName || '').trim();
-        const name = nameFa; // province-sections uses Persian names
+        const name = nameFa;
         const sections = [...(data.counties || []), ...(data.bakhsh || []), ...(data.sections || [])];
         const seen = new Set();
         for (const sec of sections) {
@@ -92,16 +87,22 @@ let sectionToProvince = null;
     console.log('[regions-by-point] Built sectionToProvince from province-sections.json:', Object.keys(sectionToProvince).length, 'sections');
 })();
 
-/**
- * Normalize province name for lookup (Unicode variants, trim).
- */
 function normalizeProvinceName(s) {
     if (!s || typeof s !== 'string') return '';
-    return s.trim()
-        .replace(/\u0643/g, '\u06A9')  // ك -> ک
-        .replace(/\u064A/g, '\u06CC')  // ي -> ی
-        .replace(/\u06D2/g, '\u06CC')  // ے -> ی
-        .replace(/\s+/g, ' ');
+    let text = s.normalize('NFC').trim()
+        .replace(/\u200C/g, ' ')
+        .replace(/ك/g, 'ک')
+        .replace(/ي/g, 'ی')
+        .replace(/ے/g, 'ی')
+        .replace(/\u06D2/g, 'ی');
+    
+    // Handle Azerbaijan space variants
+    if (text.includes('آذربایجان') || text.includes('آذربايجان')) {
+        text = text.replace(/\s+/g, '');
+    } else {
+        text = text.replace(/\s+/g, ' ');
+    }
+    return text;
 }
 
 /**
@@ -913,10 +914,12 @@ router.get('/', [
         const isActive = req.query.isActive !== undefined ? req.query.isActive === 'true' : undefined;
         const createdBy = req.query.createdBy;
         const hasAddressParam = req.query.hasAddress != null ? String(req.query.hasAddress).toLowerCase() : null;
-        const province = sanitizeOptionalText(req.query.province, 100);
-        const county = sanitizeOptionalText(req.query.county, 100);
-        const bakhsh = sanitizeOptionalText(req.query.bakhsh, 100);
-        const city = sanitizeOptionalText(req.query.city, 100);
+        
+        // Normalize region query parameters to match normalized DB records
+        const province = normalizeProvinceName(sanitizeOptionalText(req.query.province, 100));
+        const county = normalizeProvinceName(sanitizeOptionalText(req.query.county, 100));
+        const bakhsh = normalizeProvinceName(sanitizeOptionalText(req.query.bakhsh, 100));
+        const city = normalizeProvinceName(sanitizeOptionalText(req.query.city, 100));
 
         // Exact-like record: has non-empty address text and valid coordinate pair.
         // These must never appear in "without address" responses.
@@ -2220,6 +2223,7 @@ router.get('/sections', [
 
         const provinceName = (req.query.province || '')
             .replace(/\uFEFF/g, '')
+            .normalize('NFC')
             .replace(/^\s+|\s+$/g, '')
             .trim();
         const provinceNameAlt = provinceName
@@ -2399,7 +2403,8 @@ router.get('/counts', async (req, res) => {
 
         const [
             totalCount,
-            provinceCounts,
+            adminProvinceCounts,
+            approxProvinceCounts,
             countyCounts,
             bakhshCounts,
             roleCounts
@@ -2408,6 +2413,10 @@ router.get('/counts', async (req, res) => {
             Person.aggregate([
                 { $match: { ...match, 'administrativeRegion.province': { $exists: true, $ne: null, $ne: '' } } },
                 { $group: { _id: '$administrativeRegion.province', count: { $sum: 1 } } }
+            ]),
+            Person.aggregate([
+                { $match: { ...match, 'approximateRegion.province': { $exists: true, $ne: null, $ne: '' } } },
+                { $group: { _id: '$approximateRegion.province', count: { $sum: 1 } } }
             ]),
             Person.aggregate([
                 { $match: { ...match, 'administrativeRegion.county': { $exists: true, $ne: null, $ne: '' } } },
@@ -2438,73 +2447,22 @@ router.get('/counts', async (req, res) => {
             const map = {};
             (list || []).forEach(item => {
                 if (item && item._id) {
-                    map[item._id] = item.count;
+                    const normalizedKey = normalizeProvinceName(item._id);
+                    map[normalizedKey] = (map[normalizedKey] || 0) + item.count;
                 }
             });
             return map;
         };
 
-        // Province counts: use same geometry as within-bounds (provinces-new.json, then overrides, then DB)
-        // so the number next to each province (e.g. مازندران (1)) matches how many people are actually in that province.
-        let provincesMap = {};
-        try {
-            const provincesWithGeometry = [];
-            const seenByKey = new Set();
+        // Merge administrative and approximate province counts
+        const adminMap = toMap(adminProvinceCounts);
+        const approxMap = toMap(approxProvinceCounts);
+        const provincesMap = { ...adminMap };
+        Object.keys(approxMap).forEach(k => {
+            provincesMap[k] = (provincesMap[k] || 0) + approxMap[k];
+        });
 
-            const addEntry = (entry) => {
-                if (!entry || !entry.geometry || !entry.geometry.coordinates) return;
-                const fa = (entry.nameFa || entry.name || '').trim();
-                const en = (entry.name || entry.nameFa || '').trim();
-                const key = fa || en;
-                if (!key || seenByKey.has(key)) return;
-                seenByKey.add(key);
-                provincesWithGeometry.push({ name: en, nameFa: fa, geometry: entry.geometry });
-            };
-
-            if (provinceGeometryFromNewShapefile) {
-                for (const entry of Object.values(provinceGeometryFromNewShapefile)) {
-                    addEntry(entry);
-                }
-            }
-            if (provinceGeometryOverrides) {
-                for (const entry of Object.values(provinceGeometryOverrides)) {
-                    addEntry(entry);
-                }
-            }
-            const dbProvinces = await Boundary.find({ level: 'province' }).select('name nameFa geometry').lean();
-            for (const p of dbProvinces || []) {
-                const key = (p.nameFa || p.name || '').trim();
-                if (key && !seenByKey.has(key)) {
-                    seenByKey.add(key);
-                    if (p.geometry && p.geometry.coordinates) {
-                        provincesWithGeometry.push({
-                            name: (p.name || '').trim(),
-                            nameFa: (p.nameFa || p.name || '').trim(),
-                            geometry: p.geometry
-                        });
-                    }
-                }
-            }
-
-            for (const p of provincesWithGeometry) {
-                const count = await Person.countDocuments({
-                    ...match,
-                    location: { $geoWithin: { $geometry: p.geometry } }
-                });
-                const fa = p.nameFa || p.name;
-                const en = p.name || p.nameFa;
-                if (fa) provincesMap[fa] = count;
-                if (en && en !== fa) provincesMap[en] = count;
-            }
-        } catch (e) {
-            console.warn('Could not build province counts from geometry:', e.message);
-            provincesMap = toMap(provinceCounts);
-        }
-
-        const sectionsMap = {
-            ...toMap(countyCounts),
-            ...toMap(bakhshCounts)
-        };
+        const sectionsMap = toMap([...countyCounts, ...bakhshCounts]);
 
         return res.json({
             success: true,

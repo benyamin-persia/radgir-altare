@@ -250,6 +250,16 @@ function normalizeImageEntry(imageEntry) {
  */
 function localImageExists(relativePath) {
     const normalizedPath = relativePath.replace(/\\/g, '/');
+    // Archive paths are one level up from project root
+    if (
+        normalizedPath.startsWith('pezeshkan_sahmiei/') ||
+        normalizedPath.startsWith('poshtpardeha/') ||
+        normalizedPath.startsWith('poshtpardeha2/') ||
+        normalizedPath.startsWith('sepehrazadi-db/')
+    ) {
+        const archivePath = path.join(PROJECT_ROOT, '..', 'data', normalizedPath);
+        return fs.existsSync(archivePath);
+    }
     const absolutePath = path.join(PROJECT_ROOT, normalizedPath);
     return fs.existsSync(absolutePath);
 }

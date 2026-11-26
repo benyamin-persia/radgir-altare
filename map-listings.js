@@ -3129,12 +3129,19 @@ async function loadSections(options = {}) {
 
 function normalizeRegionName(s) {
     if (!s || typeof s !== 'string') return '';
-    return s
+    let text = s
         .replace(/\u200C/g, ' ')
         .replace(/ك/g, 'ک')
         .replace(/ي/g, 'ی')
-        .replace(/\s+/g, ' ')
-        .trim();
+        .replace(/ے/g, 'ی')
+        .replace(/\u06D2/g, 'ی');
+    
+    if (text.includes('آذربایجان') || text.includes('آذربايجان')) {
+        text = text.replace(/\s+/g, '');
+    } else {
+        text = text.replace(/\s+/g, ' ');
+    }
+    return text.trim();
 }
 
 /**
@@ -3806,7 +3813,9 @@ function buildListingCardHtml(p, options) {
     const tagsInfo = formatPersonTagsForCard(p, 3);
     const images = getPersonImages(p);
     const fullName = getPersonFullName(p);
+    const job = normalizeText(p.job);
     const nameHtml = `<h3 class="listing-name">${fullName || ' '}</h3>`;
+    const jobHtml = job ? `<p class="listing-job">${escapeHtml(job)}</p>` : '';
     const imageBlock = buildListingImageBlock(p, images, fullName);
     const cardStackHtml = buildCardStackLayersHtml(p);
     const cardStackControlsHtml = cardStackHtml ? buildCardStackControlsHtml() : '';
@@ -3849,6 +3858,7 @@ function buildListingCardHtml(p, options) {
                 <div class="listing-content">
                     <div class="listing-content-top">
                         ${nameHtml}
+                        ${jobHtml}
                         ${addressLine}
                         ${tagsBlock}
                     </div>
@@ -3868,6 +3878,7 @@ function buildListingCardHtml(p, options) {
                 <div class="listing-content">
                     <div class="listing-content-top">
                         ${nameHtml}
+                        ${jobHtml}
                         ${addressLine}
                         ${tagsBlock}
                     </div>

@@ -101,6 +101,12 @@ app.use('/api/almighty', almightyRoutes);
 // Some endpoints require authentication, others are public
 app.use('/api/people', peopleRoutes);
 
+// Static serving for intelligence media archive
+app.use('/pezeshkan_sahmiei/media', express.static(path.join(__dirname, '..', 'data', 'pezeshkan_sahmiei', 'media')));
+app.use('/poshtpardeha/media', express.static(path.join(__dirname, '..', 'data', 'poshtpardeha', 'media')));
+app.use('/poshtpardeha2/media', express.static(path.join(__dirname, '..', 'data', 'poshtpardeha2', 'media')));
+app.use('/sepehrazadi-db/media', express.static(path.join(__dirname, '..', 'data', 'sepehrazadi-db', 'media')));
+
 // Analytics collection routes (public ingestion + health)
 app.use('/api/analytics', analyticsRoutes);
 
