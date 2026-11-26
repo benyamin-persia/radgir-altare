@@ -2,7 +2,7 @@
  * Basic service worker for offline caching.
  */
 
-const CACHE_VERSION = 'radgir-static-v55-20261124-card-photo-altare';
+const CACHE_VERSION = 'radgir-static-v56-allahkaram-live';
 const PRECACHE_URLS = [
   '/',
   '/index.html',
