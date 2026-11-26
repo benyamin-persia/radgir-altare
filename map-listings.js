@@ -3813,9 +3813,8 @@ function buildListingCardHtml(p, options) {
     const tagsInfo = formatPersonTagsForCard(p, 3);
     const images = getPersonImages(p);
     const fullName = getPersonFullName(p);
-    const job = normalizeText(p.job);
+    // Card surface stays lean: name, address/region, tags, photo, actions — job stays in detail view only.
     const nameHtml = `<h3 class="listing-name">${fullName || ' '}</h3>`;
-    const jobHtml = job ? `<p class="listing-job">${escapeHtml(job)}</p>` : '';
     const imageBlock = buildListingImageBlock(p, images, fullName);
     const cardStackHtml = buildCardStackLayersHtml(p);
     const cardStackControlsHtml = cardStackHtml ? buildCardStackControlsHtml() : '';
@@ -3858,7 +3857,6 @@ function buildListingCardHtml(p, options) {
                 <div class="listing-content">
                     <div class="listing-content-top">
                         ${nameHtml}
-                        ${jobHtml}
                         ${addressLine}
                         ${tagsBlock}
                     </div>
@@ -3878,7 +3876,6 @@ function buildListingCardHtml(p, options) {
                 <div class="listing-content">
                     <div class="listing-content-top">
                         ${nameHtml}
-                        ${jobHtml}
                         ${addressLine}
                         ${tagsBlock}
                     </div>

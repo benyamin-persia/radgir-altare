@@ -2,7 +2,7 @@
  * Basic service worker for offline caching.
  */
 
-const CACHE_VERSION = 'radgir-static-v57-approx-noaddr';
+const CACHE_VERSION = 'radgir-static-v58-card-lean';
 const PRECACHE_URLS = [
   '/',
   '/index.html',
