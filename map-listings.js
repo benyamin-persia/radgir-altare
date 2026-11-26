@@ -4190,8 +4190,10 @@ function personHasAddressText(person) {
 function isExactLikePerson(person) {
     const status = inferPersonAddressStatus(person);
     if (status === 'exact') return true;
+    // Approximate/unknown stay in the no-address list even if they have region text or coarse coords.
+    if (status === 'approximate' || status === 'unknown') return false;
+    // Fallback when addressStatus is missing/invalid: treat concrete pin or address text as exact-like.
     if (personHasExactCoordinates(person)) return true;
-    // Guard against inconsistent saved data: any concrete address text is treated as with-address.
     if (personHasAddressText(person)) return true;
     return false;
 }
